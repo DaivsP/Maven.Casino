@@ -7,20 +7,34 @@ import static org.junit.Assert.*;
 
 public class CardTest {
     @Test
-    public void createCardTest(){
+    public void createCardTest1(){
         //When
         Card card = new Card(Card.Rank.KING, Card.Suit.HEARTS);
 
         //Then
-        Card actualRank = card.getRank();
-        Card actualSuit = card.getSuit();
+        Card.Rank actualRank = card.getRank();
+        Card.Suit actualSuit = card.getSuit();
 
         Card.Rank expectedRank = Card.Rank.KING;
         Card.Suit expectedSuit = Card.Suit.HEARTS;
 
         Assert.assertEquals(expectedRank, actualRank);
         Assert.assertEquals(expectedSuit, actualSuit);
+    }
 
+    @Test
+    public void createCardTest2(){
+        //When
+        Card card = new Card(Card.Rank.ACE, Card.Suit.CLUBS);
 
+        //Then
+        Card.Rank actualRank = card.getRank();
+        Card.Suit actualSuit = card.getSuit();
+
+        Card.Rank expectedRank = Card.Rank.ACE;
+        Card.Suit expectedSuit = Card.Suit.CLUBS;
+
+        Assert.assertEquals(expectedRank, actualRank);
+        Assert.assertEquals(expectedSuit, actualSuit);
     }
 }

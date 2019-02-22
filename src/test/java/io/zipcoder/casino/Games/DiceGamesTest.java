@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class DiceGamesTest {\
+public class DiceGamesTest {
 
     @Test
     public void tossTest1(){
