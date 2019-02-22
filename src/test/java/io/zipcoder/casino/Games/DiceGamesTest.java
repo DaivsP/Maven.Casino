@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class DiceGamesTest {\
+public class DiceGamesTest {
 
     @Test
     public void tossTest1(){
@@ -25,11 +25,33 @@ public class DiceGamesTest {\
         //Given
         DiceGames game = new DiceGames();
         Die dice = new Die();
+        Integer expected = 5;
         //When
-        Integer actual = game.toss(dice, 0);
+        Integer actual = game.toss(dice, 2);
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void tossTest3(){
+        //Given
+        DiceGames game = new DiceGames();
+        Die dice = new Die(2);
+        //When
+        Integer actual = game.toss(dice, null);
+        System.out.println(actual);
         //then
         Assert.assertTrue(actual >= 2 && actual <= 12);
     }
 
-
+    @Test
+    public void tossTest4(){
+        //Given
+        DiceGames game = new DiceGames();
+        Die dice = new Die(4);
+        //When
+        Integer actual = game.toss(dice, null);
+        //then
+        Assert.assertTrue(actual >= 4 && actual <= 24);
+    }
 }
