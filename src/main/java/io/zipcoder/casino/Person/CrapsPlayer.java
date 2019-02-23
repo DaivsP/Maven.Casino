@@ -1,21 +1,44 @@
 package io.zipcoder.casino.Person;
 
+import io.zipcoder.casino.Balance;
 import io.zipcoder.casino.Die;
 
 import java.util.ArrayList;
 
 public class CrapsPlayer extends DicePlayer implements GamblingPlayer {
-    private ArrayList<Die> dice;
+    private Balance balance;
 
-    public CrapsPlayer(String name) {
+    public CrapsPlayer(String name, Balance balance) {
         super(name);
+        this.balance = balance;
     }
 
-    public void bet() {
+    public Balance getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Balance balance) {
+        this.balance = balance;
+    }
+
+    public void bet(Balance balance, Integer amount) {
+        Balance balanceOb = getBalance();
+        Integer myCurrentAmount = balanceOb.getBalance();
+
+        myCurrentAmount -= amount;
+
+        balanceOb.setBalance(myCurrentAmount);
+
 
     }
 
-    public void collect() {
+    public void collect(Balance balance, Integer amount) {
+        Balance balanceOb = getBalance();
+        Integer myCurrentAmount = balanceOb.getBalance();
+
+        myCurrentAmount += amount;
+
+        balanceOb.setBalance(myCurrentAmount);
 
     }
 }
