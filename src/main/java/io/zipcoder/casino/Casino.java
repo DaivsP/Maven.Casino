@@ -1,21 +1,22 @@
 package io.zipcoder.casino;
 
 
-import io.zipcoder.casino.Games.Games;
-import io.zipcoder.casino.Games.GoFish;
-import io.zipcoder.casino.Games.HighLow;
+
+import io.zipcoder.casino.Games.*;
+
 import io.zipcoder.casino.utilities.Console;
 
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class Casino {
     private Balance balance;
-    Console console ;
+    private Console console ;
+    private Games games;
 
     public static void main(String[] args) {
         // write your tests before you start fucking with this
         Casino casino = new Casino();
+        Banners banners = new Banners();
+        banners.getCasinoBanner();
         casino.gameRunner();
     }
 
@@ -28,7 +29,11 @@ public class Casino {
     public void pickGame(Balance balance) {
 
         // Call games classes directly
+
+
         Games games;
+        console.println("***** Please Enter The Number Of A Game To Play *****");
+
         Integer gamePicked = console.getIntegerInput("(1) HighLow (2) Craps (3) BlackJack (4) Go Fish" );
         switch (gamePicked){
             case 1:
@@ -36,15 +41,15 @@ public class Casino {
                 ((HighLow) games).play(balance);
                 break;
             case 2:
-                games = new HighLow();
-             //  ((GoFish) games).play(balance);
+                games = new Craps();
+             //  ((GoFish) games).play();
                 break;
             case 3:
-                games = new HighLow();
+               games = new BlackJack();
              //  ((Craps) games).play(balance);
                 break;
             case 4:
-                games = new HighLow();
+                games = new GoFish();
              //  ((BlackJack) games).play(balance);
                 break;
             default:
@@ -57,6 +62,7 @@ public class Casino {
 
     public void gameRunner() {
 
+       // Add functionality to allow someone that only wants to play fun games
        setInitialBalance();
 
 
@@ -80,14 +86,22 @@ public class Casino {
         console.println("Your current chip count: " + this.balance.getBalance());
     }
 
-    // used for UNIT testing - Should not be called outside unit testing
-    public void setConsole(Console console){
-        this.console = console;
-    }
 
     public Balance getBalance(){
         return this.balance;
 
     }
+
+
+    // Below this lines methods are used for testing
+    // used for UNIT testing - Should not be called outside unit testing
+    public void setConsole(Console console){
+        this.console = console;
+    }
+
+    public Games getGames(){
+        return this.games;
+    }
+
 
 }
