@@ -1,13 +1,8 @@
 package io.zipcoder.casino;
-
-
 import io.zipcoder.casino.Games.Games;
-import io.zipcoder.casino.Games.GoFish;
 import io.zipcoder.casino.Games.HighLow;
 import io.zipcoder.casino.utilities.Console;
 
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class Casino {
     private Balance balance;
@@ -16,6 +11,8 @@ public class Casino {
     public static void main(String[] args) {
         // write your tests before you start fucking with this
         Casino casino = new Casino();
+        Banners banners = new Banners();
+        banners.getCasinoBanner();
         casino.gameRunner();
     }
 
@@ -28,7 +25,9 @@ public class Casino {
     public void pickGame(Balance balance) {
 
         // Call games classes directly
+
         Games games;
+        console.println("***** Please Enter The Number Of A Game To Play *****");
         Integer gamePicked = console.getIntegerInput("(1) HighLow (2) Craps (3) BlackJack (4) Go Fish" );
         switch (gamePicked){
             case 1:
@@ -89,5 +88,6 @@ public class Casino {
         return this.balance;
 
     }
+
 
 }
