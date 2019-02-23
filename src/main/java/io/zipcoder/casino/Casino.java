@@ -1,7 +1,6 @@
 package io.zipcoder.casino;
 
 
-
 import io.zipcoder.casino.Games.*;
 
 import io.zipcoder.casino.utilities.Console;
@@ -28,10 +27,6 @@ public class Casino {
 
     public void pickGame(Balance balance) {
 
-        // Call games classes directly
-
-
-        Games games;
         console.println("***** Please Enter The Number Of A Game To Play *****");
 
         Integer gamePicked = console.getIntegerInput("(1) HighLow (2) Craps (3) BlackJack (4) Go Fish" );
@@ -42,15 +37,15 @@ public class Casino {
                 break;
             case 2:
                 games = new Craps();
-             //  ((GoFish) games).play();
+               //((Craps) games).play(balance);
                 break;
             case 3:
                games = new BlackJack();
-             //  ((Craps) games).play(balance);
+            //   ((BlackJack) games).play(balance);
                 break;
             case 4:
                 games = new GoFish();
-             //  ((BlackJack) games).play(balance);
+               ((GoFish) games).play();
                 break;
             default:
                 console.println("Incorrect game picked");
@@ -66,13 +61,19 @@ public class Casino {
        setInitialBalance();
 
 
-      while(balance.getBalance() > 0){
+      while(balance.getBalance() >= 0){
           pickGame(balance);
           showCurrentBalance();
-          String play = console.getStringInput("Would you like to play again? (Q) to quit ") ;
+          String play = console.getStringInput("Would you like to play again? \n(Q)uit / (C)ontinue / (B)uy more chips : ") ;
+
           if("Q".equals(play) || "q".equals(play)){
               break;
           }
+
+          if("B".equals(play) || "b".equals(play)) {
+              addMoreChips();
+          }
+
       }
 
 
@@ -89,6 +90,12 @@ public class Casino {
 
     public Balance getBalance(){
         return this.balance;
+
+    }
+
+    public void addMoreChips(){
+        Integer currentAmount = balance.getBalance();
+        this.balance.setBalance(currentAmount + console.getIntegerInput("How many more chips would you like to buy? :"));
 
     }
 
