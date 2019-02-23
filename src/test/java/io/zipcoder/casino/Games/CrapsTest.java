@@ -8,8 +8,7 @@ public class CrapsTest {
 
     @Test
     public void playCrapsTest(){
-
-
-
     }
+
+
 }

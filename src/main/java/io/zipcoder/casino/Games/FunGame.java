@@ -1,7 +1,11 @@
 package io.zipcoder.casino.Games;
 
-public interface FunGame {
+import io.zipcoder.casino.Balance;
+
+public interface FunGame{
     Integer score = 0;
 
     void updateScore();
+
+    void play();
 }

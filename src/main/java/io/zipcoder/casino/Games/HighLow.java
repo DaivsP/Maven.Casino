@@ -1,10 +1,14 @@
 package io.zipcoder.casino.Games;
 import io.zipcoder.casino.Balance;
 import io.zipcoder.casino.Banners;
+import io.zipcoder.casino.Hand;
 
 
 public class HighLow extends CardGames implements FunGame {
     private io.zipcoder.casino.Person.Player highLowPlayer;
+
+    Hand hand;
+
 
     // Use funDealer
 
@@ -13,12 +17,17 @@ public class HighLow extends CardGames implements FunGame {
     }
 
 
-    public void play(Balance balance) {
+  //  public void play(Balance balance) {
+  public void play() {
         Banners banners = new Banners();
         banners.getHighLowBanner();
-        System.out.println("Playing");
-        System.out.println(balance.getBalance());
-        balance.setBalance(balance.getBalance()-100);
+       /*while(havingFun)
+        {
+            if youLose
+                havingFun =false
+                break;
+        }*/
+       // balance.setBalance(balance.getBalance()-100);
 
     }
 
