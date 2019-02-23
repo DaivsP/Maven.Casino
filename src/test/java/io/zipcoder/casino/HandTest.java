@@ -9,7 +9,7 @@ public class HandTest {
     @Test
     public void addACardTest(){
         // Given
-        Card card = new Card();
+        Card card = new Card(null,null);
         Hand hand = new Hand();
 
         // When
@@ -25,8 +25,8 @@ public class HandTest {
     @Test
     public void getACardTest(){
         // Given
-        Card card1 = new Card();
-        Card card2 = new Card();
+        Card card1 = new Card(Card.Rank.ACE , Card.Suit.CLUBS);
+        Card card2 = new Card(null,null);
         Hand hand = new Hand();
         Card expected = card1;
 
@@ -42,8 +42,8 @@ public class HandTest {
     @Test
     public void getNumberOfCardsTest(){
         // Given
-        Card card1 = new Card();
-        Card card2 = new Card();
+        Card card1 = new Card(null,null);
+        Card card2 = new Card(null,null);
         Hand hand = new Hand();
         Integer expected = 2;
 
@@ -73,11 +73,11 @@ public class HandTest {
     @Test
     public void addASetOfCardsTest(){
         // Given
-        Card card1 = new Card();
-        Card card2 = new Card();
-        Card card3 = new Card();
-        Card card4 = new Card();
-        Card card5 = new Card();
+        Card card1 = new Card(null,null);
+        Card card2 = new Card(null,null);
+        Card card3 = new Card(null,null);
+        Card card4 = new Card(null,null);
+        Card card5 = new Card(null,null);
         Card[] cTest = new Card[]{card1, card2, card3, card4, card5};
         Hand hand = new Hand();
         Integer expected = 5;
@@ -93,8 +93,8 @@ public class HandTest {
     @Test
     public void clearHandTest(){
         // Given
-        Card card1 = new Card();
-        Card card2 = new Card();
+        Card card1 = new Card(null,null);
+        Card card2 = new Card(null,null);
         Hand hand = new Hand();
         Integer expected = 0;
 
@@ -111,8 +111,8 @@ public class HandTest {
     @Test
     public void compareNegativeOneTest(){
         // Given
-        Card card1 = new Card();
-        Card card2 = new Card();
+        Card card1 = new Card(null,null);
+        Card card2 = new Card(null,null);
         Hand hand = new Hand();
         Integer expected = -1;
 
@@ -126,8 +126,8 @@ public class HandTest {
     @Test
     public void compareZeroTest(){
         // Given
-        Card card1 = new Card();
-        Card card2 = new Card();
+        Card card1 = new Card(null,null);
+        Card card2 = new Card(null,null);
         Hand hand = new Hand();
         Integer expected = 0;
 
@@ -141,8 +141,8 @@ public class HandTest {
     @Test
     public void comparePositiveOneTest(){
         // Given
-        Card card1 = new Card();
-        Card card2 = new Card();
+        Card card1 = new Card(null,null);
+        Card card2 = new Card(null,null);
         Hand hand = new Hand();
         Integer expected = 1;
 
