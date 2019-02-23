@@ -5,6 +5,7 @@ public final class Banners {
     Console console ;
 
     public Banners(){
+
         this.console = new Console(System.in, System.out);
     }
 
