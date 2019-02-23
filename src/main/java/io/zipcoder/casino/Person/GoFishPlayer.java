@@ -4,9 +4,28 @@ import io.zipcoder.casino.Hand;
 
 public class GoFishPlayer extends CardPlayer {
     private Hand hand;
-    private Integer score;
+    public Integer score;
 
-    public GoFishPlayer(String name) {
+    public GoFishPlayer(String name, Integer score) {
         super(name);
+        this.score = score;
+    }
+
+    public Hand getHand() {
+
+        return hand;
+    }
+
+    public void setHand(Hand hand) {
+
+        this.hand = hand;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
     }
 }
