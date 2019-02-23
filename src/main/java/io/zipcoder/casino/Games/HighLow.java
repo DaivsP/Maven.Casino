@@ -6,6 +6,13 @@ import io.zipcoder.casino.Banners;
 public class HighLow extends CardGames implements FunGame {
     private io.zipcoder.casino.Person.Player highLowPlayer;
 
+    // Use funDealer
+
+    public HighLow()
+    {
+    }
+
+
     public void play(Balance balance) {
         Banners banners = new Banners();
         banners.getHighLowBanner();
