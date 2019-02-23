@@ -11,6 +11,7 @@ import java.util.Collections;
 
 public class Casino {
     private Balance balance;
+    Console console ;
 
     public static void main(String[] args) {
         // write your tests before you start fucking with this
@@ -18,11 +19,16 @@ public class Casino {
         casino.gameRunner();
     }
 
+    public Casino()
+    {
+        this.balance = new Balance();
+        this.console = new Console(System.in, System.out);
+    }
+
     public void pickGame(Balance balance) {
 
-        // Call games classes directly\
+        // Call games classes directly
         Games games;
-        Console console = new Console(System.in, System.out);
         Integer gamePicked = console.getIntegerInput("(1) HighLow (2) Craps (3) BlackJack (4) Go Fish" );
         switch (gamePicked){
             case 1:
@@ -45,28 +51,42 @@ public class Casino {
                 console.println("Incorrect game picked");
                 break;
         }
-        System.out.println(balance.getBalance());
-
 
 
     }
 
     public void gameRunner() {
 
-      Balance balance =  new Balance();
-      Console console = new Console(System.in, System.out);
-
-      balance.setBalance(console.getIntegerInput("How many chips would you like to buy? :"));
+       setInitialBalance();
 
 
       while(balance.getBalance() > 0){
           pickGame(balance);
-          String play = console.getStringInput("Would you like to play again? (N) to quit ") ;
-          if("N".equals(play) || "n".equals(play)){
+          showCurrentBalance();
+          String play = console.getStringInput("Would you like to play again? (Q) to quit ") ;
+          if("Q".equals(play) || "q".equals(play)){
               break;
           }
       }
 
+
+    }
+
+    public void setInitialBalance(){
+         this.balance.setBalance(console.getIntegerInput("How many chips would you like to buy? :"));
+    }
+
+    public void showCurrentBalance(){
+        console.println("Your current chip count: " + this.balance.getBalance());
+    }
+
+    // used for UNIT testing - Should not be called outside unit testing
+    public void setConsole(Console console){
+        this.console = console;
+    }
+
+    public Balance getBalance(){
+        return this.balance;
 
     }
 
