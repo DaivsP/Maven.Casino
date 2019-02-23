@@ -42,15 +42,15 @@ public class Casino {
                 break;
             case 2:
                 games = new Craps();
-             //  ((GoFish) games).play();
+               ((Craps) games).play(balance);
                 break;
             case 3:
                games = new BlackJack();
-             //  ((Craps) games).play(balance);
+             //  ((BlackJack) games).play(balance);
                 break;
             case 4:
                 games = new GoFish();
-             //  ((BlackJack) games).play(balance);
+             //  ((GoFish) games).play(balance);
                 break;
             default:
                 console.println("Incorrect game picked");
