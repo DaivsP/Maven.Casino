@@ -24,7 +24,6 @@ public class Card {
         return this.cardSuit;
     }
 
-
     @Override
     public String toString(){
         String cardVal = getRank().toString();
