@@ -62,10 +62,10 @@ public class CasinoTest {
     }
 
     @Test
-    public void pickGameExitTest(){
+    public void pickGameIncorrectNumTest(){
         // Given
         Casino casino = new Casino();
-        String expected = "(1) HighLow (2) Craps (3) BlackJack (4) Go Fish\nIncorrect game picked\n";
+        String expected = "***** Please Enter The Number Of A Game To Play *****\n(1) HighLow (2) Craps (3) BlackJack (4) Go Fish\nIncorrect game picked\n";
         byte[] inputBytes = "7".getBytes();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ByteArrayInputStream leaveString = new ByteArrayInputStream(inputBytes);
@@ -158,6 +158,24 @@ public class CasinoTest {
 
         // Then
         Assert.assertTrue(result);
+    }
+
+    @Test
+    public void addMoreChips(){
+        // Given
+        Casino casino = new Casino();
+        Balance balance = casino.getBalance();
+        balance.setBalance(500);
+        Integer expected = 600;
+        casino.setConsole(getConsoleWithBuffetedInput("100"));
+
+
+        // When
+        casino.addMoreChips();
+        Integer actual = balance.getBalance();
+
+        // Then
+        Assert.assertEquals(expected, actual);
     }
 
 /*

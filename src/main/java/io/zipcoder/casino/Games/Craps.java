@@ -10,7 +10,6 @@ import io.zipcoder.casino.Banners;
 
 public class Craps extends DiceGames implements GamblingGame {
 
-
     private Console console = new Console(System.in, System.out);
     private Player crapsPlayer;
     private String name;
