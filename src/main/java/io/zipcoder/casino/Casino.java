@@ -33,7 +33,7 @@ public class Casino {
         switch (gamePicked){
             case 1:
                 games = new HighLow();
-                ((HighLow) games).play(balance);
+                ((HighLow) games).play();
                 break;
             case 2:
                 games = new Craps();
