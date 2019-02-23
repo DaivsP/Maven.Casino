@@ -16,9 +16,13 @@ public class HighLow extends CardGames implements FunGame {
     public void play(Balance balance) {
         Banners banners = new Banners();
         banners.getHighLowBanner();
-        System.out.println("Playing");
-        System.out.println(balance.getBalance());
-        balance.setBalance(balance.getBalance()-100);
+       /*while(havingFun)
+        {
+            if youLose
+                havingFun =false
+                break;
+        }*/
+       // balance.setBalance(balance.getBalance()-100);
 
     }
 
