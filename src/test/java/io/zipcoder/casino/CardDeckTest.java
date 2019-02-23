@@ -20,4 +20,16 @@ public class CardDeckTest {
         Assert.assertEquals(expectedCard, actualCard);
     }
 
+    @Test
+    public void shuffleCardTest(){
+        //Given
+        CardDeck cardDeck = new CardDeck();
+
+        //When
+        Card expectedCard = cardDeck.checkNextCard();
+
+        //Then
+        Card actualCard = cardDeck.dealCard();
+        Assert.assertNotEquals(expectedCard, actualCard);
+    }
 }

@@ -14,20 +14,22 @@ public class CardDeck {
         }
     }
 
-    public void shuffle() {
-        Collections.shuffle(DECK);
-    }
-
     public CardDeck(){
         cardDeck = new Stack<Card>();
         cardDeck.addAll(DECK);
     }
 
+    public void shuffle() {
+        Collections.shuffle(DECK);
+    }
+
     public Card dealCard(){
+        System.out.println(cardDeck.peek().toString());
         return cardDeck.pop();
     }
 
     public Card checkNextCard(){
+        System.out.println(cardDeck.peek().toString());
         return cardDeck.peek();
     }
 }
