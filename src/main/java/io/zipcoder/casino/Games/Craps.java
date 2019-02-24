@@ -1,6 +1,7 @@
 package io.zipcoder.casino.Games;
 
 import io.zipcoder.casino.Balance;
+import io.zipcoder.casino.Casino;
 import io.zipcoder.casino.Die;
 import io.zipcoder.casino.Person.CrapsPlayer;
 import io.zipcoder.casino.Person.Player;
@@ -10,6 +11,8 @@ import io.zipcoder.casino.Banners;
 
 public class Craps extends DiceGames implements GamblingGame {
 
+
+    private Casino casino = new Casino();
 
     private DiceGames diceGames = new DiceGames();
     private Die dice = new Die();
@@ -31,46 +34,65 @@ public class Craps extends DiceGames implements GamblingGame {
 
 
         if(passLineChoice == 1){
-            passLineBet = crapsBet();
+            passLineBet = crapsBet(balance);
             do {
                 String rollRequest = console.getStringInput("***** Press (R) to Roll\n***** Press (E) to exit");
 
                 if(rollRequest.equals("R")||rollRequest.equals("r")){
                     Integer roll = diceGames.tossTwoDie(diceGames, die);
-                    pointer = setPointer(balance, passLineBet, roll);
+                    pointer = setPointerPL(balance, passLineBet, roll);
                 }else{
                     break;
                 }
             } while (pointer == 0);
 
         } else if(passLineChoice == 2){
-            passLineBet = crapsBet();
+            passLineBet = crapsBet(balance);
+            do {
+                String rollRequest = console.getStringInput("***** Press (R) to Roll\n***** Press (E) to exit");
+
+                if(rollRequest.equals("R")||rollRequest.equals("r")){
+                    Integer roll = diceGames.tossTwoDie(diceGames, die);
+                    pointer = setPointerDontPL(balance, passLineBet, roll);
+                }else{
+                    break;
+                }
+            } while (pointer == 0);
 
         }
-
-
 
     }
 
     //Selects where the user wants to place the initial bet
     protected Integer passLineChoice() {
         Integer passLineChoice = console.getIntegerInput("***** Where do you want to place your bet:\n" +
-                "***** Select (1) Pass Line \n***** Select (2) Don't Pass Line");
+                "***** Select (1) Pass Line \n***** Select (2) Don't Pass Line\n***** Select (3) to Exit");
 
         return passLineChoice;
     }
 
 
-    protected Integer crapsBet() {
+    protected Integer crapsBet(Balance balance) {
         Integer bet = console.getIntegerInput("***** How much do you want to bet?");
-
-        return bet;
+         if(bet <= balance.getBalance()){
+             balance.setBalance(balance.getBalance()-bet);
+             return bet;
+         }else{
+             console.println("You do not have that much...");
+             String buyMore = console.getStringInput("Would you like to buy more? (Y) / (N)");
+             if(buyMore.equals("Y") || buyMore.equals("y")){
+                 balance.addMoreChips();
+                 crapsBet(balance);
+             }else{
+                 //casino.gameRunner();
+             }
+         }
+        return 0;
     }
 
     //Method that is used in the player decides to bet on the Pass Line - Sets the Pointer to On and equal to the roll
-    protected Integer setPointer(Balance balance, Integer bet, Integer diceRoll) {
+    protected Integer setPointerPL(Balance balance, Integer bet, Integer diceRoll) {
         Integer pointer = 0;
-        //boolean stopCond = true;
 
         console.println("***** You Rolled: " + diceRoll);
         if (diceRoll == 7 || diceRoll == 11) {
@@ -92,7 +114,38 @@ public class Craps extends DiceGames implements GamblingGame {
         return pointer;
     }
 
-    public void letsPlayCraps(){}
+    protected Integer setPointerDontPL(Balance balance, Integer bet, Integer diceRoll){
+        Integer pointer = 0;
+
+        console.println("***** You Rolled: " + diceRoll);
+        if (diceRoll == 2 || diceRoll == 3 ) {
+            console.println("***** Nice! you won: " +bet);
+            crapsPayout(balance, bet);
+            console.println("***** Your balance is: " +balance.getBalance());
+
+        } else if (diceRoll == 7 || diceRoll == 11) {
+            console.println("***** You Lose, Try Again!");
+            crapsCollect(balance,bet);
+            console.println("***** Your balance is: " +balance.getBalance());
+            play(balance);
+
+        } else if(diceRoll == 12){
+            console.println("Push, Roll Again!");
+        }else {
+            console.println("***** Pointer set to: " + diceRoll);
+            pointer = diceRoll;
+
+        }
+        return pointer;
+
+    }
+
+    public Integer doubleOdds(Integer bet){
+        return null;
+    }
+
+
+
 
     //House wins and takes the bet
     public void crapsCollect(Balance balance, Integer amount) {

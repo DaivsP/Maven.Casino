@@ -49,13 +49,32 @@ public class CrapsTest {
     public void crapsBetTest(){
         //Given
         Craps craps = new Craps();
+        Balance balance = new Balance(500);
         byte[] inputBytes = "100".getBytes();
         ByteArrayInputStream leaveString = new ByteArrayInputStream(inputBytes);
         craps.setConsole(new Console(leaveString, System.out));
         Integer expected = 100;
 
         //When
-        Integer actual = craps.crapsBet();
+        Integer actual = craps.crapsBet(balance);
+
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void crapsBetTest2(){
+        //Given
+        Craps craps = new Craps();
+        Balance balance = new Balance(500);
+        byte[] inputBytes = "100".getBytes();
+        ByteArrayInputStream leaveString = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(leaveString, System.out));
+        Integer expected = 400;
+
+        //When
+        craps.crapsBet(balance);
+        Integer actual = balance.getBalance();
 
         //Then
         Assert.assertEquals(expected, actual);
@@ -67,7 +86,6 @@ public class CrapsTest {
         Integer pointer;
         Integer bet = 0;
         Balance balance = new Balance();
-        //CrapsPlayer player = new CrapsPlayer("Bubba", balance);
         Craps craps = new Craps();
         DiceGames diceGames = new DiceGames();
         Die die = new Die();
@@ -75,15 +93,13 @@ public class CrapsTest {
         //When
         do{
             Integer roll = diceGames.tossTwoDie(diceGames, die);
-           pointer = craps.setPointer(balance, bet, roll);
+           pointer = craps.setPointerPL(balance, bet, roll);
 
         }while(pointer == 0);
 
         //Then
         Assert.assertTrue(pointer == 4 || pointer == 5 || pointer == 6
         || pointer == 8 || pointer == 9 || pointer == 10);
-
-
     }
 
     @Test
