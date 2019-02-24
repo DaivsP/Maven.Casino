@@ -44,7 +44,7 @@ public class Casino {
                ((BlackJack) games).play(balance);
                 break;
             case 4:
-                games = new GoFish();
+                games = new GoFish(console);
                ((GoFish) games).play();
                 break;
             default:
