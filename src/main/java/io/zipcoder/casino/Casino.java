@@ -45,7 +45,7 @@ public class Casino {
                 break;
             case 4:
                 games = new GoFish();
-             //  ((GoFish) games).play(balance);
+               ((GoFish) games).play();
                 break;
             default:
                 console.println("Incorrect game picked");
@@ -99,6 +99,10 @@ public class Casino {
     // used for UNIT testing - Should not be called outside unit testing
     public void setConsole(Console console){
         this.console = console;
+    }
+
+    public Console getConsole(Console console){
+        return  this.console;
     }
 
     public Games getGames(){

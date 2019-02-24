@@ -1,77 +1,96 @@
 package io.zipcoder.casino.Games;
 import io.zipcoder.casino.Banners;
 import io.zipcoder.casino.CardDeck;
+import io.zipcoder.casino.Card;
 import io.zipcoder.casino.Hand;
 import io.zipcoder.casino.Person.FunDealer;
 import io.zipcoder.casino.Person.HiLowPlayer;
+import io.zipcoder.casino.utilities.Console;
 
 
 public class HighLow extends CardGames implements FunGame {
 
-    //Hand hand;
     private HiLowPlayer player ;
     private FunDealer dealer;
     private CardDeck cardDeck;
 
+    private Console console ;
 
-    // Use funDealer if needed dealer person
+    private Integer score;
+    private Hand playerHand ;
+    private Hand dealerHand ;
 
     public HighLow()
     {
-        Hand playerHand = new Hand();
-        Hand dealerHand = new Hand();
+        playerHand = new Hand();
+        dealerHand = new Hand();
         player = new HiLowPlayer(null, 0 );
-        player.setHand(playerHand);
         dealer = new FunDealer(0);
-        dealer.setHand(dealerHand);
         cardDeck = new CardDeck();
-
+        console = new Console(System.in, System.out);
+        cardDeck.shuffle();
+        this.score = 0;
     }
 
 
-  //  public void play(Balance balance) {
   public void play() {
         Banners banners = new Banners();
         banners.getHighLowBanner();
-        Boolean havingFun = true;
+        Integer lives = 3;
+        console.println("Please type 'E' to exit");
 
-        while(havingFun){
-            System.out.println("In the loop");
-            break;
-        }
+        while(lives >0){
+            dealerHand.clearHand();
+            playerHand.clearHand();
+            Card playerCard = cardDeck.dealCard();
+            Card dealerCard = cardDeck.checkNextCard();
+            dealerHand.addACard(dealerCard);
+            playerHand.addACard(playerCard);
+            player.setHand(playerHand);
+            dealer.setHand(dealerHand);
 
-
-       /*while(havingFun)
-        {
-            if youLose
-                havingFun =false
+            console.print("Your current card : ");
+            console.println(playerCard.toString());
+            String userGuess = console.getStringInput("Do you think the next card will be (H)igher (L)ower or the (S)ame.  : ") ;
+            if("E".equals(userGuess.toUpperCase())){
                 break;
-        }*/
-       // balance.setBalance(balance.getBalance()-100);
+            }
+            else if(!win(userGuess)){
+                lives--;
+                console.println("WRONG: Next card was :" + dealerCard);
+                console.println("Lives left :" + lives);
+
+            }
+            else {
+               updateScore();
+            }
+
+        }
+      console.println("You guessed correctly "+score+" times!" );
 
     }
 
     public Boolean win(String userGuess){
         Boolean retVal = false;
-        Integer higherCard = player.getHand().compare(player.getHand().getACard(0),dealer.getHand().getACard(0));
+        Integer higherCard =compareRank();
         if("E".equals(userGuess.toUpperCase()) && higherCard == 0) {
-            //System.out.println("Next card Equals");
             retVal = true;
         }
-        if("H".equals(userGuess.toUpperCase()) && higherCard == 1) {
-           // System.out.println("Next Card Was Higher");
+        if("H".equals(userGuess.toUpperCase()) && higherCard < 0) {
             retVal = true;
         }
-        if("L".equals(userGuess.toUpperCase()) && higherCard == -1) {
-           // System.out.println("Next card was Lower");
+        if("L".equals(userGuess.toUpperCase()) && higherCard > 0) {
             retVal = true;
         }
         return retVal;
     }
 
-    // not used - no score saved for high/low - Need for interface
-    public void updateScore() {
+    public Integer compareRank(){
+        return player.getHand().getACard(0).getRank().ordinal() - dealer.getHand().getACard(0).getRank().ordinal();
+    }
 
+    public void updateScore() {
+        score++;
     }
 
     // Getters only - Nothing should be setting these outside of this class
