@@ -20,14 +20,14 @@ public class HighLow extends CardGames implements FunGame {
     private Hand playerHand ;
     private Hand dealerHand ;
 
-    public HighLow()
+    public HighLow(Console console)
     {
         playerHand = new Hand();
         dealerHand = new Hand();
         player = new HiLowPlayer(null, 0 );
         dealer = new FunDealer(0);
         cardDeck = new CardDeck();
-        console = new Console(System.in, System.out);
+        this.console = console;
         cardDeck.shuffle();
         this.score = 0;
     }
@@ -73,7 +73,7 @@ public class HighLow extends CardGames implements FunGame {
     public Boolean win(String userGuess){
         Boolean retVal = false;
         Integer higherCard =compareRank();
-        if("E".equals(userGuess.toUpperCase()) && higherCard == 0) {
+        if("S".equals(userGuess.toUpperCase()) && higherCard == 0) {
             retVal = true;
         }
         if("H".equals(userGuess.toUpperCase()) && higherCard < 0) {
@@ -105,5 +105,7 @@ public class HighLow extends CardGames implements FunGame {
     public FunDealer getHLDealer(){
         return this.dealer;
     }
+
+
 
 }
