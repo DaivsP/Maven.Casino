@@ -45,7 +45,7 @@ public class Casino {
                 break;
             case 4:
                 games = new GoFish();
-               ((GoFish) games).play();
+             //  ((GoFish) games).play(balance);
                 break;
             default:
                 console.println("Incorrect game picked");
@@ -93,12 +93,6 @@ public class Casino {
 
     }
 
-    /*
-    public void addMoreChips(){
-        Integer currentAmount = balance.getBalance();
-        this.balance.setBalance(currentAmount + console.getIntegerInput("How many more chips would you like to buy? :"));
-
-    }*/
 
 
     // Below this lines methods are used for testing

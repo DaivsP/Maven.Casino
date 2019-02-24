@@ -1,6 +1,7 @@
 package io.zipcoder.casino.Person;
 
 import io.zipcoder.casino.Balance;
+import io.zipcoder.casino.Hand;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,11 +10,33 @@ import static org.junit.Assert.*;
 public class BlackJackPlayerTest {
 
     @Test
-    public void getHand() {
+    public void getHandTest() {
+        //given
+        Balance balance = new Balance(500);
+        BlackJackPlayer guy = new BlackJackPlayer("guy", balance);
+        Hand hand = new Hand();
+        //when
+        guy.setHand(hand);
+        // then
+        Assert.assertEquals(hand, guy.getHand());
+
+
     }
 
     @Test
-    public void setHand() {
+    public void setHandTest() {
+        //given
+        Balance balance = new Balance(500);
+        BlackJackPlayer guy = new BlackJackPlayer("guy", balance);
+        Hand hand = new Hand();
+
+        //when
+        guy.setHand(hand);
+
+        Hand expected = guy.getHand();
+
+        // then
+        Assert.assertEquals(expected, guy.getHand());
     }
     @Test
     public void getBalanceTest() {
