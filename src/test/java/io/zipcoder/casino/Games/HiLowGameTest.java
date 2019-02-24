@@ -162,4 +162,73 @@ public class HiLowGameTest {
         Assert.assertFalse(actual);
     }
 
+    @Test
+    public void compareRankEqualTest() {
+        // Given
+        HighLow highLow = new HighLow();
+        // prep player
+        Hand playerHand = new Hand();
+        playerHand.addACard(new Card(Card.Rank.QUEEN, Card.Suit.CLUBS));
+        HiLowPlayer hiLowPlayer = highLow.getHLPlayer();
+        hiLowPlayer.setHand(playerHand);
+        // prep dealer
+        Hand DealerHand = new Hand();
+        DealerHand.addACard(new Card(Card.Rank.QUEEN, Card.Suit.HEARTS));
+        FunDealer hlDealer = highLow.getHLDealer();
+        hlDealer.setHand(DealerHand);
+        Integer expected = 0;
+
+        // When
+        Integer actual = highLow.compareRank();
+
+        // Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void compareRankDealerHigherTest(){
+        // Given
+        HighLow highLow = new HighLow();
+        // prep player
+        Hand playerHand = new Hand();
+        playerHand.addACard(new Card(Card.Rank.QUEEN, Card.Suit.CLUBS ));
+        HiLowPlayer hiLowPlayer = highLow.getHLPlayer();
+        hiLowPlayer.setHand(playerHand);
+        // prep dealer
+        Hand DealerHand = new Hand();
+        DealerHand.addACard(new Card(Card.Rank.KING, Card.Suit.HEARTS ));
+        FunDealer hlDealer = highLow.getHLDealer();
+        hlDealer.setHand(DealerHand);
+        Integer expected = -1;
+
+        // When
+        Integer actual = highLow.compareRank();
+
+        // Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void compareRankPlayerHigherTest(){
+        // Given
+        HighLow highLow = new HighLow();
+        // prep player
+        Hand playerHand = new Hand();
+        playerHand.addACard(new Card(Card.Rank.QUEEN, Card.Suit.CLUBS ));
+        HiLowPlayer hiLowPlayer = highLow.getHLPlayer();
+        hiLowPlayer.setHand(playerHand);
+        // prep dealer
+        Hand DealerHand = new Hand();
+        DealerHand.addACard(new Card(Card.Rank.JACK, Card.Suit.HEARTS ));
+        FunDealer hlDealer = highLow.getHLDealer();
+        hlDealer.setHand(DealerHand);
+        Integer expected = 1;
+
+        // When
+        Integer actual = highLow.compareRank();
+
+        // Then
+        Assert.assertEquals(expected, actual);
+    }
+
 }
