@@ -2,10 +2,11 @@
 package io.zipcoder.casino;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Hand {
 
-    private ArrayList myHand = new ArrayList<Card>();
+    private List<Card> myHand = new ArrayList<Card>();
     public void Hand(){}
 
 
@@ -29,6 +30,15 @@ public class Hand {
 
     public void clearHand(){
         myHand.clear();
+    }
+
+    @Override
+    public String toString(){
+        String results = "";
+        for (Card card: myHand) {
+            results += card + ", ";
+        }
+        return results;
     }
 
 }

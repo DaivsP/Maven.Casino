@@ -32,6 +32,7 @@ public class BlackJack extends CardGames implements GamblingGame {
         Banners banners = new Banners();
         banners.getBlackjackBanner();
         console.println("Please type 'E' to exit");
+        player.setBalance(balance);
         Integer amount = balance.getBalance();
         while(amount > 0){
             dealerHand.clearHand();
@@ -42,15 +43,15 @@ public class BlackJack extends CardGames implements GamblingGame {
             playerHand.addACard(playerCard);
             Card playerCard2 = cardDeck.dealCard();
             Card dealerCard2 = cardDeck.dealCard();
+            //dealerCard2.setHidden(true);
             dealerHand.addACard(dealerCard2);
             playerHand.addACard(playerCard2);
 
             console.print("Your current cards: ");
             console.println(playerHand.toString());
             Integer userBet = console.getIntegerInput("How much do you want to Bet: ");
-            player.bet(balance,userBet);
+            player.bet(balance, userBet);
             pot = userBet;
-
 
             String userChoice = console.getStringInput("Do you want to (H)it or (S)tay. :");
             if ("H".equals(userChoice.toUpperCase())){
