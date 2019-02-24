@@ -45,7 +45,7 @@ public class Casino {
                 break;
             case 4:
                 games = new GoFish();
-             //  ((GoFish) games).play(balance);
+               ((GoFish) games).play();
                 break;
             default:
                 console.println("Incorrect game picked");
