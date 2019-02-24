@@ -108,49 +108,4 @@ public class HandTest {
         Assert.assertEquals(expected,actual);
     }
 
-    @Test
-    public void compareNegativeOneTest(){
-        // Given
-        Card card1 = new Card(null,null);
-        Card card2 = new Card(null,null);
-        Hand hand = new Hand();
-        Integer expected = -1;
-
-        // when
-        Integer actual = hand.compare(card1, card2);
-
-        // then
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void compareZeroTest(){
-        // Given
-        Card card1 = new Card(null,null);
-        Card card2 = new Card(null,null);
-        Hand hand = new Hand();
-        Integer expected = 0;
-
-        // when
-        Integer actual = hand.compare(card1, card2);
-
-        // then
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void comparePositiveOneTest(){
-        // Given
-        Card card1 = new Card(null,null);
-        Card card2 = new Card(null,null);
-        Hand hand = new Hand();
-        Integer expected = 1;
-
-        // when
-        Integer actual = hand.compare(card1, card2);
-
-        // then
-        Assert.assertEquals(expected, actual);
-    }
-
 }
