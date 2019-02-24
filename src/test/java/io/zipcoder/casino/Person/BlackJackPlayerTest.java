@@ -9,6 +9,9 @@ import static org.junit.Assert.*;
 
 public class BlackJackPlayerTest {
 
+
+
+
     @Test
     public void getHandTest() {
         //given
@@ -51,14 +54,14 @@ public class BlackJackPlayerTest {
     @Test
     public void setBalanceTest() {
         Balance balance = new Balance(500);
-
         Balance newBalance = new Balance(1000);
-
-        CrapsPlayer guy = new CrapsPlayer("guy", balance);
+        BlackJackPlayer guy = new BlackJackPlayer("guy", balance);
 
         guy.setBalance(newBalance);
 
-        Assert.assertEquals(guy.getBalance(), newBalance);
+        Balance actual = guy.getBalance();
+
+        Assert.assertEquals(actual, newBalance);
     }
 
     @Test
