@@ -6,7 +6,4 @@ public class Dealer extends Person {
         super("The Dealer");
     }
 
-    public void collect() {
-
-    }
 }

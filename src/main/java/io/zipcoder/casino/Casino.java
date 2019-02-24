@@ -37,12 +37,11 @@ public class Casino {
                 break;
             case 2:
                 games = new Craps();
-
                ((Craps) games).play(balance);
                 break;
             case 3:
                games = new BlackJack();
-             //  ((BlackJack) games).play(balance);
+               ((BlackJack) games).play(balance);
                 break;
             case 4:
                 games = new GoFish();
@@ -72,7 +71,7 @@ public class Casino {
           }
 
           if("B".equals(play) || "b".equals(play)) {
-              addMoreChips();
+              balance.addMoreChips();
           }
 
       }
@@ -94,11 +93,6 @@ public class Casino {
 
     }
 
-    public void addMoreChips(){
-        Integer currentAmount = balance.getBalance();
-        this.balance.setBalance(currentAmount + console.getIntegerInput("How many more chips would you like to buy? :"));
-
-    }
 
 
     // Below this lines methods are used for testing

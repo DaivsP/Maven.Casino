@@ -54,4 +54,15 @@ public class DiceGamesTest {
         //then
         Assert.assertTrue(actual >= 4 && actual <= 24);
     }
+
+    @Test
+    public void tossTwoTest(){
+        //Given
+        DiceGames game = new DiceGames();
+        Die die = new Die();
+        //When
+        Integer actual = game.tossTwoDie(game, die);
+        //Then
+        Assert.assertTrue(actual >= 2 && actual <= 12);
+    }
 }
