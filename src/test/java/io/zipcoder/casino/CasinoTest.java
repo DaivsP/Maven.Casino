@@ -79,7 +79,7 @@ public class CasinoTest {
         Assert.assertEquals(expected, actual);
 
     }
-
+/*
     @Test
     public void pickGameLaunchedHLTest(){
         // Given
@@ -161,7 +161,7 @@ public class CasinoTest {
     }
 
 
-/*
+
     @Test
     public void pickGameInvalidInputTest(){
         // Given

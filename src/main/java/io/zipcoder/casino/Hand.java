@@ -2,9 +2,8 @@
 package io.zipcoder.casino;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 
-public class Hand implements Comparator {
+public class Hand {
 
     private ArrayList myHand = new ArrayList<Card>();
     public void Hand(){}
@@ -32,9 +31,4 @@ public class Hand implements Comparator {
         myHand.clear();
     }
 
-
-    public int compare(Object o1, Object o2) {
-
-        return 0;
-    }
 }
