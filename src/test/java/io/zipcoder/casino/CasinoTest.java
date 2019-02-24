@@ -154,6 +154,27 @@ public class CasinoTest {
         Assert.assertTrue(result);
 
     }
+
+    @Test
+    public void pickGameLaunchedFishTest(){
+        // Given
+        Casino casino = new Casino();
+
+        byte[] inputBytes = "4\rE".getBytes();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+        casino.setConsole(new Console(inputStream, System.out));
+        boolean result = false;
+
+        // When
+        casino.pickGame(new Balance(100));
+        if(casino.getGames() instanceof GoFish)
+        {
+            result = true;
+        }
+
+        // Then
+        Assert.assertTrue(result);
+    }
 /*
     @Test
     public void pickGameLaunchedCrapTest(){
@@ -195,25 +216,7 @@ public class CasinoTest {
         Assert.assertTrue(result);
     }
 
-    @Test
-    public void pickGameLaunchedFishTest(){
-        // Given
-        Casino casino = new Casino();
-        byte[] inputBytes = "4".getBytes();
-        ByteArrayInputStream leaveString = new ByteArrayInputStream(inputBytes);
-        casino.setConsole(new Console(leaveString, System.out));
-        boolean result = false;
 
-        // When
-        casino.pickGame(new Balance(100));
-        if(casino.getGames() instanceof GoFish)
-        {
-            result = true;
-        }
-
-        // Then
-        Assert.assertTrue(result);
-    }
 
 
 

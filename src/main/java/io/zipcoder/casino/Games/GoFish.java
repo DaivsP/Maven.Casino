@@ -21,7 +21,7 @@ public class GoFish extends CardGames implements FunGame {
     private Integer books;
     private Integer score;
 
-    public GoFish() {
+    public GoFish(Console console) {
         cardDeck = new CardDeck();
         cardDeck.shuffle();
 
@@ -34,10 +34,11 @@ public class GoFish extends CardGames implements FunGame {
         player.setHand(playerHand);
         player2.setHand(player2Hand);
 
-        console = new Console(System.in, System.out);
         player.setScore(0);
         player2.setScore(0);
         books = 0;
+
+        this.console = console;
 
 
     }

@@ -93,11 +93,11 @@ public final class Banners {
         console.println("**************************** PLEASE BUY MORE CHIPS OR GTFO *************************");
         console.println(" ");
         }
-
+/*
         public static void main(String... args){
             Banners ban = new Banners();
             ban.getOutOfFundsBanner();
             ban.getBlackjackBanner();
             ban.getCasinoBanner();
-        }
+        }*/
     }
