@@ -48,6 +48,29 @@ public class CasinoTest {
 
 
     @Test
+    public void gamblerSetInitialBalYesConditionTest(){
+        // Given
+        Casino casino = new Casino();
+
+        Integer expected = 5;
+
+        byte[] inputBytes = "y\r5".getBytes();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+        casino.setConsole(new Console(inputStream,new PrintStream(outputStream) ));
+
+        // When
+        casino.gamblerSetInitialBal();
+        Balance balance = casino.getBalance();
+        Integer actual = balance.getBalance();
+
+        // Then
+        Assert.assertEquals(expected, actual);
+
+    }
+
+
+    @Test
     public void setInitialBalanceTest(){
         // Given
         Casino casino = new Casino();
