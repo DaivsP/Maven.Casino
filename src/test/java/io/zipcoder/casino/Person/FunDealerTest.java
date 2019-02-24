@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class FunDealerTest {
 
     @Test
-    public void getHand() {
+    public void getHandTest() {
         //given
         Integer score = 500;
         FunDealer dealer = new FunDealer(score);
@@ -22,7 +22,7 @@ public class FunDealerTest {
     }
 
     @Test
-    public void setHand() {
+    public void setHandTest() {
         //given
         Integer score = 500;
         FunDealer dealer = new FunDealer(score);
@@ -47,7 +47,7 @@ public class FunDealerTest {
     }
 
     @Test
-    public void setScore() {
+    public void setScoreTest() {
         //given
         FunDealer gamer = new FunDealer(15);
         Integer newScore = 60;

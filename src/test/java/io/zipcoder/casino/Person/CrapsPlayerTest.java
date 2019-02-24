@@ -48,7 +48,7 @@ public class CrapsPlayerTest {
     }
 
     @Test
-    public void collect() {
+    public void collectTest() {
         //given
         Balance balance = new Balance(500);
         CrapsPlayer guy = new CrapsPlayer("guy", balance);
