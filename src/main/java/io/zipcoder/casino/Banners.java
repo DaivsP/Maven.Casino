@@ -1,103 +1,62 @@
 package io.zipcoder.casino;
+import io.zipcoder.casino.utilities.AdvertisementForBanners;
 import io.zipcoder.casino.utilities.Console;
 
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
 public final class Banners {
+    AdvertisementForBanners optionAdvertisement = new AdvertisementForBanners();
     Console console ;
 
     public Banners(){
-
         this.console = new Console(System.in, System.out);
     }
 
-    public void getCasinoBanner() {
-        console.println("******************************************* WELCOME TO THE ****************************************************");
-        console.println(" /$$$$$$$         /$$$$$$ /$$$$$$$$/$$$$$$ /$$$$$$$         /$$$$$$  /$$$$$$  /$$$$$$ /$$$$$$/$$   /$$ /$$$$$$ ");
-        console.println("| $$____/        /$$__  $|__  $$__/$$__  $| $$__  $$       /$$__  $$/$$__  $$/$$__  $|_  $$_| $$$ | $$/$$__  $$");
-        console.println("| $$            | $$  \\__/  | $$ | $$  \\ $| $$  \\ $$      | $$  \\__| $$  \\ $| $$  \\__/ | $$ | $$$$| $| $$  \\ $$");
-        console.println("| $$$$$$$       |  $$$$$$   | $$ | $$$$$$$| $$$$$$$/      | $$     | $$$$$$$|  $$$$$$  | $$ | $$ $$ $| $$  | $$");
-        console.println("|_____  $$       \\____  $$  | $$ | $$__  $| $$__  $$      | $$     | $$__  $$\\____  $$ | $$ | $$  $$$| $$  | $$");
-        console.println(" /$$  \\ $$       /$$  \\ $$  | $$ | $$  | $| $$  \\ $$      | $$    $| $$  | $$/$$  \\ $$ | $$ | $$\\  $$| $$  | $$");
-        console.println("|  $$$$$$/      |  $$$$$$/  | $$ | $$  | $| $$  | $$      |  $$$$$$| $$  | $|  $$$$$$//$$$$$| $$ \\  $|  $$$$$$/");
-        console.println(" \\______/        \\______/   |__/ |__/  |__|__/  |__/       \\______/|__/  |__/\\______/|______|__/  \\__/\\______/ ");
-        console.println("************************************** PLEASE GAMBLE RESPONSIBLY ***********************************************");
-        console.println("  ");
+
+    public void getCasinoBanner(){
+        printDelay( optionAdvertisement.getCasinoStr() , 1 );
     }
 
+
     public void getBlackjackBanner() {
-        console.println("******************************** LETS PLAY SOME **********************************");
-        console.println(" /$$$$$$$ /$$       /$$$$$$  /$$$$$$ /$$   /$$   /$$$$$ /$$$$$$  /$$$$$$ /$$   /$$");
-        console.println("| $$__  $| $$      /$$__  $$/$$__  $| $$  /$$/  |__  $$/$$__  $$/$$__  $| $$  /$$/");
-        console.println("| $$  \\ $| $$     | $$  \\ $| $$  \\__| $$ /$$/      | $| $$  \\ $| $$  \\__| $$ /$$/ ");
-        console.println("| $$$$$$$| $$     | $$$$$$$| $$     | $$$$$/       | $| $$$$$$$| $$     | $$$$$/  ");
-        console.println("| $$__  $| $$     | $$__  $| $$     | $$  $$  /$$  | $| $$__  $| $$     | $$  $$  ");
-        console.println("| $$  \\ $| $$     | $$  | $| $$    $| $$\\  $$| $$  | $| $$  | $| $$    $| $$\\  $$ ");
-        console.println("| $$$$$$$| $$$$$$$| $$  | $|  $$$$$$| $$ \\  $|  $$$$$$| $$  | $|  $$$$$$| $$ \\  $$");
-        console.println("|_______/|________|__/  |__/\\______/|__/  \\__/\\______/|__/  |__/\\______/|__/  \\__/");
-        console.println("************************** WHERE IS THAT DRINK WAITER??? *************************");
-        console.println("  ");
+        printDelay( optionAdvertisement.getBlackJackStr(),1 );
     }
 
     public void getCrapsBanner() {
-        console.println("****************************************** LETS PLAY SOME ****************************************");
-        console.println("              _______.      /$$$$$$ /$$$$$$$  /$$$$$$ /$$$$$$$  /$$$$$$               _______.");
-        console.println("   ______    | .   . |\\    /$$__  $| $$__  $$/$$__  $| $$__  $$/$$__  $$   ______    | .   . |\\");
-        console.println("  /     /\\   |   .   |.\\  | $$  \\__| $$  \\ $| $$  \\ $| $$  \\ $| $$\\__/    /     /\\   |   .   |.\\");
-        console.println(" /  '  /  \\  | .   . |.'| | $$     | $$$$$$$| $$$$$$$| $$$$$$$|  $$$$$$  /  '  /  \\  | .   . |.'|");
-        console.println("/_____/. . \\ |_______|.'| | $$     | $$__  $| $$__  $| $$____/ \\____  $$/_____/. . \\ |_______|.'|");
-        console.println("\\ . . \\    /  \\ ' .   \\'| | $$    $| $$  \\ $| $$  | $| $$      /$$  \\ $$\\ . . \\    /  \\ ' .   \\'|");
-        console.println(" \\ . . \\  /    \\____'__\\| |  $$$$$$| $$  | $| $$  | $| $$     |  $$$$$$/ \\ . . \\  /    \\____'__\\|");
-        console.println("  \\_____\\/                 \\______/|__/  |__|__/  |__|__/      \\______/   \\_____\\/");
-        console.println("********************************** HOW THE HELL DO YOU PLAY THIS??? ******************************");
-        console.println(" ");
+        printDelay( optionAdvertisement.getCrapsStr(),1 );
     }
 
+
     public void getGoFishBanner() {
-        console.println("************************************** LETS PLAY SOME *********************************");
-        console.println("                /$$$$$$  /$$$$$$        /$$$$$$$$/$$$$$$ /$$$$$$ /$$   /$$      |\\    o");
-        console.println("     |\\    o   /$$__  $$/$$__  $$      | $$_____|_  $$_//$$__  $| $$  | $$     |  \\    o");
-        console.println("    |  \\    o | $$  \\__| $$  \\ $$      | $$       | $$ | $$  \\__| $$  | $$ |\\ /    .\\ o");
-        console.println("|\\ /    .\\ o  | $$ /$$$| $$  | $$      | $$$$$    | $$ |  $$$$$$| $$$$$$$$ | |       (");
-        console.println("| |       (   | $$|_  $| $$  | $$      | $$__/    | $$  \\____  $| $$__  $$ |/ \\     /");
-        console.println("|/ \\     /    | $$  \\ $| $$  | $$      | $$       | $$  /$$  \\ $| $$  | $$     |  /");
-        console.println("    |  /      |  $$$$$$|  $$$$$$/      | $$      /$$$$$|  $$$$$$| $$  | $$      |/");
-        console.println("     |/        \\______/ \\______/       |__/     |______/\\______/|__/  |__/");
-        console.println("************************************** CHOOSE WISELY *********************************");
-        console.println(" ");
+        printDelay( optionAdvertisement.getGoFishStr(), 1) ;
+
     }
 
     public void getHighLowBanner() {
-        console.println("************************************* LETS PLAY SOME ***********************************");
-        console.println(" /$$   /$$/$$$$$$ /$$$$$$ /$$   /$$             /$$       /$$       /$$$$$$ /$$      /$$");
-        console.println("| $$  | $|_  $$_//$$__  $| $$  | $$            /$$/      | $$      /$$__  $| $$  /$ | $$");
-        console.println("| $$  | $$ | $$ | $$  \\__| $$  | $$           /$$/       | $$     | $$  \\ $| $$ /$$$| $$");
-        console.println("| $$$$$$$$ | $$ | $$ /$$$| $$$$$$$$          /$$/        | $$     | $$  | $| $$/$$ $$ $$");
-        console.println("| $$__  $$ | $$ | $$|_  $| $$__  $$         /$$/         | $$     | $$  | $| $$$$_  $$$$");
-        console.println("| $$  | $$ | $$ | $$  \\ $| $$  | $$        /$$/          | $$     | $$  | $| $$$/ \\  $$$");
-        console.println("| $$  | $$/$$$$$|  $$$$$$| $$  | $$       /$$/           | $$$$$$$|  $$$$$$| $$/   \\  $$");
-        console.println("|__/  |__|______/\\______/|__/  |__/      |__/            |________/\\______/|__/     \\__/");
-        console.println("********************************* WHO CAN GET HIGHER??? ********************************");
-        console.println(" ");
+
+        printDelay( optionAdvertisement.getHighLowStr(),1 );
     }
 
     public void getOutOfFundsBanner() {
+        printDelay( optionAdvertisement.getOutOfFundsStr(),1 );
+    }
 
-        console.println("******************************** YOU ARE OUT OF FUNDS ******************************");
-        console.println("  __  _.-\"` `'-.                                                          _.-\"` `'-.");
-        console.println(" /||\\'._ __{}_(    _______  ______ _   _ ____  _____   __  __ _____      '._ __{}_(");
-        console.println(" ||||  |'--.__\\   | ____\\ \\/ / ___| | | / ___|| ____| |  \\/  | ____|       |'--.__\\");
-        console.println(" |  L.(   ^_\\^    |  _|  \\  / |   | | | \\___ \\|  _|   | |\\/| |  _|        (   ^_\\^");
-        console.println(" \\ .-' |   _ |    | |___ /  \\ |___| |_| |___) | |___  | |  | | |___        |   _ |");
-        console.println(" | |   )\\___/     |_____/_/\\_\\____|\\___/|____/|_____| |_|  |_|_____|       )\\___/");
-        console.println(" |  \\-'`:._]                                                           .--'`:._]");
-        console.println(" \\__/;      '-.                                                       /  \\      '-.");
-        console.println("**************************** PLEASE BUY MORE CHIPS OR GTFO *************************");
-        console.println(" ");
-        }
 
-        public static void main(String... args){
-            Banners ban = new Banners();
-            ban.getOutOfFundsBanner();
-            ban.getBlackjackBanner();
-            ban.getCasinoBanner();
+    public void printDelay(String message, Integer time){
+        for (int i = 0; i < message.length(); i++) {
+            console.print( String.valueOf(message.charAt(i)) );
+            try {
+                TimeUnit.MILLISECONDS.sleep(time);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
+
+    // Below this lines methods are used for testing
+    // used for UNIT testing - Should not be called outside unit testing
+    public void setConsole(Console console){
+        this.console = console;
+    }
+}
