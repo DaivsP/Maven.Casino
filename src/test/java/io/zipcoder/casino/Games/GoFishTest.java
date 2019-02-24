@@ -19,12 +19,12 @@ public class GoFishTest {
         // When
         GoFish goFish = new GoFish();
         CardDeck cardDeck = goFish.getCardDeck();
-        FunDealer dealer = goFish.getDealer();
+        GoFishPlayer player2 = goFish.getPlayer();
         GoFishPlayer player = goFish.getPlayer();
 
         // Then
         Assert.assertNotNull(cardDeck);
-        Assert.assertNotNull(dealer);
+        Assert.assertNotNull(player2);
         Assert.assertNotNull(player);
     }
 
