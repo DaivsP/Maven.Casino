@@ -1,6 +1,7 @@
 package io.zipcoder.casino.Games;
 
 
+import io.zipcoder.casino.Balance;
 import io.zipcoder.casino.Banners;
 
 public class BlackJack extends CardGames implements GamblingGame {
@@ -15,5 +16,9 @@ public class BlackJack extends CardGames implements GamblingGame {
     }
 
     public void payout() {
+    }
+
+    public void play(Balance balance) {
+
     }
 }
