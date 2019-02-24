@@ -1,7 +1,9 @@
 package io.zipcoder.casino.Person;
 
-public interface GamblingPlayer {
-    void bet();
+import io.zipcoder.casino.Balance;
 
-    void collect();
+public interface GamblingPlayer {
+    void bet(Balance balance, Integer amount);
+
+    void collect(Balance balance, Integer amount);
 }
