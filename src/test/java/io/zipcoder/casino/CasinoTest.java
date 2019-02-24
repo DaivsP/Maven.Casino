@@ -160,23 +160,6 @@ public class CasinoTest {
         Assert.assertTrue(result);
     }
 
-    @Test
-    public void addMoreChips(){
-        // Given
-        Casino casino = new Casino();
-        Balance balance = casino.getBalance();
-        balance.setBalance(500);
-        Integer expected = 600;
-        casino.setConsole(getConsoleWithBuffetedInput("100"));
-
-
-        // When
-        casino.addMoreChips();
-        Integer actual = balance.getBalance();
-
-        // Then
-        Assert.assertEquals(expected, actual);
-    }
 
 /*
     @Test
