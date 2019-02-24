@@ -1,7 +1,10 @@
 package io.zipcoder.casino;
 
+import io.zipcoder.casino.utilities.Console;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.io.ByteArrayInputStream;
 
 public class BalanceTest {
 
@@ -47,6 +50,32 @@ public class BalanceTest {
 
     }
 
+
+    @Test
+    public void addMoreChips(){
+        // Given
+        Balance balance = new Balance();
+        balance.setBalance(100);
+
+        Integer expected = 200;
+        balance.setConsole(getConsoleInputConsole("100"));
+
+        // When
+        balance.addMoreChips();
+        Integer actual = balance.getBalance();
+
+        // Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    // set up - input stream
+    private Console getConsoleInputConsole(String inputString) {
+        byte[] inputBytes = inputString.getBytes();
+        ByteArrayInputStream inputByteArray = new ByteArrayInputStream(inputBytes);
+        Console console = new Console(inputByteArray , System.out);
+        return console;
+
+    }
 
 
 }
