@@ -18,7 +18,5 @@ public class BlackJack extends CardGames implements GamblingGame {
     public void payout() {
     }
 
-    public void play(Balance balance) {
 
-    }
 }

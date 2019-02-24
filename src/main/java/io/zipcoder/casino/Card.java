@@ -8,9 +8,9 @@ public class Card {
     public enum Rank {TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE}
 
     private Boolean hidden;
+
     private Suit cardSuit;
     private Rank cardRank;
-
     public Card(Rank cardRank, Suit cardSuit) {
         this.cardRank = cardRank;
         this.cardSuit = cardSuit;
@@ -22,6 +22,14 @@ public class Card {
 
     public Suit getSuit() {
         return this.cardSuit;
+    }
+
+    public Boolean getHidden() {
+        return hidden;
+    }
+
+    public void setHidden(Boolean hidden) {
+        this.hidden = hidden;
     }
 
     @Override
