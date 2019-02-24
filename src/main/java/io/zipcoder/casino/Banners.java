@@ -52,6 +52,8 @@ public final class Banners {
                 e.printStackTrace();
             }
         }
+
+
     }
 
     // Below this lines methods are used for testing
