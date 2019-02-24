@@ -23,23 +23,31 @@ public class Craps extends DiceGames implements GamblingGame {
         banners.getCrapsBanner();
         this.balance = balance;
         Integer pointer = 0;
-
-
+        Integer passLineBet = 0;
         Die die = new Die();
         DiceGames diceGames = new DiceGames();
 
-//        name = console.getStringInput("What is your name?");
-//        crapsPlayer = new CrapsPlayer(name, balance);
-
         Integer passLineChoice = passLineChoice();
-        Integer passLineBet = passLineBet();
 
-        do{
-            console.println("Lets Roll these things!");
-            Integer roll = diceGames.tossTwoDie(diceGames, die);
-            pointer = setPointer(balance, passLineBet, roll);
 
-        }while(pointer == 0);
+        if(passLineChoice == 1){
+            passLineBet = crapsBet();
+            do {
+                String rollRequest = console.getStringInput("***** Press (R) to Roll\n***** Press (E) to exit");
+
+                if(rollRequest.equals("R")||rollRequest.equals("r")){
+                    Integer roll = diceGames.tossTwoDie(diceGames, die);
+                    pointer = setPointer(balance, passLineBet, roll);
+                }else{
+                    break;
+                }
+            } while (pointer == 0);
+
+        } else if(passLineChoice == 2){
+            passLineBet = crapsBet();
+
+        }
+
 
 
     }
@@ -52,47 +60,61 @@ public class Craps extends DiceGames implements GamblingGame {
         return passLineChoice;
     }
 
-    protected Integer passLineBet() {
-        Integer bet = console.getIntegerInput("How much do you want to bet?");
+
+    protected Integer crapsBet() {
+        Integer bet = console.getIntegerInput("***** How much do you want to bet?");
 
         return bet;
     }
 
-
+    //Method that is used in the player decides to bet on the Pass Line - Sets the Pointer to On and equal to the roll
     protected Integer setPointer(Balance balance, Integer bet, Integer diceRoll) {
         Integer pointer = 0;
         //boolean stopCond = true;
 
-        console.println("You Rolled: " + diceRoll);
+        console.println("***** You Rolled: " + diceRoll);
         if (diceRoll == 7 || diceRoll == 11) {
-            console.println("Nice! you won!");
+            console.println("***** Nice! you won: " +bet);
             crapsPayout(balance, bet);
+            console.println("***** Your balance is: " +balance.getBalance());
+
         } else if (diceRoll == 2 || diceRoll == 3 || diceRoll == 12) {
-            console.println("You Lose");
-            //stopCond = false;
+            console.println("***** You Lose, Try Again!");
+            crapsCollect(balance,bet);
+            console.println("***** Your balance is: " +balance.getBalance());
+            play(balance);
+
         } else {
-            console.println("Pointer set to: " + diceRoll);
+            console.println("***** Pointer set to: " + diceRoll);
             pointer = diceRoll;
-            //stopCond = false;
+
         }
-
-
         return pointer;
     }
 
+    public void letsPlayCraps(){}
 
-    public void collect() {
-
+    //House wins and takes the bet
+    public void crapsCollect(Balance balance, Integer amount) {
+        balance.setBalance(balance.getBalance() - amount);
     }
 
+    //Player wins and gets their cut
     protected void crapsPayout(Balance balance, Integer amount) {
         balance.setBalance(balance.getBalance() + amount);
     }
+
+
+
+
 
     public void payout() {
 
     }
 
+    public void collect() {
+
+    }
 
     //Used for unit Testing
     public void setConsole(Console console) {

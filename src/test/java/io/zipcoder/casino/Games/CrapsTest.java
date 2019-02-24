@@ -55,7 +55,7 @@ public class CrapsTest {
         Integer expected = 100;
 
         //When
-        Integer actual = craps.passLineBet();
+        Integer actual = craps.crapsBet();
 
         //Then
         Assert.assertEquals(expected, actual);
@@ -87,6 +87,21 @@ public class CrapsTest {
     }
 
     @Test
+    public void collectTest(){
+        //Given
+        Craps craps = new Craps();
+        Balance balance = new Balance();
+        balance.setBalance(200);
+        Integer bet = 100;
+        Integer expected = 100;
+        //When
+        craps.crapsCollect(balance, bet);
+        Integer actual = balance.getBalance();
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
     public void payoutTest(){
         //Given
         Craps craps = new Craps();
@@ -103,9 +118,7 @@ public class CrapsTest {
     }
 
 
-    @Test
-    public void playCrapsTest(){
-    }
+
 
 
 }
