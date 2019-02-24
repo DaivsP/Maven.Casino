@@ -3,9 +3,9 @@ package io.zipcoder.casino;
 public class Card {
 
 
-    protected enum Suit {HEARTS, DIAMONDS, CLUBS, SPADES}
+    public enum Suit {HEARTS, DIAMONDS, CLUBS, SPADES}
 
-    protected enum Rank {TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE}
+    public enum Rank {TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE}
 
     private Boolean hidden;
     private Suit cardSuit;
