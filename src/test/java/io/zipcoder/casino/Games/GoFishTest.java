@@ -11,6 +11,9 @@ import io.zipcoder.casino.utilities.Console;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import static org.junit.Assert.*;
 
@@ -29,7 +32,7 @@ public class GoFishTest {
     public void setUp(){
         cardDeck = new CardDeck();
         defautConsole = new Console(System.in, System.out);
-        player = new GoFishPlayer(null, 0);
+        player = new GoFishPlayer("You", 0);
         playerHand = new Hand();
         player.setHand(playerHand);
         GoFish goFish = new GoFish(defautConsole);
@@ -75,12 +78,36 @@ public class GoFishTest {
         goFish.removeMatchingCards(player, input);
         //then
         System.out.println(player.getHand().getNumberOfCards());
-       // Assert.assertEquals(player.getHand().getNumberOfCards(),expected);
+        Assert.assertEquals(player.getHand().getNumberOfCards(),expected);
     }
 
     @Test
-    public void checkForBooks() {
+    public void getPlayerCardTest() {
+        GoFish goFish = new GoFish(defautConsole);
+        Card fiveClubs = new Card(Card.Rank.FIVE, Card.Suit.CLUBS, null);
+        playerHand.addACard(fiveClubs);
 
+        //when
+        Card expected = goFish.getPlayerCard(player,0);
+
+        //then
+        Assert.assertEquals(expected, fiveClubs);
+    }
+
+    @Test
+    public void printHandTest() {
+        GoFish goFish = new GoFish(defautConsole);
+        Card fiveClubs = new Card(Card.Rank.FIVE, Card.Suit.CLUBS, null);
+        playerHand.addACard(fiveClubs);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        goFish.setConsole(new Console(System.in , new PrintStream(outputStream)));
+
+        goFish.printHand(player);
+
+        
+        String expected = "***** Your Hand ******\n" +
+                "FIVE : ";
+ //       Assert.assertEquals(expected, actual);
 
     }
 }
