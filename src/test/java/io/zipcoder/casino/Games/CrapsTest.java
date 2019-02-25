@@ -133,6 +133,34 @@ public class CrapsTest {
 
     }
 
+    @Test
+    public void hedgeBetTest(){
+        //Given
+        Craps craps = new Craps();
+        Balance balance = new Balance(1000);
+        Integer bet = 100;
+        Integer expected = 800;
+        //When
+        craps.hedgeBet(balance, bet);
+        Integer actual = balance.getBalance();
+        //Then
+        Assert.assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void hedgeBetTest2(){
+        //Given
+        Craps craps = new Craps();
+        Balance balance = new Balance(1000);
+        Integer bet = 100;
+        Integer expected = 200;
+        //When
+        Integer actual = craps.hedgeBet(balance, bet);
+        //Then
+        Assert.assertEquals(expected, actual);
+
+    }
 
 
 
