@@ -313,6 +313,141 @@ public class BlackJackTest {
 
     @Test
     public void testDealerPlayActions1(){
-        
+        this.player = blackJack.getPlayer();
+        this.dealerHand = blackJack.getDealerHand();
+        this.playerHand = blackJack.getPlayerHand();
+        player.setBalance(new Balance(100));
+
+        Card dealerCard = new Card(Card.Rank.ACE, Card.Suit.HEARTS, 11);
+        Card dealerCard2 = new Card(Card.Rank.KING, Card.Suit.HEARTS, 10);
+        dealerHand.addACard(dealerCard);
+        dealerHand.addACard(dealerCard2);
+
+        Card playerCard = new Card(Card.Rank.TWO, Card.Suit.HEARTS, 2);
+        Card playerCard2 = new Card(Card.Rank.FIVE, Card.Suit.HEARTS, 5);
+        playerHand.addACard(playerCard);
+        playerHand.addACard(playerCard2);
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("You lost this hand! The dealer has BlackJack!" + "\n");
+        sb.append("You lost: " + blackJack.getPot() + "\n");
+        sb.append("Your new balance is: " + player.getBalance().getBalance() + "\n");
+        String expected = sb.toString();
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        blackJack.setConsole(new Console(System.in, new PrintStream(outputStream)));
+
+        //When
+        blackJack.dealerPlayActions(player.getBalance());
+        String actual = outputStream.toString();
+
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testDealerPlayActions2(){
+        this.player = blackJack.getPlayer();
+        this.dealerHand = blackJack.getDealerHand();
+        this.playerHand = blackJack.getPlayerHand();
+        player.setBalance(new Balance(100));
+
+        Card dealerCard = new Card(Card.Rank.ACE, Card.Suit.HEARTS, 11);
+        Card dealerCard2 = new Card(Card.Rank.KING, Card.Suit.HEARTS, 10);
+        Card dealerCard3 = new Card(Card.Rank.FIVE, Card.Suit.HEARTS, 5);
+        dealerHand.addACard(dealerCard);
+        dealerHand.addACard(dealerCard2);
+        dealerHand.addACard(dealerCard3);
+
+        playerHand.addACard(cardDeck.dealCard());
+        playerHand.addACard(cardDeck.dealCard());
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("You Win! The Dealer Bust!" + "\n");
+        sb.append("You collect double of the pot: " + blackJack.getPot() * 2 + "\n");
+        sb.append("Your new balance is: " + player.getBalance().getBalance() + "\n");
+        String expected = sb.toString();
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        blackJack.setConsole(new Console(System.in, new PrintStream(outputStream)));
+
+        //When
+        blackJack.dealerPlayActions(player.getBalance());
+        String actual = outputStream.toString();
+
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testDealerPlayActions3(){
+        this.player = blackJack.getPlayer();
+        this.dealerHand = blackJack.getDealerHand();
+        this.playerHand = blackJack.getPlayerHand();
+        player.setBalance(new Balance(100));
+
+        Card dealerCard = new Card(Card.Rank.KING, Card.Suit.HEARTS, 10);
+        Card dealerCard2 = new Card(Card.Rank.KING, Card.Suit.DIAMONDS, 10);
+        dealerHand.addACard(dealerCard);
+        dealerHand.addACard(dealerCard2);
+
+        Card playerCard = new Card(Card.Rank.FIVE, Card.Suit.HEARTS, 5);
+        Card playerCard2 = new Card(Card.Rank.TEN, Card.Suit.HEARTS, 10);
+        playerHand.addACard(playerCard);
+        playerHand.addACard(playerCard2);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("The Dealer Stays" + "\n");
+        sb.append("You lost this hand! The Dealers hand is larger than yours!" + "\n");
+        sb.append("You lost: " + blackJack.getPot() + "\n");
+        sb.append("Your new balance is: " + player.getBalance().getBalance() + "\n");
+        String expected = sb.toString();
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        blackJack.setConsole(new Console(System.in, new PrintStream(outputStream)));
+
+        //When
+        blackJack.dealerPlayActions(player.getBalance());
+        String actual = outputStream.toString();
+
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testDealerPlayActions4(){
+        this.player = blackJack.getPlayer();
+        this.dealerHand = blackJack.getDealerHand();
+        this.playerHand = blackJack.getPlayerHand();
+        player.setBalance(new Balance(100));
+
+        Card dealerCard = new Card(Card.Rank.KING, Card.Suit.HEARTS, 10);
+        Card dealerCard2 = new Card(Card.Rank.KING, Card.Suit.DIAMONDS, 10);
+        dealerHand.addACard(dealerCard);
+        dealerHand.addACard(dealerCard2);
+
+        Card playerCard = new Card(Card.Rank.QUEEN, Card.Suit.HEARTS, 10);
+        Card playerCard2 = new Card(Card.Rank.QUEEN, Card.Suit.DIAMONDS, 10);
+        playerHand.addACard(playerCard);
+        playerHand.addACard(playerCard2);
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Its a draw!" + "\n");
+        sb.append("You get your bet back" + "\n");
+        sb.append("Your new balance is: " + player.getBalance().getBalance() + "\n");
+        String expected = sb.toString();
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        blackJack.setConsole(new Console(System.in, new PrintStream(outputStream)));
+
+        //When
+        blackJack.dealerPlayActions(player.getBalance());
+        String actual = outputStream.toString();
+
+        //Then
+        Assert.assertEquals(expected, actual);
     }
 }
