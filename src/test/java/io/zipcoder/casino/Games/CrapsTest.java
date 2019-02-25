@@ -18,8 +18,8 @@ public class CrapsTest {
         //Given
         Craps craps = new Craps();
         byte[] inputBytes = "p".getBytes();
-        ByteArrayInputStream leaveString = new ByteArrayInputStream(inputBytes);
-        craps.setConsole(new Console(leaveString, System.out));
+        ByteArrayInputStream inputString = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputString, System.out));
         String expected = "p";
 
         //When
@@ -34,8 +34,8 @@ public class CrapsTest {
         //Given
         Craps craps = new Craps();
         byte[] inputBytes = "d".getBytes();
-        ByteArrayInputStream leaveString = new ByteArrayInputStream(inputBytes);
-        craps.setConsole(new Console(leaveString, System.out));
+        ByteArrayInputStream inoutString = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inoutString, System.out));
         String expected = "d";
 
         //When
@@ -51,8 +51,8 @@ public class CrapsTest {
         Craps craps = new Craps();
         Balance balance = new Balance(500);
         byte[] inputBytes = "100".getBytes();
-        ByteArrayInputStream leaveString = new ByteArrayInputStream(inputBytes);
-        craps.setConsole(new Console(leaveString, System.out));
+        ByteArrayInputStream inputString = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputString, System.out));
         Integer expected = 100;
 
         //When
@@ -68,8 +68,8 @@ public class CrapsTest {
         Craps craps = new Craps();
         Balance balance = new Balance(500);
         byte[] inputBytes = "100".getBytes();
-        ByteArrayInputStream leaveString = new ByteArrayInputStream(inputBytes);
-        craps.setConsole(new Console(leaveString, System.out));
+        ByteArrayInputStream inputString = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputString, System.out));
         Integer expected = 400;
 
         //When
