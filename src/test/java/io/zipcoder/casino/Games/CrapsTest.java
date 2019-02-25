@@ -17,13 +17,13 @@ public class CrapsTest {
     public void passLineChoiceTest(){
         //Given
         Craps craps = new Craps();
-        byte[] inputBytes = "1".getBytes();
+        byte[] inputBytes = "p".getBytes();
         ByteArrayInputStream leaveString = new ByteArrayInputStream(inputBytes);
         craps.setConsole(new Console(leaveString, System.out));
-        Integer expected = 1;
+        String expected = "p";
 
         //When
-        Integer actual = craps.passLineChoice();
+        String actual = craps.passLineChoice();
 
         //Then
         Assert.assertEquals(expected, actual);
@@ -33,13 +33,13 @@ public class CrapsTest {
     public void passLineChoiceTest2(){
         //Given
         Craps craps = new Craps();
-        byte[] inputBytes = "2".getBytes();
+        byte[] inputBytes = "d".getBytes();
         ByteArrayInputStream leaveString = new ByteArrayInputStream(inputBytes);
         craps.setConsole(new Console(leaveString, System.out));
-        Integer expected = 2;
+        String expected = "d";
 
         //When
-        Integer actual = craps.passLineChoice();
+        String actual = craps.passLineChoice();
 
         //Then
         Assert.assertEquals(expected, actual);
@@ -124,7 +124,7 @@ public class CrapsTest {
         Balance balance = new Balance();
         balance.setBalance(500);
         Integer bet = 100;
-        Integer expected = 600;
+        Integer expected = 700;
         //When
         craps.crapsPayout(balance, bet);
         Integer actual = balance.getBalance();

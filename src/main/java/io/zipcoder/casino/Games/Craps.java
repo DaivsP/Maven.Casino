@@ -29,10 +29,10 @@ public class Craps extends DiceGames implements GamblingGame {
         Die die = new Die();
         DiceGames diceGames = new DiceGames();
 
-        Integer passLineChoice = passLineChoice();
+        String  passLineChoice = passLineChoice();
 
 
-        if (passLineChoice == 1) {
+        if (passLineChoice.equals("p") || passLineChoice.equals("P")) {
             passLineBet = crapsBet(balance);
             console.println("You bet: "+passLineBet);
             do {
@@ -45,10 +45,32 @@ public class Craps extends DiceGames implements GamblingGame {
                     break;
                 }
 
+
             } while (pointer == 0);
 
-        } else if (passLineChoice == 2) {
+            Integer crapsRoll = 0;
+            while (crapsRoll != pointer && crapsRoll != 7 && pointer != 0) {
+
+                String rollRequest = console.getStringInput("ROLL A " + pointer + " TO WIN!\n***** Press (R) to Roll\n***** Press (E) to exit");
+                if (rollRequest.equals("R") || rollRequest.equals("r")) {
+                    crapsRoll = diceGames.tossTwoDie(diceGames, die);
+                    crapsRoundPL(balance, passLineBet, crapsRoll, pointer);
+                } else {
+                    break;
+                }
+
+            }
+
+            String anotherRound = console.getStringInput("Play another round? (Y)/(N)");
+            if (anotherRound.equals("Y") || anotherRound.equals("y")) {
+                passLineBet = 0;
+                play(balance);
+            }
+
+        }
+        else if (passLineChoice.equals("d") || passLineChoice.equals("D")) {
             passLineBet = crapsBet(balance);
+
             do {
                 String rollRequest = console.getStringInput("***** Press (R) to Roll\n***** Press (E) to exit");
 
@@ -60,34 +82,34 @@ public class Craps extends DiceGames implements GamblingGame {
                 }
             } while (pointer == 0);
 
-        }
+            Integer crapsRoll = 0;
+            while (crapsRoll != pointer && crapsRoll != 7 && pointer != 0) {
 
-        Integer crapsRoll = 0;
-        while (crapsRoll != pointer && crapsRoll != 7 && pointer != 0) {
+                String rollRequest = console.getStringInput("ROLL A 7 before " +pointer+ " TO WIN!\n***** Press (R) to Roll\n***** Press (E) to exit");
+                if (rollRequest.equals("R") || rollRequest.equals("r")) {
+                    crapsRoll = diceGames.tossTwoDie(diceGames, die);
+                    crapsRoundDPL(balance, passLineBet, crapsRoll, pointer);
+                } else {
+                    break;
+                }
 
-            String rollRequest = console.getStringInput("ROLL A " + pointer + " TO WIN!\n***** Press (R) to Roll\n***** Press (E) to exit");
-            if (rollRequest.equals("R") || rollRequest.equals("r")) {
-                crapsRoll = diceGames.tossTwoDie(diceGames, die);
-                crapsRoundPL(balance, passLineBet, crapsRoll, pointer);
-            } else {
-                break;
             }
-
+            String anotherRound = console.getStringInput("Play another round? (Y)/(N)");
+            if (anotherRound.equals("Y") || anotherRound.equals("y")) {
+                passLineBet = 0;
+                play(balance);
+            }
         }
 
-        String anotherRound = console.getStringInput("Play another round? (Y)/(N)");
-        if (anotherRound.equals("Y") || anotherRound.equals("y")) {
-            passLineBet = 0;
-            play(balance);
-        }
+
 
 
     }
 
     //Selects where the user wants to place the initial bet
-    protected Integer passLineChoice() {
-        Integer passLineChoice = console.getIntegerInput("***** Where do you want to place your bet:\n" +
-                "***** Select (1) Pass Line \n***** Select (2) Don't Pass Line");
+    protected String passLineChoice() {
+        String  passLineChoice = console.getStringInput("***** Where do you want to place your bet:\n" +
+                "***** Select (P) Pass Line \n***** Select (D) Don't Pass Line\n***** Select (E) to Exit");
 
         return passLineChoice;
     }
@@ -113,7 +135,7 @@ public class Craps extends DiceGames implements GamblingGame {
         return 0;
     }
 
-    //Method that is used in the player decides to bet on the Pass Line - Sets the Pointer to On and equal to the roll
+    //Sets the Pointer to On and equal to the roll
     protected Integer setPointerPL(Balance balance, Integer bet, Integer diceRoll) {
         Integer pointer = 0;
 
@@ -130,7 +152,7 @@ public class Craps extends DiceGames implements GamblingGame {
             console.println("***** Your balance is: " + balance.getBalance());
 
         } else {
-            console.println("***** Pointer set to: " + diceRoll + "\n\n");
+            console.println("***** Pointer set to: " + diceRoll + "\n");
             pointer = diceRoll;
 
         }
@@ -154,7 +176,7 @@ public class Craps extends DiceGames implements GamblingGame {
         } else if (diceRoll == 12) {
             console.println("Push, Roll Again!");
         } else {
-            console.println("***** Pointer set to: " + diceRoll);
+            console.println("***** Pointer set to: " + diceRoll+"\n");
             pointer = diceRoll;
 
         }
@@ -170,7 +192,7 @@ public class Craps extends DiceGames implements GamblingGame {
 
     protected void crapsRoundPL(Balance balance, Integer bet, Integer diceRoll, Integer pointer) {
 
-        console.println("***** You Rolled: " + diceRoll);
+        console.println("***** You Rolled: " + diceRoll +"\n");
         if (diceRoll == pointer) {
             console.println("***** You WIN!\n Winnings: " + bet);
             crapsPayout(balance, bet);
@@ -223,6 +245,10 @@ public class Craps extends DiceGames implements GamblingGame {
     public void setConsole(Console console) {
         this.console = console;
     }
+
+
+//
+
 
 //    public static void main(String[] args) {
 //        Balance balance =  new Balance();
