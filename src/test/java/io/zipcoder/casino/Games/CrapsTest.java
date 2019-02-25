@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 public class CrapsTest {
 
     @Test
-    public void passLineChoiceTest(){
+    public void passLineChoiceTest() {
         //Given
         Craps craps = new Craps();
         byte[] inputBytes = "p".getBytes();
@@ -30,7 +30,7 @@ public class CrapsTest {
     }
 
     @Test
-    public void passLineChoiceTest2(){
+    public void passLineChoiceTest2() {
         //Given
         Craps craps = new Craps();
         byte[] inputBytes = "d".getBytes();
@@ -45,8 +45,8 @@ public class CrapsTest {
         Assert.assertEquals(expected, actual);
     }
 
-//    @Test
-    public void crapsBetTest(){
+    @Test
+    public void crapsBetTest() {
         //Given
         Craps craps = new Craps();
         Balance balance = new Balance(500);
@@ -62,8 +62,8 @@ public class CrapsTest {
         Assert.assertEquals(expected, actual);
     }
 
- //   @Test
-    public void crapsBetTest2(){
+    @Test
+    public void crapsBetTest2() {
         //Given
         Craps craps = new Craps();
         Balance balance = new Balance(500);
@@ -80,8 +80,8 @@ public class CrapsTest {
         Assert.assertEquals(expected, actual);
     }
 
- //   @Test
-    public void pointerSetTest(){
+    @Test
+    public void pointerSetTest() {
         //Given
         Integer pointer;
         Integer bet = 0;
@@ -91,19 +91,19 @@ public class CrapsTest {
         Die die = new Die();
 
         //When
-        do{
+        do {
             Integer roll = diceGames.tossTwoDie(diceGames, die);
-           pointer = craps.setPointerPL(balance, bet, roll);
+            pointer = craps.setPointerPL(balance, bet, roll);
 
-        }while(pointer == 0);
+        } while (pointer == 0);
 
         //Then
         Assert.assertTrue(pointer == 4 || pointer == 5 || pointer == 6
-        || pointer == 8 || pointer == 9 || pointer == 10);
+                || pointer == 8 || pointer == 9 || pointer == 10);
     }
 
-  //  @Test
-    public void collectTest(){
+    @Test
+    public void collectTest() {
         //Given
         Craps craps = new Craps();
         Balance balance = new Balance();
@@ -117,8 +117,8 @@ public class CrapsTest {
         Assert.assertEquals(expected, actual);
     }
 
- //   @Test
-    public void payoutTest(){
+    @Test
+    public void payoutTest() {
         //Given
         Craps craps = new Craps();
         Balance balance = new Balance();
@@ -133,8 +133,8 @@ public class CrapsTest {
 
     }
 
-  //  @Test
-    public void hedgeBetTest(){
+    @Test
+    public void hedgeBetTest() {
         //Given
         Craps craps = new Craps();
         Balance balance = new Balance(1000);
@@ -150,8 +150,8 @@ public class CrapsTest {
 
     }
 
-  //  @Test
-    public void hedgeBetTest2(){
+    @Test
+    public void hedgeBetTest2() {
         //Given
         Craps craps = new Craps();
         Balance balance = new Balance(1000);
@@ -165,8 +165,6 @@ public class CrapsTest {
         //Then
         Assert.assertEquals(expected, actual);
     }
-
-
 
 
 }
