@@ -55,7 +55,7 @@ public class GoFish extends CardGames implements FunGame {
             if (input.equals("D") || input.equals("d")) {
                 takeTurn(player);
                 console.println("\n*********");
-                if(books<13){
+                if(books>=13){
                     break;
                 }
                 takeTurn(player2);
@@ -69,7 +69,7 @@ public class GoFish extends CardGames implements FunGame {
     }
 
     public void takeTurn(GoFishPlayer anyPlayer) {
-        //sortHand(anyPlayer);
+        anyPlayer.getHand().sort();
         printHand(anyPlayer);
         String input = console.getStringInput("\nGuess a Card:").toUpperCase();
         if (input.equals("E")){
