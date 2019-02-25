@@ -77,4 +77,10 @@ public class GoFishTest {
         System.out.println(player.getHand().getNumberOfCards());
        // Assert.assertEquals(player.getHand().getNumberOfCards(),expected);
     }
+
+    @Test
+    public void checkForBooks() {
+
+
+    }
 }
