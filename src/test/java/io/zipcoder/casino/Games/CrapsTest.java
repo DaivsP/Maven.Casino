@@ -138,11 +138,13 @@ public class CrapsTest {
         //Given
         Craps craps = new Craps();
         Balance balance = new Balance(1000);
+        byte[] inputBytes = "y".getBytes();
+        ByteArrayInputStream inputString = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputString, System.out));
         Integer bet = 100;
-        Integer expected = 800;
+        Integer expected = 200;
         //When
-        craps.hedgeBet(balance, bet);
-        Integer actual = balance.getBalance();
+        Integer actual = craps.hedgeBet(balance, bet);
         //Then
         Assert.assertEquals(expected, actual);
 
@@ -153,13 +155,15 @@ public class CrapsTest {
         //Given
         Craps craps = new Craps();
         Balance balance = new Balance(1000);
+        byte[] inputBytes = "n".getBytes();
+        ByteArrayInputStream inputString = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputString, System.out));
         Integer bet = 100;
-        Integer expected = 200;
+        Integer expected = 100;
         //When
         Integer actual = craps.hedgeBet(balance, bet);
         //Then
         Assert.assertEquals(expected, actual);
-
     }
 
 
