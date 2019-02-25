@@ -37,6 +37,7 @@ public class CardDeckTest {
 
         int expectedSize = 51;
         Assert.assertEquals(expectedSize, cardDeck.deckSize());
+        System.out.println(actualCard);
     }
 
     @Test

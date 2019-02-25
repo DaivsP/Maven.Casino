@@ -41,4 +41,11 @@ public class Hand {
         return results;
     }
 
+    public Integer getSumOfHand() {
+        Integer sumOfHand = 0;
+        for (Card card: myHand) {
+            sumOfHand += card.getCardValue();
+        }
+        return sumOfHand;
+    }
 }
