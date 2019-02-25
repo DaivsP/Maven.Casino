@@ -226,6 +226,4 @@ public class HandTest {
         Assert.assertTrue(hand.isEmpty());
 
     }
-
-
 }
