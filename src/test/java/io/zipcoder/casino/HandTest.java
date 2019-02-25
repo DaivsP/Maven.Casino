@@ -228,12 +228,4 @@ public class HandTest {
 
     }
 
-    @Test
-    public void testConstructorIsPublic() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        Constructor<Hand> constructor = Hand.class.getDeclaredConstructor();
-        Assert.assertTrue(Modifier.isProtected(constructor.getModifiers()));
-        constructor.setAccessible(true);
-        constructor.newInstance();
-    }
-
 }
