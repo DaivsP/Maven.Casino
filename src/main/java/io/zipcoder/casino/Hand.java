@@ -2,13 +2,15 @@
 package io.zipcoder.casino;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
-public class Hand {
+public class Hand  {
 
 
     private List<Card> myHand = new ArrayList<Card>();
-    public void Hand(){}
+    protected void Hand(){}
 
     public void addACard(Card card){
         myHand.add(card);
@@ -32,25 +34,39 @@ public class Hand {
         myHand.clear();
     }
 
+    //Needs Card Value when constructing cards
+    // or will throw NULL pointer exception
     @Override
     public String toString(){
-        String results = "";
-        for (Card card: myHand) {
-            results += card + ", ";
+        if(myHand.size() > 0) {
+            String results = getACard(0).toString();
+            for (int i = 1; i < myHand.size(); i++) {
+                results += ", " + getACard(i);
+            }
+            return results;
         }
-        return results;
+        return null;
     }
 
     public Integer getSumOfHand() {
         Integer sumOfHand = 0;
+
         for (Card card: myHand) {
             sumOfHand += card.getCardValue();
         }
         return sumOfHand;
     }
 
+    public void sort(){
+        Collections.sort(myHand);
+    }
+
     public void removeACard(Card card){
         myHand.remove(card);
+    }
+
+    public boolean isEmpty() {
+        return myHand.isEmpty();
     }
 }
 
