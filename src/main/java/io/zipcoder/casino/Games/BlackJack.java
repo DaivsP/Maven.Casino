@@ -9,6 +9,7 @@ import io.zipcoder.casino.utilities.Console;
 public class BlackJack extends CardGames implements GamblingGame {
 
     private BlackJackPlayer player;
+
     private GamblingDealer dealer;
     private CardDeck cardDeck;
     private Integer pot = 0;
@@ -16,6 +17,7 @@ public class BlackJack extends CardGames implements GamblingGame {
     private Console console;
 
     private Hand playerHand;
+
     private Hand dealerHand;
 
     public BlackJack(){
@@ -27,7 +29,6 @@ public class BlackJack extends CardGames implements GamblingGame {
         console = new Console(System.in, System.out);
         cardDeck.shuffle();
     }
-
     public void play(Balance balance) {
         Banners banners = new Banners();
         banners.getBlackjackBanner();
@@ -56,6 +57,8 @@ public class BlackJack extends CardGames implements GamblingGame {
             do {
                 userChoice = console.getStringInput("Do you want to (H)it or (S)tay: ");
                 if ("H".equals(userChoice.toUpperCase())){
+                    Card nextPlayerCard = cardDeck.dealCard();
+                    playerHand.addACard(nextPlayerCard);
                     dealACardToThePlayerAndPrintTheirNewHand();
                 }
             }while (playerHitsAndDidNotBustAndDoesNotHave21(userChoice));
@@ -71,6 +74,8 @@ public class BlackJack extends CardGames implements GamblingGame {
                 printDealersFullHand();
 
                 while (dealerHandIsLessThanPlayerHandAndDoesNotHave21()){
+                    Card dealerNextCard = cardDeck.dealCard();
+                    dealerHand.addACard(dealerNextCard);
                     dealerDrawsACardAddsItToHisHandAndPrintDealerHand();
                 }
                 dealerPlayActions(balance);
@@ -108,8 +113,6 @@ public class BlackJack extends CardGames implements GamblingGame {
     }
 
     public void dealACardToThePlayerAndPrintTheirNewHand(){
-        Card nextPlayerCard = cardDeck.dealCard();
-        playerHand.addACard(nextPlayerCard);
         console.print("Your current cards");
         console.println(playerHand.toString());
         console.print("Your current hand value: ");
@@ -130,16 +133,14 @@ public class BlackJack extends CardGames implements GamblingGame {
     }
 
     public void printDealersFullHand(){
-        console.print("The dealers shows all cards: ");
+        console.print("The dealer shows all cards: ");
         console.println(dealerHand.toString());
         console.print("The dealers hand value is: ");
         console.println(dealerHand.getSumOfHand().toString());
     }
 
     public void dealerDrawsACardAddsItToHisHandAndPrintDealerHand(){
-        Card dealerNextCard = cardDeck.dealCard();
-        dealerHand.addACard(dealerNextCard);
-        console.println("The dealers hits");
+        console.println("The dealer hits");
         console.print("The dealers hand is now: ");
         console.println(dealerHand.toString());
         console.print("The dealers hand value is now: ");
@@ -166,7 +167,7 @@ public class BlackJack extends CardGames implements GamblingGame {
         console.println("Your new balance is: " + player.getBalance().getBalance());
     }
 
-    public void dealerHandAndDealerHandIsADraw(){
+    public void playerHandAndDealerHandIsADraw(){
         console.println("Its a draw!");
         console.println("You get your bet back");
         player.setBalance(new Balance(new Integer(player.getBalance().getBalance().intValue() + pot)));
@@ -190,7 +191,7 @@ public class BlackJack extends CardGames implements GamblingGame {
             dealer.collect(balance, pot);
         }
         else if (dealerHand.getSumOfHand() == playerHand.getSumOfHand()){
-            dealerHandAndDealerHandIsADraw();
+            playerHandAndDealerHandIsADraw();
         }
     }
 
@@ -226,5 +227,13 @@ public class BlackJack extends CardGames implements GamblingGame {
 
     public void setDealerHand(Hand dealerHand) {
         this.dealerHand = dealerHand;
+    }
+
+    public Integer getPot() {
+        return pot;
+    }
+
+    public BlackJackPlayer getPlayer() {
+        return player;
     }
 }
