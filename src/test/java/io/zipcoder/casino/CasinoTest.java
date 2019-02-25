@@ -219,18 +219,20 @@ public class CasinoTest {
 
 
 
-
+*/
     @Test
     public void pickGameInvalidInputTest(){
         // Given
         Casino casino = new Casino();
         StringBuilder sb = new StringBuilder();
+        sb.append("***** Please Enter The Number Of A Game To Play *****\n");
         sb.append("(1) HighLow (2) Craps (3) BlackJack (4) Go Fish\n");
-        sb.append("[ l ] is an invalid user input!\n");
+        sb.append("[ b ] is an invalid user input!\n");
         sb.append("Try inputting an integer value!\n");
-      //  sb.append("(1) HighLow (2) Craps (3) BlackJack (4) Go Fish\n");
+        sb.append("(1) HighLow (2) Craps (3) BlackJack (4) Go Fish\n");
+        sb.append("Incorrect game picked\n");
         String expected = sb.toString();
-        byte[] inputBytes = "b".getBytes();
+        byte[] inputBytes = "b\r5".getBytes();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
 
@@ -244,6 +246,6 @@ public class CasinoTest {
         Assert.assertEquals(expected, actual);
     }
 
-*/
+
 
 }
