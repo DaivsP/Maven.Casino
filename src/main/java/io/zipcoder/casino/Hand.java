@@ -2,9 +2,10 @@
 package io.zipcoder.casino;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class Hand {
+public class Hand{
 
 
     private List<Card> myHand = new ArrayList<Card>();
@@ -48,6 +49,10 @@ public class Hand {
         }
         return sumOfHand;
     }
+
+//    public void sort(){
+//        Collections.sort(myHand);
+//    }
 
     public void removeACard(Card card){
         myHand.remove(card);
