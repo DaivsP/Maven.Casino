@@ -5,26 +5,35 @@ import io.zipcoder.casino.Person.CardPlayer;
 import io.zipcoder.casino.Person.FunDealer;
 import io.zipcoder.casino.Person.GoFishPlayer;
 import io.zipcoder.casino.Person.HiLowPlayer;
+import io.zipcoder.casino.utilities.Console;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class GoFishTest {
 
+    Console defautConsole;
+
+    @Before
+    public void setUp(){
+        defautConsole = new Console(System.in, System.out);
+    }
+
     @Test
     public void constructorTest(){
         // Given
 
         // When
-        GoFish goFish = new GoFish();
+        GoFish goFish = new GoFish(defautConsole);
         CardDeck cardDeck = goFish.getCardDeck();
-        FunDealer dealer = goFish.getDealer();
+        GoFishPlayer player2 = goFish.getPlayer();
         GoFishPlayer player = goFish.getPlayer();
 
         // Then
         Assert.assertNotNull(cardDeck);
-        Assert.assertNotNull(dealer);
+        Assert.assertNotNull(player2);
         Assert.assertNotNull(player);
     }
 
