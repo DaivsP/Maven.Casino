@@ -46,20 +46,4 @@ public class DiceGames extends Games {
         return sum;
 
     }
-//    public static void main(String[] args) {
-//        Integer sum;
-//        Integer die1;
-//        Integer die2;
-//
-//        Die dice = new Die();
-//        //Die dice2 = new Die();
-//        DiceGames one = new DiceGames();
-//
-//
-//        System.out.println(die1);
-//        System.out.println(die2);
-//        System.out.println(sum);
-//    }
-
-
 }
