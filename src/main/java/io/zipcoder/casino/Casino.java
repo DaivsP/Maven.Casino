@@ -32,7 +32,7 @@ public class Casino {
         Integer gamePicked = console.getIntegerInput("(1) HighLow (2) Craps (3) BlackJack (4) Go Fish" );
         switch (gamePicked){
             case 1:
-                games = new HighLow();
+                games = new HighLow(console);
                 ((HighLow) games).play();
                 break;
             case 2:
@@ -44,7 +44,7 @@ public class Casino {
                ((BlackJack) games).play(balance);
                 break;
             case 4:
-                games = new GoFish();
+                games = new GoFish(console);
                ((GoFish) games).play();
                 break;
             default:
@@ -57,26 +57,31 @@ public class Casino {
 
     public void gameRunner() {
 
-       // Add functionality to allow someone that only wants to play fun games
-       setInitialBalance();
-
+       gamblerSetInitialBal();
 
       while(balance.getBalance() >= 0){
           pickGame(balance);
           showCurrentBalance();
-          String play = console.getStringInput("Would you like to play again? \n(Q)uit / (C)ontinue / (B)uy more chips : ") ;
+          String play = console.getStringInput("Would you like to play again? \n(Q) to Exit the Casino / (A)ny key to Enter the Lobby / (B)uy more chips : ") ;
 
-          if("Q".equals(play) || "q".equals(play)){
+          if("Q".equals(play.toUpperCase())){
               break;
           }
 
-          if("B".equals(play) || "b".equals(play)) {
+          if("B".equals(play.toUpperCase())) {
               balance.addMoreChips();
           }
 
       }
 
 
+    }
+
+    public void gamblerSetInitialBal(){
+        String gambling =   console.getStringInput("Would you like to buy chips ? (Y/N) ") ;
+        if("Y".equals(gambling.toUpperCase())){
+            setInitialBalance();
+        }
     }
 
     public void setInitialBalance(){
@@ -101,9 +106,6 @@ public class Casino {
         this.console = console;
     }
 
-    public Console getConsole(Console console){
-        return  this.console;
-    }
 
     public Games getGames(){
         return this.games;
