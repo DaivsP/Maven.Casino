@@ -1,10 +1,7 @@
 package io.zipcoder.casino.Games;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
-import io.zipcoder.casino.Banners;
-import io.zipcoder.casino.Card;
-import io.zipcoder.casino.CardDeck;
-import io.zipcoder.casino.Hand;
+import io.zipcoder.casino.*;
 import io.zipcoder.casino.Person.*;
 import io.zipcoder.casino.utilities.Console;
 import java.lang.reflect.Array;
@@ -58,6 +55,9 @@ public class GoFish extends CardGames implements FunGame {
             if (input.equals("D") || input.equals("d")) {
                 takeTurn(player);
                 console.println("\n*********");
+                if(books<13){
+                    break;
+                }
                 takeTurn(player2);
                 console.println("\n*********");
 
@@ -69,8 +69,13 @@ public class GoFish extends CardGames implements FunGame {
     }
 
     public void takeTurn(GoFishPlayer anyPlayer) {
+        //sortHand(anyPlayer);
         printHand(anyPlayer);
         String input = console.getStringInput("\nGuess a Card:").toUpperCase();
+        if (input.equals("E")){
+            books = 13;
+            return;
+        }
         if (checkForMatch(anyPlayer, input)) {
         } else {
             console.println("Your guess must also be in your hand");
@@ -78,12 +83,23 @@ public class GoFish extends CardGames implements FunGame {
         }
         if(checkForMatch(otherPlayer(anyPlayer), input)){
             removeMatchingCards(otherPlayer(anyPlayer), input);
+            takeTurn(anyPlayer);
+        } else {
+            console.println("Go Fish!");
+            goFish(anyPlayer);
         }
     }
 
-    public void removeMatchingCards(GoFishPlayer otherPlayer, String input){
-        Card inputCard = new Card(Card.Rank.valueOf(input), Card.Suit.CLUBS);
-        otherPlayer.getHand().removeACard(inputCard);
+    public void removeMatchingCards(GoFishPlayer anyPlayer, String input){
+        Card removedCard;
+        for(int i=0; i<=numOfCards(anyPlayer) - 1; i++){
+            if (getPlayerCardRank(anyPlayer, i).toString().equals(input)){
+                removedCard = getPlayerCard(anyPlayer,i);
+                otherPlayer(anyPlayer).getHand().addACard(removedCard);
+                anyPlayer.getHand().removeACard(getPlayerCard(anyPlayer,i));
+                console.println("\nYou received a "+input+"! Go Again!");
+            }
+        }
     }
 
     public GoFishPlayer otherPlayer(GoFishPlayer anyPlayer) {
@@ -94,15 +110,24 @@ public class GoFish extends CardGames implements FunGame {
         }
     }
 
+    public int numOfCards(GoFishPlayer anyPlayer){
+        return anyPlayer.getHand().getNumberOfCards();
+    }
+
     public Boolean checkForMatch(GoFishPlayer anyPlayer, String input) {
         Boolean cardIsInHand = false;
         for (int i = 0; i <= anyPlayer.getHand().getNumberOfCards() - 1; i++) {
-            if (getPlayerCard(anyPlayer, i).toString().equals(input)) {
+            if (getPlayerCardRank(anyPlayer, i).toString().equals(input)) {
                 cardIsInHand = true;
             }
         }
         return cardIsInHand;
     }
+
+//    public void sortHand(GoFishPlayer anyPlayer){
+//        Hand newHand = anyPlayer.getHand();
+//        newHand.
+//    }
 
     public void guess(GoFishPlayer anyPlayer, String input) {
 //        getPlayerCard(anyPlayer, i)
@@ -158,8 +183,11 @@ public class GoFish extends CardGames implements FunGame {
         }
     }
 
-    public Card.Rank getPlayerCard(GoFishPlayer anyPlayer, int i) {
+    public Card.Rank getPlayerCardRank(GoFishPlayer anyPlayer, int i) {
         return anyPlayer.getHand().getACard(i).getRank();
+    }
+    public Card getPlayerCard(GoFishPlayer anyPlayer, int i) {
+        return anyPlayer.getHand().getACard(i);
     }
 
     public GoFishPlayer getPlayer() {
