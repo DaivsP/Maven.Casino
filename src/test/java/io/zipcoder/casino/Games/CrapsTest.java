@@ -89,25 +89,51 @@ public class CrapsTest {
     }
 
     @Test
-    public void pointerSetTest() {
+    public void pointerSetLoserTest() {
         //Given
         Integer pointer;
-        Integer bet = 0;
+        Integer expected = 0;
         Balance balance = new Balance();
         Craps craps = new Craps(defautConsole);
-        DiceGames diceGames = new DiceGames();
-        Die die = new Die();
+        byte[] inputBytes = "9".getBytes();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputStream, System.out));
 
         //When
-        do {
-            Integer roll = diceGames.tossTwoDie(diceGames, die);
-            pointer = craps.setPointerPL(balance, bet, roll);
-
-        } while (pointer == 0);
+        pointer = craps.setPointerPL(balance, 5, 2);
 
         //Then
-        Assert.assertTrue(pointer == 4 || pointer == 5 || pointer == 6
-                || pointer == 8 || pointer == 9 || pointer == 10);
+        Assert.assertEquals(expected,pointer);
+    }
+
+    @Test
+    public void pointerSetWinnerTest() {
+        //Given
+        Integer expected = 105;
+        Integer actual;
+        Balance balance = new Balance(100);
+        Craps craps = new Craps(defautConsole);
+
+        //When
+        craps.setPointerPL(balance, 5, 7);
+        actual = balance.getBalance();
+
+        //Then
+        Assert.assertEquals(expected,actual);
+    }
+    @Test
+    public void pointerSetNumberTest() {
+        //Given
+        Integer expected = 4;
+        Integer bet = 0;
+        Balance balance = new Balance(100);
+        Craps craps = new Craps(defautConsole);
+
+
+        Integer actual = craps.setPointerPL(balance, 5, 4);
+
+        //Then
+        Assert.assertEquals(expected,actual);
     }
 
     @Test
