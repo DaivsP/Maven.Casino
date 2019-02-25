@@ -37,6 +37,7 @@ public class Card {
         return this.cardSuit;
     }
 
+
     public Integer getCardValue(){return this.cardValue;}
 
     public Boolean getHidden() {
@@ -62,6 +63,7 @@ public class Card {
         bjCardValueList.add(10);
         bjCardValueList.add(11);
     }
+  
     @Override
     public String toString(){
         String cardVal = getRank().toString();

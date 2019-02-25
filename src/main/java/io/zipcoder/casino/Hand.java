@@ -6,9 +6,9 @@ import java.util.List;
 
 public class Hand {
 
+
     private List<Card> myHand = new ArrayList<Card>();
     public void Hand(){}
-
 
     public void addACard(Card card){
         myHand.add(card);
@@ -48,4 +48,9 @@ public class Hand {
         }
         return sumOfHand;
     }
+
+    public void removeACard(Card card){
+        myHand.remove(card);
+    }
 }
+

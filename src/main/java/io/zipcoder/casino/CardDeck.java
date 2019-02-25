@@ -32,12 +32,10 @@ public class CardDeck {
     }
 
     public Card dealCard(){
-        //System.out.println(cardDeck.peek().toString());
         return cardDeck.pop();
     }
 
     public Card checkNextCard(){
-        //System.out.println(cardDeck.peek().toString());
         return cardDeck.peek();
     }
 
