@@ -167,7 +167,7 @@ public class BlackJack extends CardGames implements GamblingGame {
         console.println("Your new balance is: " + player.getBalance().getBalance());
     }
 
-    public void dealerHandAndDealerHandIsADraw(){
+    public void playerHandAndDealerHandIsADraw(){
         console.println("Its a draw!");
         console.println("You get your bet back");
         player.setBalance(new Balance(new Integer(player.getBalance().getBalance().intValue() + pot)));
@@ -191,7 +191,7 @@ public class BlackJack extends CardGames implements GamblingGame {
             dealer.collect(balance, pot);
         }
         else if (dealerHand.getSumOfHand() == playerHand.getSumOfHand()){
-            dealerHandAndDealerHandIsADraw();
+            playerHandAndDealerHandIsADraw();
         }
     }
 

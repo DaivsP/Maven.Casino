@@ -1,5 +1,6 @@
 package io.zipcoder.casino.Games;
 
+import com.sun.xml.internal.bind.v2.util.ByteArrayOutputStreamEx;
 import com.sun.xml.internal.ws.api.ha.StickyFeature;
 import io.zipcoder.casino.*;
 import io.zipcoder.casino.Person.BlackJackPlayer;
@@ -14,6 +15,7 @@ import javax.print.attribute.HashAttributeSet;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.text.BreakIterator;
 
 import static org.junit.Assert.*;
 
@@ -262,5 +264,55 @@ public class BlackJackTest {
 
         //Then
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testDealerHandBeatsPlayerHand(){
+        this.player = blackJack.getPlayer();
+        player.setBalance(new Balance(100));
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("The Dealer Stays" + "\n");
+        sb.append("You lost this hand! The Dealers hand is larger than yours!" + "\n");
+        sb.append("You lost: " + blackJack.getPot() + "\n");
+        sb.append("Your new balance is: " + player.getBalance().getBalance() + "\n");
+        String expected = sb.toString();
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        blackJack.setConsole(new Console(System.in, new PrintStream(outputStream)));
+
+        //When
+        blackJack.dealerHandBeatsPlayerHand();
+        String actual = outputStream.toString();
+
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testPlayerHandAndDealerHandIsADraw(){
+        this.player = blackJack.getPlayer();
+        player.setBalance(new Balance(100));
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Its a draw!" + "\n");
+        sb.append("You get your bet back" + "\n");
+        sb.append("Your new balance is: " + player.getBalance().getBalance() + "\n");
+        String expected = sb.toString();
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        blackJack.setConsole(new Console(System.in, new PrintStream(outputStream)));
+
+        //When
+        blackJack.playerHandAndDealerHandIsADraw();
+        String actual = outputStream.toString();
+
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testDealerPlayActions1(){
+        
     }
 }
