@@ -6,7 +6,7 @@ import io.zipcoder.casino.Person.BlackJackPlayer;
 import io.zipcoder.casino.Person.GamblingDealer;
 import io.zipcoder.casino.utilities.Console;
 
-public class BlackJack extends CardGames implements GamblingGame {
+public class BlackJack extends Games implements GamblingGame {
 
     private BlackJackPlayer player;
 

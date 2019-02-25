@@ -7,7 +7,7 @@ import io.zipcoder.casino.utilities.Console;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class GoFish extends CardGames implements FunGame {
+public class GoFish extends Games implements FunGame {
     private io.zipcoder.casino.Person.Player goFishPlayer;
     private Console console;
     private GoFishPlayer player;
