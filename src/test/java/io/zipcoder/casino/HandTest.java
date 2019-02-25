@@ -141,7 +141,7 @@ public class HandTest {
         Card card2 = new Card(Card.Rank.QUEEN , Card.Suit.CLUBS,0);
         Card card3 = new Card(Card.Rank.ACE , Card.Suit.HEARTS,0);
         Hand hand = new Hand();
-        String expected = "QUEEN CLUBS 0, ACE CLUBS 0, ACE HEARTS 0, ";
+        String expected = "QUEEN CLUBS 0, ACE CLUBS 0, ACE HEARTS 0";
 
         // When
         hand.addACard(card1);
