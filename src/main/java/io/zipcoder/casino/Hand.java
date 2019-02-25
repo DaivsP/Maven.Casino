@@ -6,7 +6,8 @@ import java.util.ArrayList;
 public class Hand {
 
     private ArrayList myHand = new ArrayList<Card>();
-    public void Hand(){}
+
+    public Hand(){}
 
 
     public void addACard(Card card){

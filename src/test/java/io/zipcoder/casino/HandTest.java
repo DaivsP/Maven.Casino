@@ -1,7 +1,15 @@
 package io.zipcoder.casino;
 
+import org.jcp.xml.dsig.internal.dom.Utils;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
+import java.util.Scanner;
+
+import static junit.framework.TestCase.assertTrue;
 
 public class HandTest {
 
@@ -123,6 +131,23 @@ public class HandTest {
 
         // Then
         Assert.assertEquals(expected,actual);
+    }
+  
+    @Test
+    public void testPrivateConstructor() throws Exception {
+        Constructor constructor = Hand.class.getDeclaredConstructor();
+        Assert.assertTrue("Constructor is not private", Modifier.isPublic(constructor.getModifiers()));
 
+        constructor.setAccessible(true);
+        constructor.newInstance();
+    }
+  
+    @Test
+    public void testConstructor(){
+        Hand hand = new Hand();
+
+        Object expected = hand;
+
+        Assert.assertEquals(expected,hand);
     }
 }
