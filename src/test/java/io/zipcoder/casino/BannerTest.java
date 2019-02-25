@@ -30,36 +30,96 @@ public class BannerTest {
     @Test
     public void getCasinoBannerTest(){
         Banners ban = new Banners();
-        String expected = "\u001B[32m*****";
+        String expected = "*****";
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ban.setConsole(new Console(System.in , new PrintStream(outputStream)));
 
         // When
         ban.getCasinoBanner();
         String actual = outputStream.toString();
+        actual = actual.substring(actual.indexOf('*'),10);
 
         // Then
-        Assert.assertEquals(expected,actual.substring(0,10));
+        Assert.assertEquals(expected,actual);
     }
 
     @Test
     public void getBlackjackBannerTest(){
         Banners ban = new Banners();
-        String expected = "\u001B[36m*****";
+        String expected = "*****";
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ban.setConsole(new Console(System.in , new PrintStream(outputStream)));
 
         // When
         ban.getBlackjackBanner();
         String actual = outputStream.toString();
+        actual = actual.substring(actual.indexOf('*'),10);
 
         // Then
-        Assert.assertEquals(expected,actual.substring(0,10));
+        Assert.assertEquals(expected,actual);
     }
 
+    @Test
+    public void getCrapsBannerTest(){
+        Banners ban = new Banners();
+        String expected = "*****";
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ban.setConsole(new Console(System.in , new PrintStream(outputStream)));
 
+        // When
+        ban.getCrapsBanner();
+        String actual = outputStream.toString();
+        actual = actual.substring(actual.indexOf('*'),10);
 
+        // Then
+        Assert.assertEquals(expected,actual);
+    }
 
+    @Test
+    public void getGoFishBannerTest(){
+        Banners ban = new Banners();
+        String expected = "*****";
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ban.setConsole(new Console(System.in , new PrintStream(outputStream)));
 
+        // When
+        ban.getGoFishBanner();
+        String actual = outputStream.toString();
+        actual = actual.substring(actual.indexOf('*'),10);
 
+        // Then
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void getHighLowBannerTest(){
+        Banners ban = new Banners();
+        String expected = "*****";
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ban.setConsole(new Console(System.in , new PrintStream(outputStream)));
+
+        // When
+        ban.getHighLowBanner();
+        String actual = outputStream.toString();
+        actual = actual.substring(actual.indexOf('*'),10);
+
+        // Then
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void getOutOfFundsBannerTest(){
+        Banners ban = new Banners();
+        String expected = "*****";
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ban.setConsole(new Console(System.in , new PrintStream(outputStream)));
+
+        // When
+        ban.getOutOfFundsBanner();
+        String actual = outputStream.toString();
+        actual = actual.substring(actual.indexOf('*'),10);
+
+        // Then
+        Assert.assertEquals(expected,actual);
+    }
 }

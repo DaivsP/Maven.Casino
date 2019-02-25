@@ -7,7 +7,9 @@ import java.util.concurrent.TimeUnit;
 
 public final class Banners {
     AdvertisementForBanners optionAdvertisement = new AdvertisementForBanners();
+    Integer setDelay = 0;
     Console console ;
+
 
     public Banners(){
         this.console = new Console(System.in, System.out);
@@ -15,31 +17,31 @@ public final class Banners {
 
 
     public void getCasinoBanner(){
-        printDelay( optionAdvertisement.getCasinoStr() , 1 );
+        printDelay( optionAdvertisement.getCasinoStr() , setDelay );
     }
 
 
     public void getBlackjackBanner() {
-        printDelay( optionAdvertisement.getBlackJackStr(),1 );
+        printDelay( optionAdvertisement.getBlackJackStr(),setDelay );
     }
 
     public void getCrapsBanner() {
-        printDelay( optionAdvertisement.getCrapsStr(),1 );
+        printDelay( optionAdvertisement.getCrapsStr(),setDelay );
     }
 
 
     public void getGoFishBanner() {
-        printDelay( optionAdvertisement.getGoFishStr(), 1) ;
+        printDelay( optionAdvertisement.getGoFishStr(), setDelay) ;
 
     }
 
     public void getHighLowBanner() {
 
-        printDelay( optionAdvertisement.getHighLowStr(),1 );
+        printDelay( optionAdvertisement.getHighLowStr(),setDelay );
     }
 
     public void getOutOfFundsBanner() {
-        printDelay( optionAdvertisement.getOutOfFundsStr(),1 );
+        printDelay( optionAdvertisement.getOutOfFundsStr(),setDelay );
     }
 
 
