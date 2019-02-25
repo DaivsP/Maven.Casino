@@ -108,4 +108,21 @@ public class HandTest {
         Assert.assertEquals(expected,actual);
     }
 
+    @Test
+    public void removeACard() {
+
+        // Given
+        Card card = new Card(null,null);
+        Hand hand = new Hand();
+
+        // When
+        hand.addACard(card);
+        hand.removeACard(card);
+        Integer expected = 0;
+        Integer actual = hand.getNumberOfCards();
+
+        // Then
+        Assert.assertEquals(expected,actual);
+
+    }
 }
