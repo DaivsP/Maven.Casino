@@ -132,7 +132,30 @@ public class HandTest {
         // Then
         Assert.assertEquals(expected,actual);
     }
-  
+
+    @Test
+    public void sortTest() {
+
+        // Given
+        Card card1 = new Card(Card.Rank.ACE , Card.Suit.CLUBS,0);
+        Card card2 = new Card(Card.Rank.QUEEN , Card.Suit.CLUBS,0);
+        Card card3 = new Card(Card.Rank.ACE , Card.Suit.HEARTS,0);
+        Hand hand = new Hand();
+        String expected = "QUEEN CLUBS 0, ACE CLUBS 0, ACE HEARTS 0, ";
+
+        // When
+        hand.addACard(card1);
+        hand.addACard(card2);
+        hand.addACard(card3);
+        hand.sort();
+        String actual = hand.toString();
+
+       // System.out.println(actual);
+
+        // Then
+        Assert.assertEquals(expected,actual);
+    }
+
     @Test
     public void testPrivateConstructor() throws Exception {
         Constructor constructor = Hand.class.getDeclaredConstructor();
