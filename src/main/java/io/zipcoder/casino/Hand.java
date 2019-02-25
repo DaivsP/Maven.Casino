@@ -2,13 +2,13 @@
 package io.zipcoder.casino;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Hand {
 
-    private ArrayList myHand = new ArrayList<Card>();
 
-    public Hand(){}
-
+    private List<Card> myHand = new ArrayList<Card>();
+    public void Hand(){}
 
     public void addACard(Card card){
         myHand.add(card);
@@ -32,9 +32,25 @@ public class Hand {
         myHand.clear();
     }
 
+    @Override
+    public String toString(){
+        String results = "";
+        for (Card card: myHand) {
+            results += card + ", ";
+        }
+        return results;
+    }
+
+    public Integer getSumOfHand() {
+        Integer sumOfHand = 0;
+        for (Card card: myHand) {
+            sumOfHand += card.getCardValue();
+        }
+        return sumOfHand;
+    }
+
     public void removeACard(Card card){
         myHand.remove(card);
     }
-
 }
 

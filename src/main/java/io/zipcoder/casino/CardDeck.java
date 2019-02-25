@@ -8,8 +8,12 @@ public class CardDeck {
     private Stack<Card> cardDeck;
     static {
         for (Card.Suit suit : Card.Suit.values()){
+            Card card = new Card(null, null);
+            card.createBJCardValue();
+            List<Integer> listOfCardValues = card.bjCardValueList;
+            Iterator<Integer> iterator = listOfCardValues.iterator();
             for (Card.Rank rank : Card.Rank.values()){
-                DECK.add(new Card(rank, suit));
+                DECK.add(new Card(rank, suit, iterator.next()));
             }
         }
     }
@@ -28,12 +32,10 @@ public class CardDeck {
     }
 
     public Card dealCard(){
-
         return cardDeck.pop();
     }
 
     public Card checkNextCard(){
-       // System.out.println(cardDeck.peek().toString());
         return cardDeck.peek();
     }
 
