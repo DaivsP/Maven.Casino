@@ -8,7 +8,7 @@ import io.zipcoder.casino.Person.HiLowPlayer;
 import io.zipcoder.casino.utilities.Console;
 
 
-public class HighLow extends CardGames implements FunGame {
+public class HighLow extends Games implements FunGame {
 
     private HiLowPlayer player ;
     private FunDealer dealer;
