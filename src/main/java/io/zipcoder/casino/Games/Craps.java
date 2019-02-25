@@ -11,8 +11,13 @@ public class Craps extends DiceGames implements GamblingGame {
     private Casino casino = new Casino();
     private DiceGames diceGames = new DiceGames();
     private Die dice = new Die();
-    private Console console = new Console(System.in, System.out);
+    private Console console; // = new Console(System.in, System.out);
     private Balance balance;
+
+    public Craps(Console console){
+        this.console =console;
+
+    }
 
 
     public void play(Balance balance) {

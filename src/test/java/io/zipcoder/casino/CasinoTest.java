@@ -175,12 +175,12 @@ public class CasinoTest {
         // Then
         Assert.assertTrue(result);
     }
-/*
+
     @Test
     public void pickGameLaunchedCrapTest(){
         // Given
         Casino casino = new Casino();
-        byte[] inputBytes = "2".getBytes();
+        byte[] inputBytes = "2\rE".getBytes();
         ByteArrayInputStream leaveString = new ByteArrayInputStream(inputBytes);
         casino.setConsole(new Console(leaveString, System.out));
         boolean result = false;
@@ -195,12 +195,12 @@ public class CasinoTest {
         // Then
         Assert.assertTrue(result);
     }
-
+/*
     @Test
     public void pickGameLaunchedBJTest(){
         // Given
         Casino casino = new Casino();
-        byte[] inputBytes = "3".getBytes();
+        byte[] inputBytes = "3\rE".getBytes();
         ByteArrayInputStream leaveString = new ByteArrayInputStream(inputBytes);
         casino.setConsole(new Console(leaveString, System.out));
         boolean result = false;
