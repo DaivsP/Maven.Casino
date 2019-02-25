@@ -62,7 +62,7 @@ public class Casino {
       while(balance.getBalance() >= 0){
           pickGame(balance);
           showCurrentBalance();
-          String play = console.getStringInput("Would you like to play again? \n(Q)uit / (A)ny key to continue / (B)uy more chips : ") ;
+          String play = console.getStringInput("Would you like to play again? \n(Q) to Exit the Casino / (A)ny key to Enter the Lobby / (B)uy more chips : ") ;
 
           if("Q".equals(play.toUpperCase())){
               break;
