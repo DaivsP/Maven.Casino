@@ -2,6 +2,7 @@ package io.zipcoder.casino.Games;
 
 import io.zipcoder.casino.Card;
 import io.zipcoder.casino.CardDeck;
+import io.zipcoder.casino.Casino;
 import io.zipcoder.casino.Hand;
 import io.zipcoder.casino.Person.GamblingDealer;
 import io.zipcoder.casino.utilities.Console;
@@ -12,6 +13,8 @@ import org.junit.Test;
 
 import javax.print.attribute.HashAttributeSet;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.junit.Assert.*;
 
@@ -26,7 +29,6 @@ public class BlackJackTest {
     public void setup(){
         blackJack.clearHands(dealerHand, playerHand);
         cardDeck.shuffle();
-
     }
 
     @Test
@@ -64,11 +66,33 @@ public class BlackJackTest {
     }
 
     @Test
-    public void testPlayerFirstHandAndDealerFirstCard(){
+    public void testPrintUserFirstHandAndDealerFirstCard(){
         //Given
-        blackJack.printUserFirstHandAndDealerFirstCard();
+        this.playerHand = blackJack.getPlayerHand();
+        this.dealerHand = blackJack.getDealerHand();
+        dealerHand.addACard(cardDeck.dealCard());
+        dealerHand.addACard(cardDeck.dealCard());
+        playerHand.addACard(cardDeck.dealCard());
+        playerHand.addACard(cardDeck.dealCard());
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Your current cards: ");
+        sb.append(playerHand.toString() + "\n");
+        sb.append("Your current hand value: ");
+        sb.append(playerHand.getSumOfHand().toString() + "\n");
+        sb.append("The Dealers first card: ");
+        sb.append(dealerHand.getACard(0).toString() + "\n");
+        String expected = sb.toString();
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        blackJack.setConsole(new Console(System.in,new PrintStream(outputStream)));
 
         //When
+        blackJack.printUserFirstHandAndDealerFirstCard();
+        String actual = outputStream.toString();
 
+        //Then
+        Assert.assertEquals(expected, actual);
     }
 }

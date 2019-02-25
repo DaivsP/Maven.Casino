@@ -38,7 +38,7 @@ public class BlackJack extends CardGames implements GamblingGame {
             console.println("You dont have enough chips to play.");
             console.println("Please buy more chips to play.");
         }
-        while(player.getBalance().getBalance() > 0){
+        while(playerHasAPositiveBalance()){
 
             clearHands(dealerHand, playerHand);
 
@@ -58,7 +58,7 @@ public class BlackJack extends CardGames implements GamblingGame {
                 if ("H".equals(userChoice.toUpperCase())){
                     dealACardToThePlayerAndPrintTheirNewHand();
                 }
-            }while ("H".equals(userChoice.toUpperCase()) && playerHand.getSumOfHand() < 22 && !playerHand.getSumOfHand().equals(21));
+            }while (playerHitsAndDidNotBustAndDoesNotHave21(userChoice));
 
             if (playerHand.getSumOfHand() > 21){
                 playerLostHandWithValueLargerThan21();
@@ -70,23 +70,10 @@ public class BlackJack extends CardGames implements GamblingGame {
             else if ("S".equals(userChoice.toUpperCase())){
                 printDealersFullHand();
 
-                while (dealerHand.getSumOfHand() < playerHand.getSumOfHand() && dealerHand.getSumOfHand() <= 21){
+                while (dealerHandIsLessThanPlayerHandAndDoesNotHave21()){
                     dealerDrawsACardAddsItToHisHandAndPrintDealerHand();
                 }
-                if (dealerHand.getSumOfHand() == 21){
-                    dealerGotBlackJack();
-                    dealer.collect(balance, pot);
-                }
-                else if (dealerHand.getSumOfHand() > 21){
-                    dealerBust();
-                }
-                else if (dealerHand.getSumOfHand() > playerHand.getSumOfHand()){
-                    dealerHandBeatsPlayerHand();
-                    dealer.collect(balance, pot);
-                }
-                else if (dealerHand.getSumOfHand() == playerHand.getSumOfHand()){
-                    dealerHandAndDealerHandIsADraw();
-                }
+                dealerPlayActions(balance);
             }
             String userInput = console.getStringInput("Would you like to continue? (Y/N)");
             if ("N".equals(userInput.toUpperCase())){
@@ -186,9 +173,58 @@ public class BlackJack extends CardGames implements GamblingGame {
         console.println("Your new balance is: " + player.getBalance().getBalance());
     }
 
+    public boolean playerHasAPositiveBalance(){
+        return player.getBalance().getBalance() > 0;
+    }
+
+    public void dealerPlayActions(Balance balance){
+        if (dealerHand.getSumOfHand() == 21){
+            dealerGotBlackJack();
+            dealer.collect(balance, pot);
+        }
+        else if (dealerHand.getSumOfHand() > 21){
+            dealerBust();
+        }
+        else if (dealerHand.getSumOfHand() > playerHand.getSumOfHand()){
+            dealerHandBeatsPlayerHand();
+            dealer.collect(balance, pot);
+        }
+        else if (dealerHand.getSumOfHand() == playerHand.getSumOfHand()){
+            dealerHandAndDealerHandIsADraw();
+        }
+    }
+
+    public boolean dealerHandIsLessThanPlayerHandAndDoesNotHave21(){
+        return dealerHand.getSumOfHand() < playerHand.getSumOfHand() && dealerHand.getSumOfHand() <= 21;
+    }
+
+    public boolean playerHitsAndDidNotBustAndDoesNotHave21(String userChoice){
+        return "H".equals(userChoice.toUpperCase()) && playerHand.getSumOfHand() < 22 && !playerHand.getSumOfHand().equals(21);
+    }
+
     public void collect() {
     }
 
     public void payout() {
+    }
+
+    public void setConsole(Console console) {
+        this.console = console;
+    }
+
+    public Hand getPlayerHand() {
+        return playerHand;
+    }
+
+    public void setPlayerHand(Hand playerHand) {
+        this.playerHand = playerHand;
+    }
+
+    public Hand getDealerHand() {
+        return dealerHand;
+    }
+
+    public void setDealerHand(Hand dealerHand) {
+        this.dealerHand = dealerHand;
     }
 }
