@@ -5,6 +5,7 @@ import io.zipcoder.casino.Die;
 import io.zipcoder.casino.Person.CrapsPlayer;
 import io.zipcoder.casino.utilities.Console;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -13,10 +14,17 @@ import static org.junit.Assert.*;
 
 public class CrapsTest {
 
+    Console defautConsole;
+
+    @Before
+    public void setUp(){
+        defautConsole = new Console(System.in, System.out);
+    }
+
     @Test
     public void passLineChoiceTest() {
         //Given
-        Craps craps = new Craps();
+        Craps craps = new Craps(defautConsole);
         byte[] inputBytes = "p".getBytes();
         ByteArrayInputStream inputString = new ByteArrayInputStream(inputBytes);
         craps.setConsole(new Console(inputString, System.out));
@@ -32,7 +40,7 @@ public class CrapsTest {
     @Test
     public void passLineChoiceTest2() {
         //Given
-        Craps craps = new Craps();
+        Craps craps = new Craps(defautConsole);
         byte[] inputBytes = "d".getBytes();
         ByteArrayInputStream inoutString = new ByteArrayInputStream(inputBytes);
         craps.setConsole(new Console(inoutString, System.out));
@@ -48,7 +56,7 @@ public class CrapsTest {
     @Test
     public void crapsBetTest() {
         //Given
-        Craps craps = new Craps();
+        Craps craps = new Craps(defautConsole);
         Balance balance = new Balance(500);
         byte[] inputBytes = "100".getBytes();
         ByteArrayInputStream inputString = new ByteArrayInputStream(inputBytes);
@@ -65,7 +73,7 @@ public class CrapsTest {
     @Test
     public void crapsBetTest2() {
         //Given
-        Craps craps = new Craps();
+        Craps craps = new Craps(defautConsole);
         Balance balance = new Balance(500);
         byte[] inputBytes = "100".getBytes();
         ByteArrayInputStream inputString = new ByteArrayInputStream(inputBytes);
@@ -81,31 +89,57 @@ public class CrapsTest {
     }
 
     @Test
-    public void pointerSetTest() {
+    public void pointerSetLoserTest() {
         //Given
         Integer pointer;
-        Integer bet = 0;
+        Integer expected = 0;
         Balance balance = new Balance();
-        Craps craps = new Craps();
-        DiceGames diceGames = new DiceGames();
-        Die die = new Die();
+        Craps craps = new Craps(defautConsole);
+        byte[] inputBytes = "9".getBytes();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputStream, System.out));
 
         //When
-        do {
-            Integer roll = diceGames.tossTwoDie(diceGames, die);
-            pointer = craps.setPointerPL(balance, bet, roll);
-
-        } while (pointer == 0);
+        pointer = craps.setPointerPL(balance, 5, 2);
 
         //Then
-        Assert.assertTrue(pointer == 4 || pointer == 5 || pointer == 6
-                || pointer == 8 || pointer == 9 || pointer == 10);
+        Assert.assertEquals(expected,pointer);
+    }
+
+    @Test
+    public void pointerSetWinnerTest() {
+        //Given
+        Integer expected = 105;
+        Integer actual;
+        Balance balance = new Balance(100);
+        Craps craps = new Craps(defautConsole);
+
+        //When
+        craps.setPointerPL(balance, 5, 7);
+        actual = balance.getBalance();
+
+        //Then
+        Assert.assertEquals(expected,actual);
+    }
+    @Test
+    public void pointerSetNumberTest() {
+        //Given
+        Integer expected = 4;
+        Integer bet = 0;
+        Balance balance = new Balance(100);
+        Craps craps = new Craps(defautConsole);
+
+
+        Integer actual = craps.setPointerPL(balance, 5, 4);
+
+        //Then
+        Assert.assertEquals(expected,actual);
     }
 
     @Test
     public void collectTest() {
         //Given
-        Craps craps = new Craps();
+        Craps craps = new Craps(defautConsole);
         Balance balance = new Balance();
         balance.setBalance(200);
         Integer bet = 100;
@@ -120,7 +154,7 @@ public class CrapsTest {
     @Test
     public void payoutTest() {
         //Given
-        Craps craps = new Craps();
+        Craps craps = new Craps(defautConsole);
         Balance balance = new Balance();
         balance.setBalance(500);
         Integer bet = 100;
@@ -136,7 +170,7 @@ public class CrapsTest {
     @Test
     public void hedgeBetTest() {
         //Given
-        Craps craps = new Craps();
+        Craps craps = new Craps(defautConsole);
         Balance balance = new Balance(1000);
         byte[] inputBytes = "y".getBytes();
         ByteArrayInputStream inputString = new ByteArrayInputStream(inputBytes);
@@ -153,7 +187,7 @@ public class CrapsTest {
     @Test
     public void hedgeBetTest2() {
         //Given
-        Craps craps = new Craps();
+        Craps craps = new Craps(defautConsole);
         Balance balance = new Balance(1000);
         byte[] inputBytes = "n".getBytes();
         ByteArrayInputStream inputString = new ByteArrayInputStream(inputBytes);
