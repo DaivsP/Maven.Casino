@@ -181,8 +181,8 @@ public class CasinoTest {
         // Given
         Casino casino = new Casino();
         byte[] inputBytes = "2\rE".getBytes();
-        ByteArrayInputStream leaveString = new ByteArrayInputStream(inputBytes);
-        casino.setConsole(new Console(leaveString, System.out));
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+        casino.setConsole(new Console(inputStream, System.out));
         boolean result = false;
 
         // When
@@ -201,8 +201,8 @@ public class CasinoTest {
         // Given
         Casino casino = new Casino();
         byte[] inputBytes = "3\rE".getBytes();
-        ByteArrayInputStream leaveString = new ByteArrayInputStream(inputBytes);
-        casino.setConsole(new Console(leaveString, System.out));
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+        casino.setConsole(new Console(inputStream, System.out));
         boolean result = false;
 
         // When
