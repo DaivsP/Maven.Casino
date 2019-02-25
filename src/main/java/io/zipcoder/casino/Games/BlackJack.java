@@ -40,15 +40,15 @@ public class BlackJack extends CardGames implements GamblingGame {
         }
         while(player.getBalance().getBalance() > 0){
 
-            clearHands();
+            clearHands(dealerHand, playerHand);
 
             Integer userBet = console.getIntegerInput("How much do you want to Bet: ");
             player.bet(balance, userBet);
             pot = userBet;
 
-            dealCardsToPlayerAndDealerAndAddThemToRespectiveHands();
+            dealCardsToPlayerAndDealerAndAddThemToRespectiveHands(dealerHand, playerHand);
 
-            dealCardsToPlayerAndDealerAndAddThemToRespectiveHands();
+            dealCardsToPlayerAndDealerAndAddThemToRespectiveHands(dealerHand, playerHand);
 
             printUserFirstHandAndDealerFirstCard();
 
@@ -99,12 +99,12 @@ public class BlackJack extends CardGames implements GamblingGame {
         }
     }
 
-    public void clearHands(){
+    public void clearHands(Hand dealerHand, Hand playerHand){
         dealerHand.clearHand();
         playerHand.clearHand();
     }
 
-    public void dealCardsToPlayerAndDealerAndAddThemToRespectiveHands(){
+    public void dealCardsToPlayerAndDealerAndAddThemToRespectiveHands(Hand dealerHand, Hand playerHand){
         Card playerCard = cardDeck.dealCard();
         Card dealerCard = cardDeck.dealCard();
         dealerHand.addACard(dealerCard);
