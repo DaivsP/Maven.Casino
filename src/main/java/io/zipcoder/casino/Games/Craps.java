@@ -34,6 +34,7 @@ public class Craps extends DiceGames implements GamblingGame {
 
         if (passLineChoice == 1) {
             passLineBet = crapsBet(balance);
+            console.println("You bet: "+passLineBet);
             do {
                 String rollRequest = console.getStringInput("***** Press (R) to Roll\n***** Press (E) to exit");
 
@@ -103,7 +104,8 @@ public class Craps extends DiceGames implements GamblingGame {
             String buyMore = console.getStringInput("Would you like to buy more? (Y) / (N)");
             if (buyMore.equals("Y") || buyMore.equals("y")) {
                 balance.addMoreChips();
-                crapsBet(balance);
+                Integer newBet = crapsBet(balance);
+                return newBet;
             } else {
                 play(balance);
             }
@@ -123,7 +125,8 @@ public class Craps extends DiceGames implements GamblingGame {
 
         } else if (diceRoll == 2 || diceRoll == 3 || diceRoll == 12) {
             console.println("***** You Lose, Try Again!");
-            crapsCollect(balance, bet);
+            //crapsCollect(balance, bet);
+            play(balance);
             console.println("***** Your balance is: " + balance.getBalance());
 
         } else {
@@ -181,6 +184,21 @@ public class Craps extends DiceGames implements GamblingGame {
         }
     }
 
+    protected void crapsRoundDPL(Balance balance, Integer bet, Integer diceRoll, Integer pointer){
+        console.println("***** You Rolled: " + diceRoll);
+        if (diceRoll == pointer) {
+            console.println("***** Don't Pass Line Loses! Better Luck Next Time.\n***** Your balance is: " + balance.getBalance());
+
+        } else if (diceRoll == 7) {
+
+            console.println("***** You WIN!\n Winnings: " + bet);
+            crapsPayout(balance, bet);
+            console.println("***** Your balance is: " + balance.getBalance());
+
+        } else {
+            console.println("Roll Again\n");
+        }
+    }
 
     //House wins and takes the bet
     protected void crapsCollect(Balance balance, Integer amount) {
