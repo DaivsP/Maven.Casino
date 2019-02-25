@@ -248,11 +248,11 @@ public class GoFish extends Games implements FunGame {
         return player;
     }
 
-    public GoFishPlayer getPlayer2() {
-        return player2;
-    }
 
     public CardDeck getCardDeck() {
         return cardDeck;
+    }
+    public void setConsole(Console console){
+        this.console = console;
     }
 }
