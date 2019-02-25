@@ -32,4 +32,9 @@ public class Hand {
         myHand.clear();
     }
 
+    public void removeACard(Card card){
+        myHand.remove(card);
+    }
+
 }
+

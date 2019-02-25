@@ -27,7 +27,7 @@ public class CasinoTest {
         sb.append("Incorrect game picked\n");
         sb.append("Your current chip count: 0\n");
         sb.append("Would you like to play again? \n");
-        sb.append("(Q)uit / (A)ny key to continue / (B)uy more chips : \n");
+        sb.append("(Q) to Exit the Casino / (A)ny key to Enter the Lobby / (B)uy more chips : \n");
         String expected = sb.toString();
 
 

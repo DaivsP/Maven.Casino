@@ -117,6 +117,23 @@ public class HandTest {
     }
 
     @Test
+    public void removeACard() {
+
+        // Given
+        Card card = new Card(null,null);
+        Hand hand = new Hand();
+
+        // When
+        hand.addACard(card);
+        hand.removeACard(card);
+        Integer expected = 0;
+        Integer actual = hand.getNumberOfCards();
+
+        // Then
+        Assert.assertEquals(expected,actual);
+    }
+  
+    @Test
     public void testPrivateConstructor() throws Exception {
         Constructor constructor = Hand.class.getDeclaredConstructor();
         Assert.assertTrue("Constructor is not private", Modifier.isPublic(constructor.getModifiers()));
@@ -124,7 +141,7 @@ public class HandTest {
         constructor.setAccessible(true);
         constructor.newInstance();
     }
-
+  
     @Test
     public void testConstructor(){
         Hand hand = new Hand();
@@ -132,9 +149,5 @@ public class HandTest {
         Object expected = hand;
 
         Assert.assertEquals(expected,hand);
-
     }
-
-
-
 }
