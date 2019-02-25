@@ -12,7 +12,6 @@ public class Card implements Comparable<Card>{
 
     public List<Integer> bjCardValueList = new ArrayList<Integer>();
 
-    private Boolean hidden;
 
     private Suit cardSuit;
     private Rank cardRank;
@@ -46,15 +45,6 @@ public class Card implements Comparable<Card>{
 
 
     public Integer getCardValue(){return this.cardValue;}
-
-    public Boolean getHidden() {
-        return hidden;
-    }
-
-    public void setHidden(Boolean hidden) {
-        this.hidden = hidden;
-    }
-
 
 
     public void createBJCardValue(){
