@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
 
 public class BlackJackTest {
 
-    BlackJack blackJack = new BlackJack();
+    BlackJack blackJack = new BlackJack(new Console(System.in, System.out));
     CardDeck cardDeck = new CardDeck();
     Hand playerHand = new Hand();
     Hand dealerHand = new Hand();
@@ -68,7 +68,9 @@ public class BlackJackTest {
     @Test
     public void testAddCardToPlayerAndDealerHands(){
         //Given
-        blackJack.dealCardsToPlayerAndDealerAndAddThemToRespectiveHands(dealerHand, playerHand);
+        this.playerHand = blackJack.getPlayerHand();
+        this.dealerHand = blackJack.getDealerHand();
+        blackJack.dealCardsToPlayerAndDealerAndAddThemToRespectiveHands();
 
         //When
         Integer actualAmountOfDealerCards = dealerHand.getNumberOfCards();
