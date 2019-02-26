@@ -463,12 +463,56 @@ public class CrapsTest {
         craps.setConsole(new Console(inputStream, System.out));
 
         //When
-        pointer = craps.setPointerPL(balance, 5, 2);
+        pointer = craps.setPointerDontPL(balance, 5, 7);
 
         //Then
         Assert.assertEquals(expected, pointer);
     }
 
+    @Test
+    public void setPointerLoserPrintOut() {
+        //Given
+        String expected = "***** You Rolled: 7\n" +
+                            "***** You Lose, Try Again!\n" +
+                                "Play another round? (Y)/(N)\n";
+        Balance balance = new Balance();
+        Craps craps = new Craps(defautConsole);
+        byte[] inputBytes = "7".getBytes();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputStream, new PrintStream(outputStream)));
+
+        //When
+        craps.setPointerDontPL(balance, 5, 7);
+        String actual = outputStream.toString();
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void setPointerLoserPrintOut2() {
+        //Given
+        String expected = "***** You Rolled: 12\n" +
+                            "Push, Roll Again!\n";
+        Balance balance = new Balance();
+        Craps craps = new Craps(defautConsole);
+        byte[] inputBytes = "12".getBytes();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputStream, new PrintStream(outputStream)));
+
+        //When
+        craps.setPointerDontPL(balance, 5, 12);
+        String actual = outputStream.toString();
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void secondPhaseHardwayCheck(){
+        //Given
+
+    }
 
 
 }

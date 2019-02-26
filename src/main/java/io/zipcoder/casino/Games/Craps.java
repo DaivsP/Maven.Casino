@@ -15,6 +15,7 @@ public class Craps extends DiceGames implements GameInterface {
     private Balance balance;
     private Integer pointer = 0;
     private Integer passLineBet = 0;
+    private Integer dontPassLineBet= 0;
     private Die die = new Die();
     private DiceGames diceGames = new DiceGames();
     private Integer hardwayBet = 0;
@@ -79,6 +80,10 @@ public class Craps extends DiceGames implements GameInterface {
                     break;
                 }
             }
+            pointer = 0;
+            crapsRoll = 0;
+            passLineBet = 0;
+            hardwayBet = 0;
 
             anotherRound(balance);
 
@@ -90,14 +95,14 @@ public class Craps extends DiceGames implements GameInterface {
              * COME OUT ROLL SEQUENCE
              *
              * */
-            passLineBet = crapsBet(balance);
+            dontPassLineBet = crapsBet(balance);
 
             do {
                 String rollRequest = console.getStringInput("***** Press (R) to Roll\n***** Press (E) to exit");
 
                 if (rollRequest.equals("R") || rollRequest.equals("r")) {
                     Integer roll = diceGames.tossTwoDie(diceGames, die);
-                    pointer = setPointerDontPL(balance, passLineBet, roll);
+                    pointer = setPointerDontPL(balance, dontPassLineBet, roll);
                 } else {
                     break;
                 }
@@ -111,7 +116,7 @@ public class Craps extends DiceGames implements GameInterface {
              * */
 
             //Hedge Bet Prompt
-            passLineBet = hedgeBet(balance, passLineBet);
+            dontPassLineBet = hedgeBet(balance, dontPassLineBet);
 
             if (hardWayPlayChoice() == true) {
                 hardwayNumber = hardWayNumberChoice();
@@ -119,23 +124,29 @@ public class Craps extends DiceGames implements GameInterface {
             }
 
             while (crapsRoll != pointer && crapsRoll != 7 && pointer != 0) {
-                betCheck(passLineBet);
+                betCheck(dontPassLineBet);
                 String rollRequest = console.getStringInput("ROLL A 7 before " + pointer + " TO WIN!\n***** Press (R) to Roll\n***** Press (E) to exit");
                 if (rollRequest.equals("R") || rollRequest.equals("r")) {
                     crapsRoll = secondPhaseRollWithHardWayCheck(hardwayBet, hardwayNumber);
-                    crapsRoundDPL(balance, passLineBet, crapsRoll, pointer);
+                    crapsRoundDPL(balance, dontPassLineBet, crapsRoll, pointer);
 
                 } else {
                     break;
                 }
             }
+
+            pointer = 0;
+            crapsRoll = 0;
+            dontPassLineBet = 0;
+            hardwayBet = 0;
             anotherRound(balance);
         }
 
 
     }
 
-    protected Integer secondPhaseRollWithHardWayCheck(Integer hardwayBet, Integer hardWayNumber) {
+    //SEED USED FOR TESTING -- DEFAULT NULL FOR TRUE RANDOM
+    protected Integer secondPhaseRollWithHardWayCheck(Integer hardwayBet, Integer hardWayNumber){
         die = new Die();
         diceGames = new DiceGames();
         Integer die1 = diceGames.toss(die, null);
