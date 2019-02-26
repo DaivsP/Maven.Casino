@@ -88,7 +88,7 @@ public class CrapsTest {
     }
 
     @Test
-    public void pointerSetLoserTest() {
+    public void pointerSetLoserTestPL() {
         //Given
         Integer pointer;
         Integer expected = 0;
@@ -106,7 +106,7 @@ public class CrapsTest {
     }
 
     @Test
-    public void pointerSetWinnerTest() {
+    public void pointerSetWinnerTestPL() {
         //Given
         Integer expected = 105;
         Integer actual;
@@ -122,7 +122,7 @@ public class CrapsTest {
     }
 
     @Test
-    public void pointerSetNumberTest() {
+    public void pointerSetNumberTestPL() {
         //Given
         Integer expected = 4;
         Integer bet = 0;
@@ -180,7 +180,7 @@ public class CrapsTest {
         //When
         Integer actual = craps.hedgeBet(balance, bet);
         //Then
-        Assert. assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual);
 
     }
 
@@ -261,7 +261,7 @@ public class CrapsTest {
         Craps craps = new Craps(defautConsole);
         Integer expected = 700;
         //When
-        Integer actual = craps.hardWayWinnings( 2, 2, 100, 4);
+        Integer actual = craps.hardWayWinnings(2, 2, 100, 4);
         //Then
         Assert.assertEquals(expected, actual);
     }
@@ -272,13 +272,13 @@ public class CrapsTest {
         Craps craps = new Craps(defautConsole);
         Integer expected = 900;
         //When
-        Integer actual = craps.hardWayWinnings(3,3, 100, 6);
+        Integer actual = craps.hardWayWinnings(3, 3, 100, 6);
         //Then
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void hardWayPayoutTest(){
+    public void hardWayPayoutTest() {
         //Given
         Craps craps = new Craps(defautConsole);
         Balance balance = new Balance(1000);
@@ -292,90 +292,90 @@ public class CrapsTest {
     }
 
     @Test
-    public void betCheckTest(){
+    public void betCheckTest() {
         //Given
         Craps craps = new Craps(defautConsole);
         String expected = "***** Bet: 50 *****\n\n";
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        craps.setConsole(new Console(System.in,new PrintStream(outputStream) ));
+        craps.setConsole(new Console(System.in, new PrintStream(outputStream)));
         //When
         craps.betCheck(50);
-        String actual =outputStream.toString();
+        String actual = outputStream.toString();
         //then
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void crapsRoundPLTest1(){
+    public void crapsRoundPLTest1() {
         //Given
         Craps craps = new Craps(defautConsole);
         Balance balance = new Balance(1000);
-        String expected = "***** You Rolled: 8\n\n***** You WIN!\n Winnings: 100\n***** Your balance is: 1200\n";
+        String expected = "**ROLL** (( 8 )) **ROLL**\n\n***** You WIN!\n Winnings: 100\n***** Your balance is: 1200\n";
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        craps.setConsole(new Console(System.in,new PrintStream(outputStream) ));
+        craps.setConsole(new Console(System.in, new PrintStream(outputStream)));
         //When
-        craps.crapsRoundPL(balance,100, 8, 8);
-        String actual =outputStream.toString();
+        craps.crapsRoundPL(balance, 100, 8, 8);
+        String actual = outputStream.toString();
         //then
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void crapsRoundPLTest2(){
+    public void crapsRoundPLTest2() {
         //Given
         Craps craps = new Craps(defautConsole);
         Balance balance = new Balance(1000);
-        String expected = "***** You Rolled: 2\n\nRoll Again\n\n";
+        String expected = "**ROLL** (( 2 )) **ROLL**\n\nRoll Again\n\n";
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        craps.setConsole(new Console(System.in,new PrintStream(outputStream) ));
+        craps.setConsole(new Console(System.in, new PrintStream(outputStream)));
         //When
-        craps.crapsRoundPL(balance,100, 2, 8);
-        String actual =outputStream.toString();
+        craps.crapsRoundPL(balance, 100, 2, 8);
+        String actual = outputStream.toString();
         //then
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void crapsRoundPLTest3(){
+    public void crapsRoundPLTest3() {
         //Given
         Craps craps = new Craps(defautConsole);
         Balance balance = new Balance(1000);
-        String expected = "***** You Rolled: 7\n\n***** 7 OUT! Better Luck Next Time.\n***** Your balance is: 1000\n";
+        String expected = "**ROLL** (( 7 )) **ROLL**\n\n***** 7 OUT! Better Luck Next Time.\n***** Your balance is: 1000\n";
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        craps.setConsole(new Console(System.in,new PrintStream(outputStream) ));
+        craps.setConsole(new Console(System.in, new PrintStream(outputStream)));
         //When
-        craps.crapsRoundPL(balance,100, 7, 8);
-        String actual =outputStream.toString();
+        craps.crapsRoundPL(balance, 100, 7, 8);
+        String actual = outputStream.toString();
         //then
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void crapsRoundDPLTest1(){
+    public void crapsRoundDPLTest1() {
         //Given
         Craps craps = new Craps(defautConsole);
         Balance balance = new Balance(1000);
-        String expected = "***** You Rolled: 5\nRoll Again\n\n";
+        String expected = "**ROLL** (( 5 )) **ROLL**\n\nRoll Again\n\n";
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        craps.setConsole(new Console(System.in,new PrintStream(outputStream) ));
+        craps.setConsole(new Console(System.in, new PrintStream(outputStream)));
         //When
-        craps.crapsRoundDPL(balance,100, 5, 8);
-        String actual =outputStream.toString();
+        craps.crapsRoundDPL(balance, 100, 5, 8);
+        String actual = outputStream.toString();
         //then
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void crapsRoundDPLTest2(){
+    public void crapsRoundDPLTest2() {
         //Given
         Craps craps = new Craps(defautConsole);
         Balance balance = new Balance(1000);
-        String expected = "***** You Rolled: 7\n***** You WIN!\n Winnings: 100\n***** Your balance is: 1200\n";
+        String expected = "**ROLL** (( 7 )) **ROLL**\n\n***** You WIN!\n Winnings: 100\n***** Your balance is: 1200\n";
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        craps.setConsole(new Console(System.in,new PrintStream(outputStream) ));
+        craps.setConsole(new Console(System.in, new PrintStream(outputStream)));
         //When
-        craps.crapsRoundDPL(balance,100, 7, 8);
-        String actual =outputStream.toString();
+        craps.crapsRoundDPL(balance, 100, 7, 8);
+        String actual = outputStream.toString();
         //then
         Assert.assertEquals(expected, actual);
     }
@@ -385,7 +385,7 @@ public class CrapsTest {
         //Given
         Craps craps = new Craps(defautConsole);
         Balance balance = new Balance(1000);
-        String expected = "***** You Rolled: 8\n***** Don't Pass Line Loses! Better Luck Next Time.\n***** Your balance is: 1000\n";
+        String expected = "**ROLL** (( 8 )) **ROLL**\n\n***** Don't Pass Line Loses! Better Luck Next Time.\n***** Your balance is: 1000\n";
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         craps.setConsole(new Console(System.in, new PrintStream(outputStream)));
         //When
@@ -396,13 +396,13 @@ public class CrapsTest {
     }
 
     @Test
-    public void secondPhaseRollWithHardWayTest(){
+    public void secondPhaseRollWithHardWayTest() {
         //Given
         Craps craps = new Craps(defautConsole);
         //When
-        Integer expected = craps.secondPhaseRollWithHardWay(100, 0);
+        Integer expected = craps.secondPhaseRollWithHardWayCheck(100, 0);
         //then
-        Assert.assertTrue(expected>=2 && expected <=12);
+        Assert.assertTrue(expected >= 2 && expected <= 12);
     }
 
 //    @Test
@@ -412,12 +412,63 @@ public class CrapsTest {
 //        Balance balance = new Balance(1000);
 //        byte[] inputBytes = "y".getBytes();
 //        ByteArrayInputStream inputString = new ByteArrayInputStream(inputBytes);
-//        craps.setConsole(new Console(inputString, System.out));
+//        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//        craps.setConsole(new Console(inputString, new PrintStream(outputStream)));
 //        //When
+//        craps.anotherRound(balance);
+//        String expected ="";
+//        String actual = outputStream.toString();
+//        //then
+//        Assert.assertEquals(expected, actual);
 //
-//        //Then
-//
-//        Assert.assertEquals();
 //    }
+
+    @Test
+    public void setPointerTestDPL() {
+        //Given
+        Integer expected = 4;
+        Balance balance = new Balance(100);
+        Craps craps = new Craps(defautConsole);
+        //When
+        Integer actual = craps.setPointerDontPL(balance, 5, 4);
+
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void pointerSetWinnerTestDPL() {
+        //Given
+        Integer pointer;
+        Balance balance = new Balance(1000);
+        Craps craps = new Craps(defautConsole);
+        Integer expected = 1010;
+        //When
+        craps.setPointerDontPL(balance, 5, 2);
+        Integer actual = balance.getBalance();
+
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void setPointerLoserDPL() {
+        //Given
+        Integer pointer;
+        Integer expected = 0;
+        Balance balance = new Balance();
+        Craps craps = new Craps(defautConsole);
+        byte[] inputBytes = "7".getBytes();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputStream, System.out));
+
+        //When
+        pointer = craps.setPointerPL(balance, 5, 2);
+
+        //Then
+        Assert.assertEquals(expected, pointer);
+    }
+
+
 
 }
