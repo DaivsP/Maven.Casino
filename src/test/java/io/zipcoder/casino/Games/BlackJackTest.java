@@ -465,4 +465,17 @@ public class BlackJackTest {
         //Then
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void testPlayerHasAPositiveBalance(){
+        //Given
+        this.player = blackJack.getPlayer();
+        player.setBalance(new Balance(1));
+
+        //When
+
+        //Then
+        Boolean actual = blackJack.playerHasAPositiveBalance();
+        Assert.assertTrue(actual);
+    }
 }
