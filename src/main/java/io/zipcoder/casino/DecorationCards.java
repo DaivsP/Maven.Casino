@@ -10,7 +10,6 @@ public class DecorationCards {
     Integer setDelay = 0;
     Console console ;
 
-
     private static String container1 = "";
     private static String container2 = "";
     private static String container3 = "";
@@ -23,9 +22,7 @@ public class DecorationCards {
 
     public void drawHand( Hand hand ){
         Symbols sym = new Symbols();
-        String suitOfCard = "";
-        String rankOfCard = "";
-        String containerT = "";
+        String suitOfCard , rankOfCard , containerT = "";
 
         for (int i = 0; i < hand.getNumberOfCards(); i++) {
             rankOfCard =  String.valueOf( hand.getACard(i).getRank() );
@@ -40,6 +37,7 @@ public class DecorationCards {
             containerT = container1 + "\n" + container2 + "\n"
                     + container3 + "\n" + container4 + "\n" + container5;
         }
+        container1 = container2 = container3 = container4 = container5 = "";
         console.print(containerT);
     }
 
@@ -55,25 +53,8 @@ public class DecorationCards {
             containerT = container1 + "\n" + container2 + "\n"
                     + container3 + "\n" + container4 + "\n" + container5;
         }
+        container1 = container2 = container3 = container4 = container5 = "";
         console.print(containerT);
-    }
-
-
-    public static void main(String[] args) {
-
-//        DecorationCards decoration = new DecorationCards();
-//        Hand hand = new Hand();
-//
-//        for (Card.Rank r : Card.Rank.values()){
-//            for (Card.Suit s : Card.Suit.values()){
-//                Card master = new Card( r, s );
-//                hand.addACard(master);
-//                System.out.print( r.toString() + s.toString() );
-//            }
-//        }
-//        System.out.println("");
-//        decoration.drawHand(hand);
-
     }
 
 }
