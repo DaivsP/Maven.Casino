@@ -16,9 +16,7 @@ public class GoFish extends Games implements FunGame {
     private CardDeck cardDeck;
     private Hand player2Hand;
     private Hand playerHand;
-    private GoFishPlayer[] Players;
     private Integer books;
-    private Integer score;
     private String lastGuess;
 
     public GoFish(Console console) {
@@ -27,7 +25,6 @@ public class GoFish extends Games implements FunGame {
 
         player = new GoFishPlayer("You", 0);
         player2 = new GoFishPlayer("Dealer", 0);
-        Players = new GoFishPlayer[]{player, player2};
 
         playerHand = new Hand();
         player2Hand = new Hand();
@@ -49,26 +46,21 @@ public class GoFish extends Games implements FunGame {
         console.println("Please type 'E' to exit at any time");
         String input = console.getStringInput("Welcome to the Go Fish table. (D) to draw a hand.");
         dealHands();
-
         while (player.score < 7) {
             if (input.equals("D") || input.equals("d")) {
                 console.println("\n* * * * Your Turn * * * * *\n");
                 takeTurn(player);
                 if (books == 13) {
-                    break;
-                }
+                    break; }
                 if (books < 13) {
                     console.println("\n* * * * AI Turn * * * * *\n");
-                    aITakeTurn(player2);
-                }
+                    aITakeTurn(player2); }
             }
             if (input.equals("E") || input.equals("e")) {
-                break;
-            }
+                break; }
         }
         if (player.score == 0 && player2.score == 0) {
-            console.println("\nSo Soon? Alright, See Ya!\n");
-        }
+            console.println("\nSo Soon? Alright, See Ya!\n"); }
         findWinner();
         console.println("\nThanks for playing!\n");
     }
@@ -80,18 +72,14 @@ public class GoFish extends Games implements FunGame {
         if (numOfCards(anyPlayer) == 0) {
             console.println("\nLooks like you are out of cards!");
             goFish(anyPlayer);
-            printHand(anyPlayer);
-        }
+            printHand(anyPlayer); }
         if (cardDeck.deckSize() == 0 && numOfCards(anyPlayer) == 0) {
             findWinner();
-
         } else {
             String input = console.getStringInput("\nGuess a Card: (please spell the card)").toUpperCase();
-
             if (input.equals("E")) {
                 books = 13;
-                return;
-            }
+                return; }
             if (checkForMatch(anyPlayer, input)) {
                 if (checkForMatch(otherPlayer(anyPlayer), input)) {
                     removeMatchingCards(otherPlayer(anyPlayer), input);
@@ -100,14 +88,11 @@ public class GoFish extends Games implements FunGame {
                     console.println("Go Fish!");
                     goFish(anyPlayer);
                     printHand(anyPlayer);
-                    console.print(" <- new card\n");
-                }
+                    console.print(" <- new card\n"); }
             } else {
                 console.println("Your guess must also be in your hand");
-                takeTurn(anyPlayer);
-            }
-            checkForBooks(anyPlayer, anyPlayer.getHand());
-        }
+                takeTurn(anyPlayer); }
+            checkForBooks(anyPlayer, anyPlayer.getHand()); }
     }
 
     public void aITakeTurn(GoFishPlayer anyPlayer) {
@@ -115,7 +100,7 @@ public class GoFish extends Games implements FunGame {
         checkForBooks(anyPlayer, anyPlayer.getHand());
         if (anyPlayer.getHand().getNumberOfCards() > 0) {
             String input = aIGuessingMagic(anyPlayer);
-            console.getStringInput("\nDo you have a " + input + "?\n");
+            console.getStringInput("\nDo you have a " + input + "?");
             if (checkForMatch(otherPlayer(anyPlayer), input)) {
                 aIRemoveMatchingCards(otherPlayer(anyPlayer), input);
                 aITakeTurn(anyPlayer);
@@ -156,6 +141,9 @@ public class GoFish extends Games implements FunGame {
     public void aILastGuess(String input) {
         lastGuess = input;
     }
+    public String getLastGuess(){
+        return lastGuess;
+    }
 
     public void removeMatchingCards(GoFishPlayer anyPlayer, String input) {
         Card removedCard;
@@ -177,7 +165,7 @@ public class GoFish extends Games implements FunGame {
                 removedCard = getPlayerCard(anyPlayer, i);
                 otherPlayer(anyPlayer).getHand().addACard(removedCard);
                 anyPlayer.getHand().removeACard(getPlayerCard(anyPlayer, i));
-                console.println("\nDealer took a " + input + " card from you! Dealer goes Again!\n");
+                console.println("\nDealer took a " + input + " card from you! Dealer goes Again!");
                 i--;
             }
         }
@@ -292,10 +280,16 @@ public class GoFish extends Games implements FunGame {
     public GoFishPlayer getPlayer() {
         return player;
     }
-
+    public GoFishPlayer getPlayer2() {
+        return player2;
+    }
 
     public CardDeck getCardDeck() {
         return cardDeck;
+    }
+
+    public int getBooks(){
+        return books;
     }
 
     public void setConsole(Console console) {
