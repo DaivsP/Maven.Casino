@@ -6,6 +6,7 @@ import io.zipcoder.casino.Die;
 import io.zipcoder.casino.utilities.Console;
 import io.zipcoder.casino.Banners;
 
+import static io.zipcoder.casino.utilities.AnsiScapeCodes.*;
 
 
 public class Craps extends DiceGames implements GameInterface {
@@ -43,7 +44,7 @@ public class Craps extends DiceGames implements GameInterface {
              *
              * */
             passLineBet = crapsBet(balance);
-            console.println("You bet: " + passLineBet);
+            console.println("You bet: " +ANSI_YELLOW+ passLineBet+ANSI_RESET);
             do {
                 String rollRequest = console.getStringInput("***** Press (R) to Roll\n***** Press (E) to exit");
                 if (rollRequest.equals("R") || rollRequest.equals("r")) {
@@ -145,14 +146,13 @@ public class Craps extends DiceGames implements GameInterface {
 
     }
 
-    //SEED USED FOR TESTING -- DEFAULT NULL FOR TRUE RANDOM
     protected Integer secondPhaseRollWithHardWayCheck(Integer hardwayBet, Integer hardWayNumber){
         die = new Die();
         diceGames = new DiceGames();
         Integer die1 = diceGames.toss(die, null);
         Integer die2 = diceGames.toss(die, null);
         Integer crapsRoll = die1 + die2;
-        console.println("****** [ " + die1 + " ] / [ " + die2 + " ] ******");
+        console.println("****** "+ANSI_YELLOW+"[ "+ die1 + " ] / [ " + die2 + " ]"+ANSI_RESET+" ******");
         if (crapsRoll == hardWayNumber) {
             hardWayWinnings(die1, die2, hardwayBet, hardWayNumber);
         }
@@ -205,9 +205,9 @@ public class Craps extends DiceGames implements GameInterface {
     protected Integer setPointerPL(Balance balance, Integer bet, Integer diceRoll) {
         Integer pointer = 0;
 
-        console.println("***** You Rolled: " + diceRoll);
+        console.println("***** You Rolled: " +ANSI_RED+diceRoll+ANSI_RESET);
         if (diceRoll == 7 || diceRoll == 11) {
-            console.println("***** Nice! you won: " + bet);
+            console.println("***** Nice! you won: " + ANSI_GREEN +bet+ ANSI_RESET);
             balance.setBalance(balance.getBalance() + bet);
             console.println("***** Your balance is: " + balance.getBalance());
 
@@ -226,9 +226,9 @@ public class Craps extends DiceGames implements GameInterface {
 
     protected void crapsRoundPL(Balance balance, Integer bet, Integer diceRoll, Integer pointer) {
 
-        console.println("**ROLL** (( " + diceRoll + " )) **ROLL**\n");
+        console.println("***ROLL** (( "+ANSI_RED+ diceRoll+ANSI_RESET+" )) **ROLL***\n");
         if (diceRoll == pointer) {
-            console.println("***** You WIN!\n Winnings: " + bet);
+            console.println("***** You WIN!\n Winnings: " + ANSI_GREEN +bet+ ANSI_RESET);
             crapsPayout(balance, bet);
             console.println("***** Your balance is: " + balance.getBalance());
 
@@ -247,7 +247,7 @@ public class Craps extends DiceGames implements GameInterface {
     protected Integer setPointerDontPL(Balance balance, Integer bet, Integer diceRoll) {
         Integer pointer = 0;
 
-        console.println("***** You Rolled: " + diceRoll);
+        console.println("***** You Rolled: " +ANSI_RED+ diceRoll+ANSI_RESET);
         if (diceRoll == 2 || diceRoll == 3) {
             console.println("***** Nice! you won: " + bet);
             crapsPayout(balance, bet);
@@ -269,13 +269,13 @@ public class Craps extends DiceGames implements GameInterface {
     }
 
     protected void crapsRoundDPL(Balance balance, Integer bet, Integer diceRoll, Integer pointer) {
-        console.println("**ROLL** (( " + diceRoll + " )) **ROLL**\n");
+        console.println("***ROLL** (( "+ANSI_RED+ diceRoll+ANSI_RESET+" )) **ROLL***\n");
         if (diceRoll == pointer) {
             console.println("***** Don't Pass Line Loses! Better Luck Next Time.\n***** Your balance is: " + balance.getBalance());
 
         } else if (diceRoll == 7) {
 
-            console.println("***** You WIN!\n Winnings: " + bet);
+            console.println("***** You WIN!\n Winnings: " + ANSI_GREEN +bet+ ANSI_RESET);
             crapsPayout(balance, bet);
             console.println("***** Your balance is: " + balance.getBalance());
 
@@ -324,7 +324,7 @@ public class Craps extends DiceGames implements GameInterface {
             case 4:
                 if (total == hardWayNumber && dice1 == dice2) {
                     winnings = bet * 7;
-                    console.println("Hard Way HIT! You Win: " + winnings);
+                    console.println("Hard Way HIT! You Win: " + ANSI_GREEN +winnings+ ANSI_RESET);
                     break;
                 } else {
                     console.println("Soft 4 hit, You lost: " + bet);
@@ -334,7 +334,7 @@ public class Craps extends DiceGames implements GameInterface {
             case 6:
                 if (total == hardWayNumber && dice1 == dice2) {
                     winnings = bet * 9;
-                    console.println("Hard Way HIT! You Win: " + winnings);
+                    console.println("Hard Way HIT! You Win: "+ ANSI_GREEN +winnings+ ANSI_RESET);
                     break;
                 } else {
                     console.println("Soft 6 hit, You lost: " + bet);
@@ -344,7 +344,7 @@ public class Craps extends DiceGames implements GameInterface {
             case 8:
                 if (total == hardWayNumber && dice1 == dice2) {
                     winnings = bet * 9;
-                    console.println("Hard Way HIT! You Win: " + winnings);
+                    console.println("Hard Way HIT! You Win: " + ANSI_GREEN +winnings+ ANSI_RESET);
                     break;
                 } else {
                     console.println("Soft 8 hit, You lost: " + bet);
@@ -354,7 +354,7 @@ public class Craps extends DiceGames implements GameInterface {
             case 10:
                 if (total == hardWayNumber && dice1 == dice2) {
                     winnings = bet * 7;
-                    console.println("Hard Way HIT! You Win: " + winnings);
+                    console.println("Hard Way HIT! You Win: " + ANSI_GREEN +winnings+ ANSI_RESET);
                     break;
                 } else {
                     console.println("Soft 10 hit, You lost: " + bet);
