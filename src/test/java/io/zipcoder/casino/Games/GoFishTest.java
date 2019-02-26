@@ -217,7 +217,6 @@ public class GoFishTest {
         GoFish goFish = new GoFish(defautConsole);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         goFish.setConsole(new Console(System.in, new PrintStream(outputStream)));
-
         goFish.updateScore();
         int actual = goFish.getBooks();
         int expected = 1;
