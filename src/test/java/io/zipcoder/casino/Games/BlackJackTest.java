@@ -21,11 +21,13 @@ import static org.junit.Assert.*;
 
 public class BlackJackTest {
 
-    BlackJack blackJack = new BlackJack();
+
+    BlackJack blackJack = new BlackJack(new Console(System.in, System.out));
     CardDeck cardDeck = new CardDeck();
     Hand playerHand = new Hand();
     Hand dealerHand = new Hand();
     BlackJackPlayer player = new BlackJackPlayer(null, null);
+
     GamblingDealer dealer = new GamblingDealer(blackJack.getDealer().getBalance());
 
     @Before
@@ -35,6 +37,7 @@ public class BlackJackTest {
     }
 
     @Test
+
     public void testConstructor(){
         //Given
 
@@ -328,6 +331,7 @@ public class BlackJackTest {
 
     @Test
     public void testDealerPlayActions1(){
+
         this.player = blackJack.getPlayer();
         this.dealerHand = blackJack.getDealerHand();
         this.playerHand = blackJack.getPlayerHand();
@@ -464,5 +468,6 @@ public class BlackJackTest {
 
         //Then
         Assert.assertEquals(expected, actual);
+
     }
 }
