@@ -28,7 +28,7 @@ public class CasinoTest {
         sb.append("'Quit' to exit the game lobby and back to the casino, Any key to play again\n");
         sb.append("Your current chip count: 0\n");
         sb.append("Would you like to play again? \n");
-        sb.append("(Q) to Exit the Casino / (A)ny key to Enter the Lobby / (B)uy more chips : \n");
+        sb.append("(Q) to Exit the Casino / (A)ny key to Enter the Game Lobby / (B)uy more chips : \n");
         String expected = sb.toString();
 
 
@@ -41,6 +41,31 @@ public class CasinoTest {
         casino.gameRunner();
         String actual = outputStream.toString() ;
 
+
+        // Then
+        Assert.assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void runnerBuyMoreChipTest() {
+        // Given
+        Casino casino = new Casino();
+        Integer expected = 5;
+        // prep input for casino
+        byte[] inputBytes = "n\rq\rquit\rb\rq\rquit\rq".getBytes();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+        // prep input for wallet (balance)
+        byte[] inputBytes2 = "5".getBytes();
+        ByteArrayInputStream inputStream2 = new ByteArrayInputStream(inputBytes2);
+
+        casino.setConsole(new Console(inputStream, System.out));
+        Balance balance = casino.getBalance();
+        balance.setConsole(new Console(inputStream2, System.out));
+
+        // When
+        casino.gameRunner();
+        Integer actual = casino.getBalance().getBalance();
 
         // Then
         Assert.assertEquals(expected, actual);
@@ -158,7 +183,7 @@ public class CasinoTest {
         // Then
         Assert.assertTrue(result);
     }
-    /*
+
         @Test
         public void pickGameLaunchedCrapTest(){
             // Given
@@ -170,19 +195,18 @@ public class CasinoTest {
 
             // When
             casino.pickGame(new Balance(100));
-            if(casino.gameInterface instanceof Craps)
-            {
+            if(casino.gameInterface instanceof Craps) {
                 result = true;
-
+            }
             // Then
             Assert.assertTrue(result);
         }
-    /*
+    /* uncomment once there is a quick exit defined for BlackJack ********
         @Test
         public void pickGameLaunchedBJTest(){
             // Given
             Casino casino = new Casino();
-            byte[] inputBytes = "3\rE".getBytes();
+            byte[] inputBytes = "blackjack\rE".getBytes();
             ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
             casino.setConsole(new Console(inputStream, System.out));
             boolean result = false;
@@ -198,10 +222,8 @@ public class CasinoTest {
             Assert.assertTrue(result);
         }
 
-
-
-
     */
+
     @Test
     public void pickGameInvalidInputTest(){
         // Given
