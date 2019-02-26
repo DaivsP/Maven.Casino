@@ -134,13 +134,13 @@ public class Craps extends DiceGames {
     }
 
     protected Integer secondPhaseRollWithHardWay(Integer hardwayBet, Integer hardWayNumber) {
-        Die die = new Die();
-        DiceGames diceGames = new DiceGames();
+        die = new Die();
+        diceGames = new DiceGames();
         Integer die1 = diceGames.toss(die, null);
         Integer die2 = diceGames.toss(die, null);
         Integer crapsRoll = die1 + die2;
         console.println("****** [ " + die1 + " ] / [ " + die2 + " ] ******");
-        if(crapsRoll == hardWayNumber) {
+        if (crapsRoll == hardWayNumber) {
             hardWayWinnings(die1, die2, hardwayBet, hardWayNumber);
         }
         return crapsRoll;
