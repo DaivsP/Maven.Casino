@@ -661,4 +661,43 @@ public class CrapsTest {
         Assert.assertEquals(expectedInt, actualInt);
 
     }
+
+    @Test
+    public void hedgeBetCheck(){
+        //Given
+        Craps craps = new Craps(defautConsole);
+        Balance balance = new Balance(0);
+        String expected = "Do you want to Hedge your Bet? (Y)/(N)\n" +
+                            "Sorry but.... You're Broke.\n" +
+                                "***** Balance: 0 *****\n\n\n";
+        byte[] inputBytes = "y".getBytes();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputStream, new PrintStream(outputStream)));
+        //when
+        craps.hedgeBet(balance, 1000);
+        String actual = outputStream.toString();
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+//    @Test
+//    public void getMoreFundsMakeNewBetTest(){
+//        //Given
+//        Craps craps = new Craps(defautConsole);
+//        Balance balance = new Balance(0);
+//        byte[] inputBytes = "100".getBytes();
+//        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+//        craps.setConsole(new Console(inputStream, System.out));
+//        Integer expected = 100;
+//        //when
+//        Integer actual = craps.getMoreFundsMakeNewBet(balance);
+//
+//        //Then
+//        Assert.assertEquals(expected, actual);
+//    }
+
+
+
 }

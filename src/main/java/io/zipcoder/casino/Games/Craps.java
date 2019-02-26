@@ -152,8 +152,8 @@ public class Craps extends DiceGames implements GameInterface {
         Integer die2 = diceGames.toss(die, null);
         Integer[] dices = {die1, die2};
         Integer crapsRoll = die1 + die2;
-        //console.println("****** "+ANSI_YELLOW+ diceArt.switchDie(die1).toString() + "  /  " + diceArt.switchDie(die2).toString() +ANSI_RESET+" ******");
-        diceArt.drawDices(dices);
+        console.println("****** [ "+ANSI_YELLOW+ die1 + " ] / [ " + die2 +ANSI_RESET+" ] ******");
+//        diceArt.drawDices(dices);
         if (crapsRoll == hardWayNumber) {
             hardWayWinnings(die1, die2, hardwayBet, hardWayNumber);
         }
@@ -189,14 +189,18 @@ public class Craps extends DiceGames implements GameInterface {
             console.println("You do not have that much...");
             String buyMore = console.getStringInput("Would you like to buy more? (Y) / (N)");
             if (buyMore.equals("Y") || buyMore.equals("y")) {
-                balance.addMoreChips();
-                Integer newBet = crapsBet(balance);
-                return newBet;
+                return getMoreFundsMakeNewBet(balance);
             } else {
                 play(balance);
             }
         }
         return 0;
+    }
+
+    protected Integer getMoreFundsMakeNewBet(Balance balance) {
+        balance.addMoreChips();
+        Integer newBet = crapsBet(balance);
+        return newBet;
     }
 
     protected boolean passLine(String passLineChoice) {
