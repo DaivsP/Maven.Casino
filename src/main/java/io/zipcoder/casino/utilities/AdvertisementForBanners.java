@@ -106,4 +106,5 @@ public class AdvertisementForBanners {
     public String getOutOfFundsStr(){
         return this.outOfFundsStr;
     }
+
 }
