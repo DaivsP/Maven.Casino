@@ -201,19 +201,19 @@ public class CasinoTest {
             // Then
             Assert.assertTrue(result);
         }
-    /* uncomment once there is a quick exit defined for BlackJack ********
+
         @Test
         public void pickGameLaunchedBJTest(){
             // Given
             Casino casino = new Casino();
-            byte[] inputBytes = "blackjack\rE".getBytes();
+            byte[] inputBytes = "blackjack\r9\rs\nn\nquit".getBytes();
             ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
             casino.setConsole(new Console(inputStream, System.out));
             boolean result = false;
 
             // When
             casino.pickGame(new Balance(100));
-            if(casino.getGames() instanceof BlackJack)
+            if(casino.gameInterface instanceof BlackJack)
             {
                 result = true;
             }
@@ -222,7 +222,7 @@ public class CasinoTest {
             Assert.assertTrue(result);
         }
 
-    */
+
 
     @Test
     public void pickGameInvalidInputTest(){
