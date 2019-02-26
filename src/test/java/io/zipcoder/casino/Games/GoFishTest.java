@@ -430,8 +430,29 @@ public class GoFishTest {
 //        defautConsole.println(actual);
 //        defautConsole.println(expected);
         Assert.assertEquals(actual,expected);
+    }
+    @Test
+    public void aIGuessingMagicTest4() {
+        GoFish goFish = new GoFish(defautConsole);
+        Card fiveClubs = new Card(Card.Rank.FIVE, Card.Suit.CLUBS, null);
+        Card fiveSpades = new Card(Card.Rank.FIVE, Card.Suit.SPADES, null);
+        GoFishPlayer player = goFish.getPlayer();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        goFish.setConsole(new Console(System.in , new PrintStream(outputStream)));
+        Hand playerHand = new Hand();
+        goFish.aILastGuess("FIVE");
 
+        playerHand.addACard(fiveClubs);
+        playerHand.addACard(fiveSpades);
+        player.setHand(playerHand);
+        //when
+        String actual = goFish.aIGuessingMagic(player);
 
+        String expected = "FIVE";
+        //then
+//        defautConsole.println(actual);
+//        defautConsole.println(expected);
+        Assert.assertEquals(actual,expected);
     }
 
     @Test

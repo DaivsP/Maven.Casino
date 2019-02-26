@@ -141,9 +141,10 @@ public class GoFish extends Games implements FunGame, GameInterface {
             if (!input.equals(lastGuess)) {
                 aILastGuess(input);
                 return input;
+            } else if (anyPlayer.getHand().getNumberOfCards() <= 2) {
+                return anyPlayer.getHand().getACard(1).getRank().toString();
             } else {
                 aIGuessingMagic(anyPlayer);
-                return anyPlayer.getHand().getACard(1).getRank().toString();
             }
         }
         return getPlayerCard(anyPlayer, 0).getRank().toString();
