@@ -35,6 +35,9 @@ public class HighLow  implements  GameInterface{
   public void play(Balance balance) {
         Banners banners = new Banners();
         banners.getHighLowBanner();
+
+         DecorationCards decor = new DecorationCards();
+
         Integer lives = 3;
         console.println("Please type 'E' to exit");
 
@@ -48,15 +51,20 @@ public class HighLow  implements  GameInterface{
             player.setHand(playerHand);
             dealer.setHand(dealerHand);
 
-            console.print("Your current card : ");
-            console.println(playerCard.toString());
+            console.println("Your current card : ");
+           // console.println(playerCard.toString());
+
+            decor.drawHand(playerHand);
+            console.println("");
             String userGuess = console.getStringInput("Do you think the next card will be (H)igher (L)ower or the (S)ame.  : ") ;
             if("E".equals(userGuess.toUpperCase())){
                 break;
             }
             else if(!win(userGuess)){
                 lives--;
-                console.println("WRONG: Next card was :" + dealerCard);
+                console.println("WRONG: Next card was :" );
+                decor.drawHand(dealerHand);
+                console.println("");
                 console.println("Lives left :" + lives);
 
             }
