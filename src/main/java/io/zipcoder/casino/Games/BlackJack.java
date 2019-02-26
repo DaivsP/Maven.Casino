@@ -11,9 +11,9 @@ public class BlackJack extends Games implements GamblingGame {
     private BlackJackPlayer player;
 
     private GamblingDealer dealer;
+
     private CardDeck cardDeck;
     private Integer pot = 0;
-
     private Console console;
 
     private Hand playerHand;
@@ -29,10 +29,10 @@ public class BlackJack extends Games implements GamblingGame {
         console = new Console(System.in, System.out);
         cardDeck.shuffle();
     }
+
     public void play(Balance balance) {
         Banners banners = new Banners();
         banners.getBlackjackBanner();
-        console.println("Please type 'E' to exit");
         //Setting Players balance to current balance
         player.setBalance(balance);
         if (player.getBalance().getBalance() <= 0){
@@ -40,8 +40,11 @@ public class BlackJack extends Games implements GamblingGame {
             console.println("Please buy more chips to play.");
         }
         while(playerHasAPositiveBalance()){
-
-            clearHands(dealerHand, playerHand);
+            String userChoice = "";
+            console.println("Please type 'E' to exit");
+            if ("E".equals(userChoice.toUpperCase())){
+                break;
+            }
 
             Integer userBet = console.getIntegerInput("How much do you want to Bet: ");
             player.bet(balance, userBet);
@@ -53,9 +56,9 @@ public class BlackJack extends Games implements GamblingGame {
 
             printUserFirstHandAndDealerFirstCard();
 
-                String userChoice = "";
             do {
                 userChoice = console.getStringInput("Do you want to (H)it or (S)tay: ");
+                    clearHands(dealerHand, playerHand);
                 if ("H".equals(userChoice.toUpperCase())){
                     Card nextPlayerCard = cardDeck.dealCard();
                     playerHand.addACard(nextPlayerCard);
@@ -90,7 +93,6 @@ public class BlackJack extends Games implements GamblingGame {
             }
         }
     }
-
     public void clearHands(Hand dealerHand, Hand playerHand){
         dealerHand.clearHand();
         playerHand.clearHand();
@@ -235,5 +237,9 @@ public class BlackJack extends Games implements GamblingGame {
 
     public BlackJackPlayer getPlayer() {
         return player;
+    }
+
+    public GamblingDealer getDealer() {
+        return dealer;
     }
 }

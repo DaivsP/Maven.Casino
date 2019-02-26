@@ -7,7 +7,7 @@ import io.zipcoder.casino.utilities.Console;
 import io.zipcoder.casino.Banners;
 
 
-public class Craps extends DiceGames implements GamblingGame {
+public class Craps extends DiceGames{
     private Casino casino = new Casino();
     private DiceGames diceGames = new DiceGames();
     private Die dice = new Die();
@@ -369,15 +369,6 @@ public class Craps extends DiceGames implements GamblingGame {
     //Player wins and gets their cut
     protected void crapsPayout(Balance balance, Integer amount) {
         balance.setBalance(balance.getBalance() + (amount * 2));
-    }
-
-
-    public void payout() {
-
-    }
-
-    public void collect() {
-
     }
 
     //Used for unit Testing
