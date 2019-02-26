@@ -25,7 +25,7 @@ public class CasinoTest {
         sb.append("***** Please Enter The Number Of A Game To Play *****\n");
         sb.append("HighLow  / Craps / BlackJack / GoFish\n");
         sb.append("You selected an invalid game\n");
-        sb.append("Quit to continue, Any key to play again\n");
+        sb.append("'Quit' to exit the game lobby and back to the casino, Any key to play again\n");
         sb.append("Your current chip count: 0\n");
         sb.append("Would you like to play again? \n");
         sb.append("(Q) to Exit the Casino / (A)ny key to Enter the Lobby / (B)uy more chips : \n");
@@ -210,7 +210,7 @@ public class CasinoTest {
         sb.append("***** Please Enter The Number Of A Game To Play *****\n");
         sb.append("HighLow  / Craps / BlackJack / GoFish\n");
         sb.append("You selected an invalid game\n");
-        sb.append("Quit to continue, Any key to play again\n");
+        sb.append("'Quit' to exit the game lobby and back to the casino, Any key to play again\n");
         String expected = sb.toString();
         byte[] inputBytes = "b\rQUIT".getBytes();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
