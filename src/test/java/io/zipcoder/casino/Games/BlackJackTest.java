@@ -83,6 +83,21 @@ public class BlackJackTest {
     }
 
     @Test
+    public void testDealCardToPlayersHand(){
+        //Given
+        this.playerHand = blackJack.getPlayerHand();
+        blackJack.dealACardToPlayersHand(playerHand);
+
+        //When
+        Integer actualAmountOfPlayerCards = playerHand.getNumberOfCards();
+
+        //Then
+        Integer expected = 1;
+        Assert.assertEquals(expected, actualAmountOfPlayerCards);
+
+    }
+
+    @Test
     public void testPrintUserFirstHandAndDealerFirstCard(){
         //Given
         this.playerHand = blackJack.getPlayerHand();
@@ -94,7 +109,7 @@ public class BlackJackTest {
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append("Your current cards: ");
+        sb.append("Your current cards: " + "\n");
         sb.append(playerHand.toString() + "\n");
         sb.append("Your current hand value: ");
         sb.append(playerHand.getSumOfHand().toString() + "\n");
@@ -463,6 +478,25 @@ public class BlackJackTest {
         String actual = outputStream.toString();
 
         //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testPrintPlayerDoesntHaveEnoughChips(){
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("You dont have enough chips to play." + "\n");
+        sb.append("Please buy more chips to play." + "\n");
+        String expected = sb.toString();
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        blackJack.setConsole(new Console(System.in, new PrintStream(outputStream)));
+
+        //When
+        blackJack.printPlayerDoesntHaveEnoughChips();
+        String actual = outputStream.toString();
+
+        //When
         Assert.assertEquals(expected, actual);
     }
 }

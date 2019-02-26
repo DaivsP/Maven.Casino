@@ -37,8 +37,7 @@ public class BlackJack extends Games implements GamblingGame {
         //Setting Players balance to current balance
         player.setBalance(balance);
         if (player.getBalance().getBalance() <= 0) {
-            console.println("You dont have enough chips to play.");
-            console.println("Please buy more chips to play.");
+            printPlayerDoesntHaveEnoughChips();
         }
         while (playerHasAPositiveBalance()) {
             clearHands(dealerHand, playerHand);
@@ -56,8 +55,7 @@ public class BlackJack extends Games implements GamblingGame {
             do {
                 userChoice = console.getStringInput("Do you want to (H)it or (S)tay: ");
                 if ("H".equals(userChoice.toUpperCase())) {
-                    Card nextPlayerCard = cardDeck.dealCard();
-                    playerHand.addACard(nextPlayerCard);
+                    dealACardToPlayersHand(playerHand);
                     dealACardToThePlayerAndPrintTheirNewHand();
                 }
             } while (playerHitsAndDidNotBustAndDoesNotHave21(userChoice));
@@ -71,8 +69,7 @@ public class BlackJack extends Games implements GamblingGame {
                 printDealersFullHand();
 
                 while (dealerHandIsLessThanPlayerHandAndDoesNotHave21()) {
-                    Card dealerNextCard = cardDeck.dealCard();
-                    dealerHand.addACard(dealerNextCard);
+                    dealACardToPlayersHand(dealerHand);
                     dealerDrawsACardAddsItToHisHandAndPrintDealerHand();
                 }
                 dealerPlayActions(balance);
@@ -88,6 +85,16 @@ public class BlackJack extends Games implements GamblingGame {
         }
     }
 
+    public void printPlayerDoesntHaveEnoughChips() {
+        console.println("You dont have enough chips to play.");
+        console.println("Please buy more chips to play.");
+    }
+
+    public void dealACardToPlayersHand(Hand playerHand) {
+        Card nextPlayerCard = cardDeck.dealCard();
+        playerHand.addACard(nextPlayerCard);
+    }
+
     public void clearHands(Hand dealerHand, Hand playerHand) {
         dealerHand.clearHand();
         playerHand.clearHand();
@@ -95,8 +102,7 @@ public class BlackJack extends Games implements GamblingGame {
 
     public void dealCardsToPlayerAndDealerAndAddThemToRespectiveHands() {
         Card playerCard = cardDeck.dealCard();
-        Card dealerCard = cardDeck.dealCard();
-        dealerHand.addACard(dealerCard);
+        dealACardToPlayersHand(dealerHand);
         playerHand.addACard(playerCard);
     }
 
