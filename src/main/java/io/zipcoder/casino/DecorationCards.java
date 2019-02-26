@@ -63,4 +63,8 @@ public class DecorationCards {
         this.containerT = container1 + "\n" + container2 + "\n"
                 + container3 + "\n" + container4 + "\n" + container5;
     }
+
+    public void setConsole(Console console){
+        this.console = console;
+    }
 }
