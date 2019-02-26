@@ -26,11 +26,24 @@ public class BlackJackTest {
     Hand playerHand = new Hand();
     Hand dealerHand = new Hand();
     BlackJackPlayer player = new BlackJackPlayer(null, null);
+    GamblingDealer dealer = new GamblingDealer(blackJack.getDealer().getBalance());
 
     @Before
     public void setup(){
         blackJack.clearHands(dealerHand, playerHand);
         cardDeck.shuffle();
+    }
+
+    @Test
+    public void testConstructor(){
+        //Given
+
+        //When
+
+        //Then
+        Assert.assertNotNull(cardDeck);
+        Assert.assertNotNull(player);
+        Assert.assertNotNull(dealer);
     }
 
     @Test
