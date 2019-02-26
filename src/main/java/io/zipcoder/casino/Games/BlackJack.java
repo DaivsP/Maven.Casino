@@ -101,7 +101,7 @@ public class BlackJack extends Games implements GamblingGame {
     }
 
     public void printUserFirstHandAndDealerFirstCard() {
-        console.println("Your current cards: ");
+        console.print("Your current cards: ");
         console.println(playerHand.toString());
         console.print("Your current hand value: ");
         console.println(playerHand.getSumOfHand().toString());

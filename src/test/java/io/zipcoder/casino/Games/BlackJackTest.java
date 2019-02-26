@@ -68,6 +68,8 @@ public class BlackJackTest {
     @Test
     public void testAddCardToPlayerAndDealerHands(){
         //Given
+        this.playerHand = blackJack.getPlayerHand();
+        this.dealerHand = blackJack.getDealerHand();
         blackJack.dealCardsToPlayerAndDealerAndAddThemToRespectiveHands();
 
         //When
