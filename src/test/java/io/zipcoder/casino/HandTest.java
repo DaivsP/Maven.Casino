@@ -150,7 +150,6 @@ public class HandTest {
         hand.sort();
         String actual = hand.toString();
 
-       // System.out.println(actual);
 
         // Then
         Assert.assertEquals(expected,actual);

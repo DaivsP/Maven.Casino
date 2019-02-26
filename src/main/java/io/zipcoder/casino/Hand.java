@@ -3,6 +3,7 @@ package io.zipcoder.casino;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
 import java.util.Comparator;
 import java.util.List;
 
@@ -56,6 +57,7 @@ public class Hand  {
         }
         return sumOfHand;
     }
+
 
     public void sort(){
         Collections.sort(myHand);
