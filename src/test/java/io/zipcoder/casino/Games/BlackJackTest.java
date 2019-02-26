@@ -27,6 +27,7 @@ public class BlackJackTest {
     Hand dealerHand = new Hand();
     BlackJackPlayer player = new BlackJackPlayer(null, null);
     GamblingDealer dealer = new GamblingDealer(blackJack.getDealer().getBalance());
+    DecorationCards decorationCards = new DecorationCards();
 
     @Before
     public void setup(){
@@ -85,6 +86,7 @@ public class BlackJackTest {
 //    @Test
     public void testPrintUserFirstHandAndDealerFirstCard(){
         //Given
+        decorationCards.set
         this.playerHand = blackJack.getPlayerHand();
         this.dealerHand = blackJack.getDealerHand();
         dealerHand.addACard(cardDeck.dealCard());
@@ -95,7 +97,7 @@ public class BlackJackTest {
         StringBuilder sb = new StringBuilder();
 
         sb.append("Your current cards: ");
-        sb.append(playerHand.toString() + "\n");
+        sb.append(decorationCards.drawHand(playerHand) + "\n");
         sb.append("Your current hand value: ");
         sb.append(playerHand.getSumOfHand().toString() + "\n");
         sb.append("The Dealers first card: ");
