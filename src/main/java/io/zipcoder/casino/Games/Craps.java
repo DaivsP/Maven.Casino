@@ -8,7 +8,7 @@ import io.zipcoder.casino.Banners;
 
 
 public class Craps extends DiceGames {
-    private Casino casino = new Casino();
+//    private Casino casino = new Casino();
     private Console console; // = new Console(System.in, System.out);
     private Balance balance;
     private Integer pointer = 0;
@@ -23,7 +23,6 @@ public class Craps extends DiceGames {
         this.console = console;
 
     }
-
 
     public void play(Balance balance) {
         Banners banners = new Banners();
@@ -81,7 +80,8 @@ public class Craps extends DiceGames {
 
             anotherRound(balance);
 
-        } else if (dontPassLine(choice)) {
+        }
+        else if (dontPassLine(choice)) {
 
             /**
              *
@@ -358,16 +358,17 @@ public class Craps extends DiceGames {
         balance.setBalance(balance.getBalance() + winnings);
     }
 
-
-    //House wins and takes the bet
     protected void crapsCollect(Balance balance, Integer amount) {
         balance.setBalance(balance.getBalance() - amount);
     }
 
-    //Player wins and gets their cut
     protected void crapsPayout(Balance balance, Integer amount) {
         balance.setBalance(balance.getBalance() + (amount * 2));
     }
+
+
+
+
 
     //Used for unit Testing
     public void setConsole(Console console) {
