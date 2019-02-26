@@ -8,7 +8,7 @@ import io.zipcoder.casino.Banners;
 
 
 
-public class Craps extends DiceGames {
+public class Craps extends DiceGames implements GameInterface {
 //    private Casino casino = new Casino();
 
     private Console console; // = new Console(System.in, System.out);
