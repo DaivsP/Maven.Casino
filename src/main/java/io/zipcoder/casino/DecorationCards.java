@@ -65,14 +65,9 @@ public class DecorationCards {
                 + container3 + "\n" + container4 + "\n" + container5;
     }
 
-    public static void main(String[] args) {
-        DecorationCards decoration = new DecorationCards();
-        DiceGames setDices = new DiceGames();
-        Die die = new Die();
-        Symbols sym = new Symbols();
-        Integer[] number = new Integer[]{1,2,3,4,5,6};
-        System.out.println("9999999");
-        decoration.drawDices(number);
+
+    public void setConsole(Console console){
+        this.console = console;
     }
 
 }

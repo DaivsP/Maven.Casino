@@ -53,6 +53,9 @@ public class BlackJack extends Games implements GamblingGame {
             dealCardsToPlayerAndDealerAndAddThemToRespectiveHands();
 
             dealCardsToPlayerAndDealerAndAddThemToRespectiveHands();
+            Integer aceCounter = 0;
+            if (aceCounter == 0){
+            }
 
             printUserFirstHandAndDealerFirstCard();
 
