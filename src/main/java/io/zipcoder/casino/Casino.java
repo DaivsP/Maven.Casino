@@ -5,15 +5,10 @@ import io.zipcoder.casino.Games.*;
 
 import io.zipcoder.casino.utilities.Console;
 
-import java.util.Arrays;
-
-
 public class Casino {
     private Balance balance;
-    //private Console console ;
     private static Console console  = new Console(System.in, System.out);
     GameInterface gameInterface;
-
 
 
     public static void main(String[] args) {
@@ -36,10 +31,10 @@ public class Casino {
 
         String continueString = "";
         while(!"QUIT".equals(continueString.toUpperCase())){
-            //   String userInput = console.getStringInput(Arrays.toString(GameEnum.values()));
+
             String userInput = console.getStringInput("HighLow  / Craps / BlackJack / GoFish" );
             GameEnum enumeration = GameEnum.getValueOf(userInput);
-            //GameInterface gameInterface = enumeration.create(console);
+
             gameInterface = enumeration.create(console);
             gameInterface.play(balance);
             continueString = console.getStringInput("'Quit' to exit the game lobby and back to the casino, Any key to play again");
@@ -55,7 +50,7 @@ public class Casino {
       while(balance.getBalance() >= 0){
           pickGame(balance);
           showCurrentBalance();
-          String play = console.getStringInput("Would you like to play again? \n(Q) to Exit the Casino / (A)ny key to Enter the Lobby / (B)uy more chips : ") ;
+          String play = console.getStringInput("Would you like to play again? \n(Q) to Exit the Casino / (A)ny key to Enter the Game Lobby / (B)uy more chips : ") ;
 
           if("Q".equals(play.toUpperCase())){
               break;
@@ -64,10 +59,7 @@ public class Casino {
           if("B".equals(play.toUpperCase())) {
               balance.addMoreChips();
           }
-
       }
-
-
     }
 
     public void gamblerSetInitialBal(){
@@ -88,18 +80,12 @@ public class Casino {
 
     public Balance getBalance(){
         return this.balance;
-
     }
-
-
 
     // Below this lines methods are used for testing
     // used for UNIT testing - Should not be called outside unit testing
     public void setConsole(Console console){
         this.console = console;
     }
-
-
-
 
 }
