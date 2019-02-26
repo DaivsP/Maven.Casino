@@ -10,6 +10,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
+
 public class HiLowGameTest {
     Console defautConsole;
 
@@ -33,6 +35,22 @@ public class HiLowGameTest {
         Assert.assertNotNull(hlDealer);
         Assert.assertNotNull(hiLowPlayer);
     }
+/*
+    @Test
+    public void playTest(){
+        // Given
+        byte[] inputBytes = "h\rh\rh".getBytes();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+
+        HighLow highLow = new HighLow(defautConsole);
+        highLow.setConsole(new Console(inputStream, System.out));
+
+        // When
+        highLow.play();
+
+
+        // Then
+    }*/
 
     @Test
     public void winEqualTrueTest(){
@@ -55,6 +73,21 @@ public class HiLowGameTest {
 
         // Then
         Assert.assertTrue(actual);
+
+    }
+
+    @Test
+    public void updateScoreTest(){
+        // Given
+        HighLow highLow = new HighLow(defautConsole);
+        Integer expected =1;
+
+        // When
+        highLow.updateScore();
+        Integer actual = highLow.getScore();
+
+        // Then
+        Assert.assertEquals(expected, actual);
 
     }
 

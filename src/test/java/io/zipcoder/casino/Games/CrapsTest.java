@@ -1,58 +1,65 @@
 package io.zipcoder.casino.Games;
 
 import io.zipcoder.casino.Balance;
-import io.zipcoder.casino.Die;
-import io.zipcoder.casino.Person.CrapsPlayer;
 import io.zipcoder.casino.utilities.Console;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
-
-import static org.junit.Assert.*;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 public class CrapsTest {
 
+
+    Console defautConsole;
+
+    @Before
+    public void setUp() {
+        defautConsole = new Console(System.in, System.out);
+    }
+
     @Test
-    public void passLineChoiceTest(){
+    public void passLineChoiceTest() {
         //Given
-        Craps craps = new Craps();
-        byte[] inputBytes = "1".getBytes();
-        ByteArrayInputStream leaveString = new ByteArrayInputStream(inputBytes);
-        craps.setConsole(new Console(leaveString, System.out));
-        Integer expected = 1;
+        Craps craps = new Craps(defautConsole);
+        byte[] inputBytes = "p".getBytes();
+        ByteArrayInputStream inputString = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputString, System.out));
+        String expected = "p";
 
         //When
-        Integer actual = craps.passLineChoice();
+        String actual = craps.passLineChoice();
 
         //Then
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void passLineChoiceTest2(){
+    public void passLineChoiceTest2() {
         //Given
-        Craps craps = new Craps();
-        byte[] inputBytes = "2".getBytes();
-        ByteArrayInputStream leaveString = new ByteArrayInputStream(inputBytes);
-        craps.setConsole(new Console(leaveString, System.out));
-        Integer expected = 2;
+        Craps craps = new Craps(defautConsole);
+        byte[] inputBytes = "d".getBytes();
+        ByteArrayInputStream inoutString = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inoutString, System.out));
+        String expected = "d";
 
         //When
-        Integer actual = craps.passLineChoice();
+        String actual = craps.passLineChoice();
 
         //Then
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void crapsBetTest(){
+    public void crapsBetTest() {
         //Given
-        Craps craps = new Craps();
+        Craps craps = new Craps(defautConsole);
         Balance balance = new Balance(500);
         byte[] inputBytes = "100".getBytes();
-        ByteArrayInputStream leaveString = new ByteArrayInputStream(inputBytes);
-        craps.setConsole(new Console(leaveString, System.out));
+        ByteArrayInputStream inputString = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputString, System.out));
         Integer expected = 100;
 
         //When
@@ -63,13 +70,13 @@ public class CrapsTest {
     }
 
     @Test
-    public void crapsBetTest2(){
+    public void crapsBetTest2() {
         //Given
-        Craps craps = new Craps();
+        Craps craps = new Craps(defautConsole);
         Balance balance = new Balance(500);
         byte[] inputBytes = "100".getBytes();
-        ByteArrayInputStream leaveString = new ByteArrayInputStream(inputBytes);
-        craps.setConsole(new Console(leaveString, System.out));
+        ByteArrayInputStream inputString = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputString, System.out));
         Integer expected = 400;
 
         //When
@@ -81,31 +88,58 @@ public class CrapsTest {
     }
 
     @Test
-    public void pointerSetTest(){
+    public void pointerSetLoserTest() {
         //Given
         Integer pointer;
-        Integer bet = 0;
+        Integer expected = 0;
         Balance balance = new Balance();
-        Craps craps = new Craps();
-        DiceGames diceGames = new DiceGames();
-        Die die = new Die();
+        Craps craps = new Craps(defautConsole);
+        byte[] inputBytes = "9".getBytes();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputStream, System.out));
 
         //When
-        do{
-            Integer roll = diceGames.tossTwoDie(diceGames, die);
-           pointer = craps.setPointerPL(balance, bet, roll);
-
-        }while(pointer == 0);
+        pointer = craps.setPointerPL(balance, 5, 2);
 
         //Then
-        Assert.assertTrue(pointer == 4 || pointer == 5 || pointer == 6
-        || pointer == 8 || pointer == 9 || pointer == 10);
+        Assert.assertEquals(expected, pointer);
     }
 
     @Test
-    public void collectTest(){
+    public void pointerSetWinnerTest() {
         //Given
-        Craps craps = new Craps();
+        Integer expected = 105;
+        Integer actual;
+        Balance balance = new Balance(100);
+        Craps craps = new Craps(defautConsole);
+
+        //When
+        craps.setPointerPL(balance, 5, 7);
+        actual = balance.getBalance();
+
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void pointerSetNumberTest() {
+        //Given
+        Integer expected = 4;
+        Integer bet = 0;
+        Balance balance = new Balance(100);
+        Craps craps = new Craps(defautConsole);
+
+
+        Integer actual = craps.setPointerPL(balance, 5, 4);
+
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void collectTest() {
+        //Given
+        Craps craps = new Craps(defautConsole);
         Balance balance = new Balance();
         balance.setBalance(200);
         Integer bet = 100;
@@ -118,13 +152,13 @@ public class CrapsTest {
     }
 
     @Test
-    public void payoutTest(){
+    public void payoutTest() {
         //Given
-        Craps craps = new Craps();
+        Craps craps = new Craps(defautConsole);
         Balance balance = new Balance();
         balance.setBalance(500);
         Integer bet = 100;
-        Integer expected = 600;
+        Integer expected = 700;
         //When
         craps.crapsPayout(balance, bet);
         Integer actual = balance.getBalance();
@@ -134,35 +168,256 @@ public class CrapsTest {
     }
 
     @Test
-    public void hedgeBetTest(){
+    public void hedgeBetTest() {
         //Given
-        Craps craps = new Craps();
+        Craps craps = new Craps(defautConsole);
         Balance balance = new Balance(1000);
-        Integer bet = 100;
-        Integer expected = 800;
-        //When
-        craps.hedgeBet(balance, bet);
-        Integer actual = balance.getBalance();
-        //Then
-        Assert.assertEquals(expected, actual);
-
-    }
-
-    @Test
-    public void hedgeBetTest2(){
-        //Given
-        Craps craps = new Craps();
-        Balance balance = new Balance(1000);
+        byte[] inputBytes = "y".getBytes();
+        ByteArrayInputStream inputString = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputString, System.out));
         Integer bet = 100;
         Integer expected = 200;
         //When
         Integer actual = craps.hedgeBet(balance, bet);
         //Then
-        Assert.assertEquals(expected, actual);
+        Assert. assertEquals(expected, actual);
 
     }
 
+    @Test
+    public void hedgeBetTest2() {
+        //Given
+        Craps craps = new Craps(defautConsole);
+        Balance balance = new Balance(1000);
+        byte[] inputBytes = "n".getBytes();
+        ByteArrayInputStream inputString = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputString, System.out));
+        Integer bet = 100;
+        Integer expected = 100;
+        //When
+        Integer actual = craps.hedgeBet(balance, bet);
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
 
+    @Test
+    public void hardWayPlayChoiceTest() {
+        //Given
+        Craps craps = new Craps(defautConsole);
+        byte[] inputBytes = "y".getBytes();
+        ByteArrayInputStream inputString = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputString, System.out));
+        //When
+        boolean actual = craps.hardWayPlayChoice();
+        //Then
 
+        Assert.assertTrue(actual);
+
+    }
+
+    @Test
+    public void hardWayPlayChoiceTest2() {
+        //Given
+        Craps craps = new Craps(defautConsole);
+        byte[] inputBytes = "n".getBytes();
+        ByteArrayInputStream inputString = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputString, System.out));
+        //When
+        boolean actual = craps.hardWayPlayChoice();
+        //Then
+        Assert.assertFalse(actual);
+
+    }
+
+    @Test
+    public void hardWayNumberChoiceTest() {
+        Craps craps = new Craps(defautConsole);
+        byte[] inputBytes = "4".getBytes();
+        ByteArrayInputStream inputString = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputString, System.out));
+        Integer expected = 4;
+        //When
+        Integer actual = craps.hardWayNumberChoice();
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void hardWayNumberChoiceTest2() {
+        Craps craps = new Craps(defautConsole);
+        byte[] inputBytes = "5".getBytes();
+        ByteArrayInputStream inputString = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputString, System.out));
+        Integer expected = null;
+        //When
+        Integer actual = craps.hardWayNumberChoice();
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void hardWayWinnings() {
+        //Given
+        Craps craps = new Craps(defautConsole);
+        Integer expected = 700;
+        //When
+        Integer actual = craps.hardWayWinnings( 2, 2, 100, 4);
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void hardWayWinnings2() {
+        //Given
+        Craps craps = new Craps(defautConsole);
+        Integer expected = 900;
+        //When
+        Integer actual = craps.hardWayWinnings(3,3, 100, 6);
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void hardWayPayoutTest(){
+        //Given
+        Craps craps = new Craps(defautConsole);
+        Balance balance = new Balance(1000);
+        Integer winnings = 1000;
+        Integer expected = 2000;
+        //When
+        craps.hardWayPayout(balance, winnings);
+        Integer actual = balance.getBalance();
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void betCheckTest(){
+        //Given
+        Craps craps = new Craps(defautConsole);
+        String expected = "***** Bet: 50 *****\n\n";
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        craps.setConsole(new Console(System.in,new PrintStream(outputStream) ));
+        //When
+        craps.betCheck(50);
+        String actual =outputStream.toString();
+        //then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void crapsRoundPLTest1(){
+        //Given
+        Craps craps = new Craps(defautConsole);
+        Balance balance = new Balance(1000);
+        String expected = "***** You Rolled: 8\n\n***** You WIN!\n Winnings: 100\n***** Your balance is: 1200\n";
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        craps.setConsole(new Console(System.in,new PrintStream(outputStream) ));
+        //When
+        craps.crapsRoundPL(balance,100, 8, 8);
+        String actual =outputStream.toString();
+        //then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void crapsRoundPLTest2(){
+        //Given
+        Craps craps = new Craps(defautConsole);
+        Balance balance = new Balance(1000);
+        String expected = "***** You Rolled: 2\n\nRoll Again\n\n";
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        craps.setConsole(new Console(System.in,new PrintStream(outputStream) ));
+        //When
+        craps.crapsRoundPL(balance,100, 2, 8);
+        String actual =outputStream.toString();
+        //then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void crapsRoundPLTest3(){
+        //Given
+        Craps craps = new Craps(defautConsole);
+        Balance balance = new Balance(1000);
+        String expected = "***** You Rolled: 7\n\n***** 7 OUT! Better Luck Next Time.\n***** Your balance is: 1000\n";
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        craps.setConsole(new Console(System.in,new PrintStream(outputStream) ));
+        //When
+        craps.crapsRoundPL(balance,100, 7, 8);
+        String actual =outputStream.toString();
+        //then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void crapsRoundDPLTest1(){
+        //Given
+        Craps craps = new Craps(defautConsole);
+        Balance balance = new Balance(1000);
+        String expected = "***** You Rolled: 5\nRoll Again\n\n";
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        craps.setConsole(new Console(System.in,new PrintStream(outputStream) ));
+        //When
+        craps.crapsRoundDPL(balance,100, 5, 8);
+        String actual =outputStream.toString();
+        //then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void crapsRoundDPLTest2(){
+        //Given
+        Craps craps = new Craps(defautConsole);
+        Balance balance = new Balance(1000);
+        String expected = "***** You Rolled: 7\n***** You WIN!\n Winnings: 100\n***** Your balance is: 1200\n";
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        craps.setConsole(new Console(System.in,new PrintStream(outputStream) ));
+        //When
+        craps.crapsRoundDPL(balance,100, 7, 8);
+        String actual =outputStream.toString();
+        //then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void crapsRoundDPLTest3() {
+        //Given
+        Craps craps = new Craps(defautConsole);
+        Balance balance = new Balance(1000);
+        String expected = "***** You Rolled: 8\n***** Don't Pass Line Loses! Better Luck Next Time.\n***** Your balance is: 1000\n";
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        craps.setConsole(new Console(System.in, new PrintStream(outputStream)));
+        //When
+        craps.crapsRoundDPL(balance, 100, 8, 8);
+        String actual = outputStream.toString();
+        //then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void secondPhaseRollWithHardWayTest(){
+        //Given
+        Craps craps = new Craps(defautConsole);
+        //When
+        Integer expected = craps.secondPhaseRollWithHardWay(100, 0);
+        //then
+        Assert.assertTrue(expected>=2 && expected <=12);
+    }
+
+//    @Test
+//    public void anotherRoundTest(){
+//        //Given
+//        Craps craps = new Craps(defautConsole);
+//        Balance balance = new Balance(1000);
+//        byte[] inputBytes = "y".getBytes();
+//        ByteArrayInputStream inputString = new ByteArrayInputStream(inputBytes);
+//        craps.setConsole(new Console(inputString, System.out));
+//        //When
+//
+//        //Then
+//
+//        Assert.assertEquals();
+//    }
 
 }

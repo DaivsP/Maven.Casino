@@ -8,7 +8,7 @@ import io.zipcoder.casino.Person.HiLowPlayer;
 import io.zipcoder.casino.utilities.Console;
 
 
-public class HighLow extends CardGames implements FunGame {
+public class HighLow extends Games implements FunGame {
 
     private HiLowPlayer player ;
     private FunDealer dealer;
@@ -106,6 +106,12 @@ public class HighLow extends CardGames implements FunGame {
         return this.dealer;
     }
 
+    // Below this lines methods are used for testing
+    // used for UNIT testing - Should not be called outside unit testing
+    public void setConsole(Console console){
+        this.console = console;
+    }
 
+    public Integer getScore() {return this.score;};
 
 }

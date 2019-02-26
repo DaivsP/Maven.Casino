@@ -36,7 +36,7 @@ public class Casino {
                 ((HighLow) games).play();
                 break;
             case 2:
-                games = new Craps();
+                games = new Craps(console);
                ((Craps) games).play(balance);
                 break;
             case 3:

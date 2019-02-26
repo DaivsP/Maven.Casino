@@ -3,7 +3,7 @@ package io.zipcoder.casino;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Card {
+public class Card implements Comparable<Card>{
 
 
     public enum Suit {HEARTS, DIAMONDS, CLUBS, SPADES}
@@ -12,11 +12,12 @@ public class Card {
 
     public List<Integer> bjCardValueList = new ArrayList<Integer>();
 
-    private Boolean hidden;
 
     private Suit cardSuit;
     private Rank cardRank;
     private Integer cardValue;
+
+
 
     public Card(Rank cardRank, Suit cardSuit) {
         this.cardRank = cardRank;
@@ -27,6 +28,11 @@ public class Card {
         this.cardRank = cardRank;
         this.cardSuit = cardSuit;
         this.cardValue = cardValue;
+    }
+
+    public int compareTo(Card card){
+        int ordinalNum = card.cardRank.ordinal();
+        return this.getRank().ordinal() - ordinalNum;
     }
 
     public Rank getRank() {
@@ -40,13 +46,6 @@ public class Card {
 
     public Integer getCardValue(){return this.cardValue;}
 
-    public Boolean getHidden() {
-        return hidden;
-    }
-
-    public void setHidden(Boolean hidden) {
-        this.hidden = hidden;
-    }
 
     public void createBJCardValue(){
         bjCardValueList.add(2);
@@ -68,7 +67,6 @@ public class Card {
     public String toString(){
         String cardVal = getRank().toString();
         cardVal = cardVal + " " + getSuit().toString();
-        cardVal = cardVal + " " + getCardValue().toString();
         return cardVal;
     }
 }
