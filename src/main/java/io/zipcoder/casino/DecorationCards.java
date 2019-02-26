@@ -37,8 +37,6 @@ public class DecorationCards {
     }
 
     public void drawDices(Integer[] dices){
-        System.out.println(dices[2]);
-        System.out.println("xxxx");
         Symbols sym = new Symbols();
         for (int i = 0; i < dices.length; i++) {
             container1 += sym.switchDie(i + 1)[0];
@@ -71,7 +69,6 @@ public class DecorationCards {
         Die die = new Die();
         Symbols sym = new Symbols();
         Integer[] number = new Integer[]{1,2,3,4,5,6};
-        System.out.println("aasas");
         decoration.drawDices(number);
     }
 
