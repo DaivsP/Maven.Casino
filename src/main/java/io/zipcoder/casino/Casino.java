@@ -32,8 +32,7 @@ public class Casino {
 
     public void pickGame(Balance balance) {
 
-        console.println("***** Please Enter The Number Of A Game To Play *****");
-
+       
         String continueString = "";
         while(!"QUIT".equals(continueString.toUpperCase())){
             //   String userInput = console.getStringInput(Arrays.toString(GameEnum.values()));
@@ -43,6 +42,7 @@ public class Casino {
             gameInterface = enumeration.create(console);
             gameInterface.play(balance);
             continueString = console.getStringInput("'Quit' to exit the game lobby and back to the casino, Any key to play again");
+
         }
 
 

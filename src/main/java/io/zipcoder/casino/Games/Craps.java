@@ -32,11 +32,9 @@ public class Craps extends DiceGames implements GameInterface{
         Integer crapsRoll = 0;
         Integer hardwayNumber = 0;
 
-
         String choice = passLineChoice();
 
         if (passLine(choice)) {
-
             /**
              *
              * COME OUT ROLL SEQUENCE
@@ -359,7 +357,6 @@ public class Craps extends DiceGames implements GameInterface{
     protected void hardWayPayout(Balance balance, Integer winnings) {
         balance.setBalance(balance.getBalance() + winnings);
     }
-
 
     //House wins and takes the bet
     protected void crapsCollect(Balance balance, Integer amount) {

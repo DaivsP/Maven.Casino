@@ -158,6 +158,7 @@ public class CasinoTest {
         // Then
         Assert.assertTrue(result);
     }
+
     /*
         @Test
         public void pickGameLaunchedCrapTest(){
