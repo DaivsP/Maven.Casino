@@ -37,13 +37,4 @@ public class DiceGames extends Games {
         return sum;
     }
 
-//    //Only used for testing
-//    public Integer seedTwoDie(DiceGames game) {
-//        Integer die1 = game.toss(dice, 2);
-//        Integer die2 = game.toss(dice, 2);
-//        Integer sum = die1 + die2;
-//
-//        return sum;
-//
-//    }
 }
