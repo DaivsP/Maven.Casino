@@ -463,12 +463,200 @@ public class CrapsTest {
         craps.setConsole(new Console(inputStream, System.out));
 
         //When
-        pointer = craps.setPointerPL(balance, 5, 2);
+        pointer = craps.setPointerDontPL(balance, 5, 7);
 
         //Then
         Assert.assertEquals(expected, pointer);
     }
 
+    @Test
+    public void setPointerLoserPrintOut() {
+        //Given
+        String expected = "***** You Rolled: 7\n" +
+                "***** You Lose, Try Again!\n" +
+                "Play another round? (Y)/(N)\n";
+        Balance balance = new Balance();
+        Craps craps = new Craps(defautConsole);
+        byte[] inputBytes = "7".getBytes();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputStream, new PrintStream(outputStream)));
 
+        //When
+        craps.setPointerDontPL(balance, 5, 7);
+        String actual = outputStream.toString();
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
 
+    @Test
+    public void setPointerLoserPrintOut2() {
+        //Given
+        String expected = "***** You Rolled: 12\n" +
+                "Push, Roll Again!\n";
+        Balance balance = new Balance();
+        Craps craps = new Craps(defautConsole);
+        byte[] inputBytes = "12".getBytes();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputStream, new PrintStream(outputStream)));
+
+        //When
+        craps.setPointerDontPL(balance, 5, 12);
+        String actual = outputStream.toString();
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void secondPhaseHardwayCheck() {
+        //Given
+        Craps craps = new Craps(defautConsole);
+        Balance balance = new Balance(1000);
+        String expected = "Soft 4 hit, You lost: 100\n";
+        byte[] inputBytes = "4".getBytes();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputStream, new PrintStream(outputStream)));
+        //when
+        craps.hardWayWinnings(1,3,100, 4);
+        String actual = outputStream.toString();
+        //Then
+        Assert.assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void secondPhaseHardwayCheck2() {
+        //Given
+        Craps craps = new Craps(defautConsole);
+        Balance balance = new Balance(1000);
+        String expected = "Soft 6 hit, You lost: 100\n";
+        byte[] inputBytes = "6".getBytes();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputStream, new PrintStream(outputStream)));
+        //when
+        craps.hardWayWinnings(2,4,100, 6);
+        String actual = outputStream.toString();
+        //Then
+        Assert.assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void secondPhaseHardwayCheck3() {
+        //Given
+        Craps craps = new Craps(defautConsole);
+        Balance balance = new Balance(1000);
+        String expected = "Soft 8 hit, You lost: 100\n";
+        byte[] inputBytes = "8".getBytes();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputStream, new PrintStream(outputStream)));
+        //when
+        craps.hardWayWinnings(3,5,100, 8);
+        String actual = outputStream.toString();
+        //Then
+        Assert.assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void secondPhaseHardwayCheck4() {
+        //Given
+        Craps craps = new Craps(defautConsole);
+        Balance balance = new Balance(1000);
+        String expected = "Soft 10 hit, You lost: 100\n";
+        byte[] inputBytes = "10".getBytes();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputStream, new PrintStream(outputStream)));
+        //when
+        craps.hardWayWinnings(6,4,100, 10);
+        String actual = outputStream.toString();
+        //Then
+        Assert.assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void secondPhaseHardwayCheck5() {
+        //Given
+        Integer expectedInt = 700;
+        Craps craps = new Craps(defautConsole);
+        Balance balance = new Balance(1000);
+        String expected = "Hard Way HIT! You Win: 700\n";
+        byte[] inputBytes = "4".getBytes();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputStream, new PrintStream(outputStream)));
+        //when
+        Integer actualInt = craps.hardWayWinnings(2,2,100, 4);
+        String actual = outputStream.toString();
+        //Then
+        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expectedInt, actualInt);
+
+    }
+
+    @Test
+    public void secondPhaseHardwayCheck6() {
+        //Given
+        Integer expectedInt = 900;
+        Craps craps = new Craps(defautConsole);
+        Balance balance = new Balance(1000);
+        String expected = "Hard Way HIT! You Win: 900\n";
+        byte[] inputBytes = "6".getBytes();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputStream, new PrintStream(outputStream)));
+        //when
+        Integer actualInt = craps.hardWayWinnings(3,3,100, 6);
+        String actual = outputStream.toString();
+        //Then
+        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expectedInt, actualInt);
+
+    }
+
+    @Test
+    public void secondPhaseHardwayCheck7() {
+        //Given
+        Integer expectedInt = 900;
+        Craps craps = new Craps(defautConsole);
+        Balance balance = new Balance(1000);
+        String expected = "Hard Way HIT! You Win: 900\n";
+        byte[] inputBytes = "8".getBytes();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputStream, new PrintStream(outputStream)));
+        //when
+        Integer actualInt = craps.hardWayWinnings(4,4,100, 8);
+        String actual = outputStream.toString();
+        //Then
+        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expectedInt, actualInt);
+
+    }
+
+    @Test
+    public void secondPhaseHardwayCheck8() {
+        //Given
+        Integer expectedInt = 700;
+        Craps craps = new Craps(defautConsole);
+        Balance balance = new Balance(1000);
+        String expected = "Hard Way HIT! You Win: 700\n";
+        byte[] inputBytes = "10".getBytes();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputStream, new PrintStream(outputStream)));
+        //when
+        Integer actualInt = craps.hardWayWinnings(5,5,100, 10);
+        String actual = outputStream.toString();
+        //Then
+        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expectedInt, actualInt);
+
+    }
 }
