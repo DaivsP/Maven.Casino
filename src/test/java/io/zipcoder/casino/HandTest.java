@@ -141,7 +141,7 @@ public class HandTest {
         Card card2 = new Card(Card.Rank.QUEEN , Card.Suit.CLUBS,0);
         Card card3 = new Card(Card.Rank.ACE , Card.Suit.HEARTS,0);
         Hand hand = new Hand();
-        String expected = "QUEEN CLUBS 0, ACE CLUBS 0, ACE HEARTS 0";
+        String expected = "QUEEN CLUBS, ACE CLUBS, ACE HEARTS";
 
         // When
         hand.addACard(card1);
@@ -180,7 +180,7 @@ public class HandTest {
         Card card1 = new Card(Card.Rank.ACE,Card.Suit.HEARTS, 11);
         Card card2 = new Card(Card.Rank.TWO,Card.Suit.HEARTS, 2);
         Hand hand = new Hand();
-        String expected = "ACE HEARTS 11, TWO HEARTS 2";
+        String expected = "ACE HEARTS, TWO HEARTS";
 
         // When
         hand.addACard(card1);
