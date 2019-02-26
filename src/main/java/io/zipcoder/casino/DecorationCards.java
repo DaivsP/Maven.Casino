@@ -1,5 +1,6 @@
 package io.zipcoder.casino;
 
+import io.zipcoder.casino.Games.DiceGames;
 import io.zipcoder.casino.utilities.Console;
 import io.zipcoder.casino.utilities.Symbols;
 
@@ -7,12 +8,12 @@ import io.zipcoder.casino.utilities.Symbols;
 public class DecorationCards {
 
     Console console ;
-    private static String containerT = "";
-    private static String container1 = "";
-    private static String container2 = "";
-    private static String container3 = "";
-    private static String container4 = "";
-    private static String container5 = "";
+    private String containerT = "";
+    private String container1 = "";
+    private String container2 = "";
+    private String container3 = "";
+    private String container4 = "";
+    private String container5 = "";
 
     public DecorationCards(){
         this.console = new Console(System.in, System.out);
@@ -21,7 +22,6 @@ public class DecorationCards {
     public void drawHand( Hand hand ){
         Symbols sym = new Symbols();
         String suitOfCard , rankOfCard = "";
-
         for (int i = 0; i < hand.getNumberOfCards(); i++) {
             rankOfCard =  String.valueOf( hand.getACard(i).getRank() );
             suitOfCard =  String.valueOf( hand.getACard(i).getSuit() );
@@ -37,7 +37,8 @@ public class DecorationCards {
     }
 
     public void drawDices(Integer[] dices){
-        String containerT = "";
+        System.out.println(dices[2]);
+        System.out.println("xxxx");
         Symbols sym = new Symbols();
         for (int i = 0; i < dices.length; i++) {
             container1 += sym.switchDie(i + 1)[0];
@@ -60,7 +61,17 @@ public class DecorationCards {
     }
 
     public void fillContainer(){
-        this.containerT = container1 + "\n" + container2 + "\n"
-                + container3 + "\n" + container4 + "\n" + container5;
+        this.containerT = this.container1 + "\n" + this.container2 + "\n"
+                + this.container3 + "\n" + this.container4 + "\n" + this.container5;
+    }
+
+    public static void main(String[] args) {
+        DecorationCards decoration = new DecorationCards();
+        DiceGames setDices = new DiceGames();
+        Die die = new Die();
+        Symbols sym = new Symbols();
+        Integer[] number = new Integer[]{1,2,3,4,5,6};
+        System.out.println("aasas");
+        decoration.drawDices(number);
     }
 }
