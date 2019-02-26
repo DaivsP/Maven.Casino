@@ -45,6 +45,7 @@ public class BlackJack extends Games implements GamblingGame {
         while (playerHasAPositiveBalance()) {
             clearHands(dealerHand, playerHand);
             String userChoice = "";
+            console.println("Your balance is: " + player.getBalance().getBalance().toString());
             Integer userBet = console.getIntegerInput("How much do you want to Bet: ");
             player.bet(balance, userBet);
             pot = userBet;
@@ -87,6 +88,7 @@ public class BlackJack extends Games implements GamblingGame {
                 cardDeck = new CardDeck();
                 cardDeck.shuffle();
             }
+            balance.setBalance(player.getBalance().getBalance());
         }
     }
 
@@ -197,12 +199,6 @@ public class BlackJack extends Games implements GamblingGame {
 
     public boolean playerHitsAndDidNotBustAndDoesNotHave21(String userChoice) {
         return "H".equals(userChoice.toUpperCase()) && playerHand.getSumOfHand() < 22 && !playerHand.getSumOfHand().equals(21);
-    }
-
-    public void collect() {
-    }
-
-    public void payout() {
     }
 
     public void setConsole(Console console) {
