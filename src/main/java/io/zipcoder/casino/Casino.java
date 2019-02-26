@@ -42,7 +42,7 @@ public class Casino {
             //GameInterface gameInterface = enumeration.create(console);
             gameInterface = enumeration.create(console);
             gameInterface.play(balance);
-            continueString = console.getStringInput("Quit to continue, Any key to play again");
+            continueString = console.getStringInput("'Quit' to exit the game lobby and back to the casino, Any key to play again");
         }
 
 

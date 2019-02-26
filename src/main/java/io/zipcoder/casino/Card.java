@@ -67,7 +67,6 @@ public class Card implements Comparable<Card>{
     public String toString(){
         String cardVal = getRank().toString();
         cardVal = cardVal + " " + getSuit().toString();
-        cardVal = cardVal + " " + getCardValue().toString();
         return cardVal;
     }
 }
