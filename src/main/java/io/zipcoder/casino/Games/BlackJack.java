@@ -9,9 +9,9 @@ import io.zipcoder.casino.utilities.Console;
 public class BlackJack extends Games implements GamblingGame {
 
     private BlackJackPlayer player;
-
     private GamblingDealer dealer;
 
+    private DecorationCards decorationCards;
     private CardDeck cardDeck;
     private Integer pot = 0;
     private Console console;
@@ -21,6 +21,7 @@ public class BlackJack extends Games implements GamblingGame {
     private Hand dealerHand;
 
     public BlackJack() {
+        decorationCards = new DecorationCards();
         playerHand = new Hand();
         dealerHand = new Hand();
         player = new BlackJackPlayer(null, null);
@@ -40,20 +41,20 @@ public class BlackJack extends Games implements GamblingGame {
             console.println("Please buy more chips to play.");
         }
         while (playerHasAPositiveBalance()) {
+            clearHands(dealerHand, playerHand);
             String userChoice = "";
             Integer userBet = console.getIntegerInput("How much do you want to Bet: ");
             player.bet(balance, userBet);
             pot = userBet;
 
-            dealCardsToPlayerAndDealerAndAddThemToRespectiveHands(dealerHand, playerHand);
+            dealCardsToPlayerAndDealerAndAddThemToRespectiveHands();
 
-            dealCardsToPlayerAndDealerAndAddThemToRespectiveHands(dealerHand, playerHand);
+            dealCardsToPlayerAndDealerAndAddThemToRespectiveHands();
 
             printUserFirstHandAndDealerFirstCard();
 
             do {
                 userChoice = console.getStringInput("Do you want to (H)it or (S)tay: ");
-                clearHands(dealerHand, playerHand);
                 if ("H".equals(userChoice.toUpperCase())) {
                     Card nextPlayerCard = cardDeck.dealCard();
                     playerHand.addACard(nextPlayerCard);
@@ -91,7 +92,7 @@ public class BlackJack extends Games implements GamblingGame {
         playerHand.clearHand();
     }
 
-    public void dealCardsToPlayerAndDealerAndAddThemToRespectiveHands(Hand dealerHand, Hand playerHand) {
+    public void dealCardsToPlayerAndDealerAndAddThemToRespectiveHands() {
         Card playerCard = cardDeck.dealCard();
         Card dealerCard = cardDeck.dealCard();
         dealerHand.addACard(dealerCard);
@@ -99,7 +100,7 @@ public class BlackJack extends Games implements GamblingGame {
     }
 
     public void printUserFirstHandAndDealerFirstCard() {
-        console.print("Your current cards: ");
+        console.println("Your current cards: ");
         console.println(playerHand.toString());
         console.print("Your current hand value: ");
         console.println(playerHand.getSumOfHand().toString());

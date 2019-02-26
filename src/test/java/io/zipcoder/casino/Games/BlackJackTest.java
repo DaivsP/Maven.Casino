@@ -68,7 +68,7 @@ public class BlackJackTest {
     @Test
     public void testAddCardToPlayerAndDealerHands(){
         //Given
-        blackJack.dealCardsToPlayerAndDealerAndAddThemToRespectiveHands(dealerHand, playerHand);
+        blackJack.dealCardsToPlayerAndDealerAndAddThemToRespectiveHands();
 
         //When
         Integer actualAmountOfDealerCards = dealerHand.getNumberOfCards();
