@@ -1,17 +1,16 @@
 package io.zipcoder.casino.Games;
 
-import io.zipcoder.casino.Balance;
-import io.zipcoder.casino.Casino;
-import io.zipcoder.casino.Die;
+import io.zipcoder.casino.*;
 import io.zipcoder.casino.utilities.Console;
-import io.zipcoder.casino.Banners;
+import io.zipcoder.casino.utilities.Symbols;
 
 import static io.zipcoder.casino.utilities.AnsiScapeCodes.*;
 
 
 public class Craps extends DiceGames implements GameInterface {
 //    private Casino casino = new Casino();
-
+    DecorationCards diceArt = new DecorationCards();
+    //private Symbols diceArt;
     private Console console; // = new Console(System.in, System.out);
     private Balance balance;
     private Integer pointer = 0;
@@ -151,8 +150,10 @@ public class Craps extends DiceGames implements GameInterface {
         diceGames = new DiceGames();
         Integer die1 = diceGames.toss(die, null);
         Integer die2 = diceGames.toss(die, null);
+        Integer[] dices = {die1, die2};
         Integer crapsRoll = die1 + die2;
-        console.println("****** "+ANSI_YELLOW+"[ "+ die1 + " ] / [ " + die2 + " ]"+ANSI_RESET+" ******");
+        //console.println("****** "+ANSI_YELLOW+ diceArt.switchDie(die1).toString() + "  /  " + diceArt.switchDie(die2).toString() +ANSI_RESET+" ******");
+        diceArt.drawDices(dices);
         if (crapsRoll == hardWayNumber) {
             hardWayWinnings(die1, die2, hardwayBet, hardWayNumber);
         }
@@ -391,6 +392,6 @@ public class Craps extends DiceGames implements GameInterface {
 //        Balance balance = new Balance(1000);
 //        Console console = new Console(System.in, System.out);
 //        Craps craps = new Craps(console);
-//        craps.hardWayWinnings(1,3,100, 4);
+//
 //    }
 }
