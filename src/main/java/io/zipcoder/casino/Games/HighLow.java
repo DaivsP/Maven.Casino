@@ -1,14 +1,12 @@
 package io.zipcoder.casino.Games;
-import io.zipcoder.casino.Banners;
-import io.zipcoder.casino.CardDeck;
-import io.zipcoder.casino.Card;
-import io.zipcoder.casino.Hand;
+import io.zipcoder.casino.*;
 import io.zipcoder.casino.Person.FunDealer;
 import io.zipcoder.casino.Person.HiLowPlayer;
 import io.zipcoder.casino.utilities.Console;
 
 
-public class HighLow extends Games implements FunGame {
+public class HighLow  implements  GameInterface{
+
 
     private HiLowPlayer player ;
     private FunDealer dealer;
@@ -19,6 +17,7 @@ public class HighLow extends Games implements FunGame {
     private Integer score;
     private Hand playerHand ;
     private Hand dealerHand ;
+
 
     public HighLow(Console console)
     {
@@ -33,9 +32,12 @@ public class HighLow extends Games implements FunGame {
     }
 
 
-  public void play() {
+  public void play(Balance balance) {
         Banners banners = new Banners();
         banners.getHighLowBanner();
+
+         DecorationCards decor = new DecorationCards();
+
         Integer lives = 3;
         console.println("Please type 'E' to exit");
 
@@ -49,15 +51,20 @@ public class HighLow extends Games implements FunGame {
             player.setHand(playerHand);
             dealer.setHand(dealerHand);
 
-            console.print("Your current card : ");
-            console.println(playerCard.toString());
+            console.println("Your current card : ");
+           // console.println(playerCard.toString());
+
+            decor.drawHand(playerHand);
+            console.println("");
             String userGuess = console.getStringInput("Do you think the next card will be (H)igher (L)ower or the (S)ame.  : ") ;
             if("E".equals(userGuess.toUpperCase())){
                 break;
             }
             else if(!win(userGuess)){
                 lives--;
-                console.println("WRONG: Next card was :" + dealerCard);
+                console.println("WRONG: Next card was :" );
+                decor.drawHand(dealerHand);
+                console.println("");
                 console.println("Lives left :" + lives);
 
             }
