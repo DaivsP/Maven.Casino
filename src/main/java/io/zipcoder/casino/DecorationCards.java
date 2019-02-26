@@ -74,4 +74,8 @@ public class DecorationCards {
         System.out.println("aasas");
         decoration.drawDices(number);
     }
+
+    public void setConsole(Console console){
+        this.console = console;
+    }
 }

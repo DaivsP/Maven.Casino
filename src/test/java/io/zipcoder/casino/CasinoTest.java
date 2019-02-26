@@ -22,7 +22,7 @@ public class CasinoTest {
         StringBuilder sb = new StringBuilder();
 
         sb.append("Would you like to buy chips ? (Y/N) \n");
-        sb.append("***** Please Enter The Number Of A Game To Play *****\n");
+        sb.append("***** Please Enter The Name Of A Game To Play *****\n");
         sb.append("HighLow  / Craps / BlackJack / GoFish\n");
         sb.append("You selected an invalid game\n");
         sb.append("'Quit' to exit the game lobby and back to the casino, Any key to play again\n");
@@ -229,7 +229,7 @@ public class CasinoTest {
         // Given
         Casino casino = new Casino();
         StringBuilder sb = new StringBuilder();
-        sb.append("***** Please Enter The Number Of A Game To Play *****\n");
+        sb.append("***** Please Enter The Name Of A Game To Play *****\n");
         sb.append("HighLow  / Craps / BlackJack / GoFish\n");
         sb.append("You selected an invalid game\n");
         sb.append("'Quit' to exit the game lobby and back to the casino, Any key to play again\n");
