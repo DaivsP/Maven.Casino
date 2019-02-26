@@ -25,7 +25,7 @@ public enum GameEnum {
 
     public static GameEnum getValueOf(String userInput){
 
-        userInput = userInput.toUpperCase();
+        userInput = userInput.toUpperCase().replace(" ","");
         try {
             return valueOf(userInput);
         }
