@@ -39,11 +39,11 @@ public class DecorationCards {
     public void drawDices(Integer[] dices){
         Symbols sym = new Symbols();
         for (int i = 0; i < dices.length; i++) {
-            container1 += sym.switchDie(i + 1)[0];
-            container2 += sym.switchDie(i + 1)[1];
-            container3 += sym.switchDie(i + 1)[2];
-            container4 += sym.switchDie(i + 1)[3];
-            container5 += sym.switchDie(i + 1)[4];
+            container1 += sym.switchDie(dices[i])[0];
+            container2 += sym.switchDie(dices[i])[1];
+            container3 += sym.switchDie(dices[i])[2];
+            container4 += sym.switchDie(dices[i])[3];
+            container5 += sym.switchDie(dices[i])[4];
             fillContainer();
         }
         clearString();
@@ -68,7 +68,7 @@ public class DecorationCards {
         DiceGames setDices = new DiceGames();
         Die die = new Die();
         Symbols sym = new Symbols();
-        Integer[] number = new Integer[]{1,2,3,4,5,6};
+        Integer[] number = new Integer[]{5,6};
         decoration.drawDices(number);
     }
 
