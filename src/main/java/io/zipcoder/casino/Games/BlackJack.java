@@ -101,18 +101,18 @@ public class BlackJack extends Games implements GamblingGame {
     }
 
     public void printUserFirstHandAndDealerFirstCard() {
-        console.print("Your current cards: ");
-        console.println(playerHand.toString());
-        console.print("Your current hand value: ");
+        console.print("Your current cards: " + "\n");
+        decorationCards.drawHand(playerHand);
+        console.print("\nYour current hand value: ");
         console.println(playerHand.getSumOfHand().toString());
         console.print("The Dealers first card: ");
         console.println(dealerHand.getACard(0).toString());
     }
 
     public void dealACardToThePlayerAndPrintTheirNewHand() {
-        console.print("Your current cards");
-        console.println(playerHand.toString());
-        console.print("Your current hand value: ");
+        console.print("Your current cards" + "\n");
+        decorationCards.drawHand(playerHand);
+        console.print("\nYour current hand value: ");
         console.println(playerHand.getSumOfHand().toString());
     }
 
@@ -130,17 +130,17 @@ public class BlackJack extends Games implements GamblingGame {
     }
 
     public void printDealersFullHand() {
-        console.print("The dealer shows all cards: ");
-        console.println(dealerHand.toString());
-        console.print("The dealers hand value is: ");
+        console.print("The dealer shows all cards: " + "\n");
+        decorationCards.drawHand(dealerHand);
+        console.print("\nThe dealers hand value is: ");
         console.println(dealerHand.getSumOfHand().toString());
     }
 
     public void dealerDrawsACardAddsItToHisHandAndPrintDealerHand() {
         console.println("The dealer hits");
-        console.print("The dealers hand is now: ");
-        console.println(dealerHand.toString());
-        console.print("The dealers hand value is now: ");
+        console.print("The dealers hand is now: " + "\n");
+        decorationCards.drawHand(dealerHand);
+        console.print("\nThe dealers hand value is now: ");
         console.println(dealerHand.getSumOfHand().toString());
     }
 
