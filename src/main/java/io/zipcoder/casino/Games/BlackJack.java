@@ -199,12 +199,6 @@ public class BlackJack extends Games implements GamblingGame {
         return "H".equals(userChoice.toUpperCase()) && playerHand.getSumOfHand() < 22 && !playerHand.getSumOfHand().equals(21);
     }
 
-    public void collect() {
-    }
-
-    public void payout() {
-    }
-
     public void setConsole(Console console) {
         this.console = console;
     }
