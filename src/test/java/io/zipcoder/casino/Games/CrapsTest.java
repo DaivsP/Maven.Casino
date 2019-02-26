@@ -12,7 +12,6 @@ import java.io.PrintStream;
 
 public class CrapsTest {
 
-
     Console defautConsole;
 
     @Before
@@ -97,7 +96,6 @@ public class CrapsTest {
         byte[] inputBytes = "9".getBytes();
         ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
         craps.setConsole(new Console(inputStream, System.out));
-
         //When
         pointer = craps.setPointerPL(balance, 5, 2);
 
@@ -420,4 +418,64 @@ public class CrapsTest {
 //        Assert.assertEquals();
 //    }
 
+
+    @Test
+    public void hardWayNumberChoiceTest2() {
+        Craps craps = new Craps(defautConsole);
+        byte[] inputBytes = "5".getBytes();
+        ByteArrayInputStream inputString = new ByteArrayInputStream(inputBytes);
+        craps.setConsole(new Console(inputString, System.out));
+        Integer expected = null;
+        //When
+        Integer actual = craps.hardWayNumberChoice();
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void hardWayWinnings() {
+        //Given
+        Craps craps = new Craps(defautConsole);
+        Integer expected = 700;
+        //When
+        Integer actual = craps.hardWayWinnings( 2, 2, 100, 4);
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void hardWayWinnings2() {
+        //Given
+        Craps craps = new Craps(defautConsole);
+        Integer expected = 900;
+        //When
+        Integer actual = craps.hardWayWinnings(3,3, 100, 6);
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void hardWayPayoutTest(){
+        //Given
+        Craps craps = new Craps(defautConsole);
+        Balance balance = new Balance(1000);
+        Integer winnings = 1000;
+        Integer expected = 2000;
+        //When
+        craps.hardWayPayout(balance, winnings);
+        Integer actual = balance.getBalance();
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+//    @Test
+//    public void betCheckTest(){
+//        //Given
+//        Craps craps = new Craps(defautConsole);
+//        String expected = "***** Bet: 50 *****\n";
+//        //When
+//        String actual = craps.betCheck(50);
+//        //then
+//        Assert.assertEquals(expected, );
+//    }
 }
