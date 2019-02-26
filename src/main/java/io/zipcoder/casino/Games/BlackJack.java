@@ -79,6 +79,7 @@ public class BlackJack extends Games implements GamblingGame {
             }
             String userInput = console.getStringInput("Would you like to continue? (Y/N)");
             if ("N".equals(userInput.toUpperCase())) {
+                balance.setBalance(player.getBalance().getBalance());
                 break;
             } else {
                 cardDeck = new CardDeck();
