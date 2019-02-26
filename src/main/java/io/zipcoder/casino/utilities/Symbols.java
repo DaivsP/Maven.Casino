@@ -85,12 +85,56 @@ public class Symbols {
         }
     }
 
-    public String getCircle(Integer number){
+    public String getBullet(Integer number){
         String result = "";
         for (int i = 0; i < number; i++) {
-            result += Character.toString((char) 0x229B );
+            result += Character.toString((char) 0x25CF );
         }
         return result;
+    }
+
+    public String[] switchDie(Integer number){
+        String initialLine = switchFrame("lU") + gethL(7) + switchFrame("rU");
+        String finalLine = switchFrame("lD") + gethL(7) + switchFrame("rD");
+        switch (number){
+            case 1 :
+                return new String[]{initialLine
+                         , switchFrame("vL") + "  " +  getBullet(0) + "     " + switchFrame("vL")
+                         , switchFrame("vL") + "   " + getBullet(1) +  "   " + switchFrame("vL")
+                         , switchFrame("vL") + "      " + getBullet(0) +  " " + switchFrame("vL")
+                         , finalLine};
+            case 2 :
+                return new String[]{initialLine
+                        , switchFrame("vL") + " " +  getBullet(1) + "     " + switchFrame("vL")
+                        , switchFrame("vL") + "  " + getBullet(0) +  "     " + switchFrame("vL")
+                        , switchFrame("vL") + "     " + getBullet(1) +  " " + switchFrame("vL")
+                        , finalLine};
+            case 3 :
+                return new String[]{initialLine
+                        , switchFrame("vL") + " " +  getBullet(1) + "     " + switchFrame("vL")
+                        , switchFrame("vL") + "   " + getBullet(1) + "   " + switchFrame("vL")
+                        , switchFrame("vL") + "     " + getBullet(1) +  " " + switchFrame("vL")
+                        , finalLine};
+            case 4 :
+                return new String[]{initialLine
+                        , switchFrame("vL") + " " + getBullet(1) + "   " + getBullet(1) + " " + switchFrame("vL")
+                        , switchFrame("vL") + "  " + getBullet(0) +  "     " + switchFrame("vL")
+                        , switchFrame("vL") + " " + getBullet(1) + "   " + getBullet(1) + " " + switchFrame("vL")
+                        , finalLine};
+            case 5 :
+                return new String[]{initialLine
+                        , switchFrame("vL") + " " + getBullet(1) + "   " + getBullet(1) + " " + switchFrame("vL")
+                        , switchFrame("vL") + "   " + getBullet(1) +  "   " + switchFrame("vL")
+                        , switchFrame("vL") + " " + getBullet(1) + "   " + getBullet(1) + " " + switchFrame("vL")
+                        , finalLine};
+            case 6 :
+                return new String[]{initialLine
+                        , switchFrame("vL") + " " + getBullet(1) + " " + getBullet(1) + " " + getBullet(1) + " " + switchFrame("vL")
+                        , switchFrame("vL") + "   " + getBullet(0) +  "    " + switchFrame("vL")
+                        , switchFrame("vL") + " " + getBullet(1) + " " + getBullet(1) + " " + getBullet(1) + " " + switchFrame("vL")
+                        , finalLine};
+                default: return null;
+        }
     }
 
 }
