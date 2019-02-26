@@ -164,10 +164,9 @@ public class Craps extends DiceGames implements GameInterface {
     }
 
     protected void anotherRound(Balance balance) {
-        Integer passLineBet;
+
         String anotherRound = console.getStringInput("Play another round? (Y)/(N)");
         if (anotherRound.equals("Y") || anotherRound.equals("y")) {
-            passLineBet = 0;
             play(balance);
         }
     }
@@ -392,6 +391,6 @@ public class Craps extends DiceGames implements GameInterface {
 //        Balance balance = new Balance(1000);
 //        Console console = new Console(System.in, System.out);
 //        Craps craps = new Craps(console);
-//        craps.anotherRound(balance);
+//        craps.hardWayWinnings(1,3,100, 4);
 //    }
 }
