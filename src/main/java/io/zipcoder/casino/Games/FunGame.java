@@ -4,5 +4,4 @@ public interface FunGame{
 
     void updateScore();
 
-    void play();
 }
