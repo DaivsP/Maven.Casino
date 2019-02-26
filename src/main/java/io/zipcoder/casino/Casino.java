@@ -27,7 +27,7 @@ public class Casino {
 
     public void pickGame(Balance balance) {
 
-        console.println("***** Please Enter The Number Of A Game To Play *****");
+        console.println("***** Please Enter The Name Of A Game To Play *****");
 
         String continueString = "";
         while(!"QUIT".equals(continueString.toUpperCase())){

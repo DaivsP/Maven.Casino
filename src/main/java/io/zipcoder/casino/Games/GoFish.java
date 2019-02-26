@@ -42,11 +42,14 @@ public class GoFish extends Games implements FunGame, GameInterface {
         Banners banners = new Banners();
         banners.getGoFishBanner();
         console.println("Please type 'E' to exit at any time");
-        String input = console.getStringInput("Welcome to the Go Fish table. (D) to draw a hand.");
+        String input = console.getStringInput("Welcome to the Go Fish table. Press any key to draw a hand.");
         dealHands();
 
         while (player.score < 7) {
-            if (input.equals("D") || input.equals("d")) {
+            if (input.equals("E") || input.equals("e")) {
+                break;
+            }
+
                 console.println("\n* * * * Your Turn * * * * *\n");
                 takeTurn(player);
 
@@ -57,10 +60,7 @@ public class GoFish extends Games implements FunGame, GameInterface {
                     console.println("\n* * * * AI Turn * * * * *\n");
                     aITakeTurn(player2);
                 }
-            }
-            if (input.equals("E") || input.equals("e")) {
-                break;
-            }
+
         }
         if (player.score == 0 && player2.score == 0) {
 
@@ -69,6 +69,7 @@ public class GoFish extends Games implements FunGame, GameInterface {
         findWinner();
         console.println("\nThanks for playing!\n");
     }
+
 
     public void takeTurn(GoFishPlayer anyPlayer) {
         anyPlayer.getHand().sort();
