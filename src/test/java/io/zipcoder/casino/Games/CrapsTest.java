@@ -312,7 +312,7 @@ public class CrapsTest {
         //Given
         Craps craps = new Craps(defautConsole);
         Balance balance = new Balance(1000);
-        String expected = "***ROLL** (( "+ANSI_RED+"8"+ANSI_RESET+" )) **ROLL***\n\n***** You WIN!\n Winnings: "+ ANSI_GREEN +"100"+ ANSI_RESET+"\n***** Your balance is: 1200\n";
+        String expected = "\n***ROLL** (( "+ANSI_RED+"8"+ANSI_RESET+" )) **ROLL***\n\n***** You WIN!\n Winnings: "+ ANSI_GREEN +"100"+ ANSI_RESET+"\n***** Your balance is: 1200\n";
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         craps.setConsole(new Console(System.in, new PrintStream(outputStream)));
         //When
@@ -327,7 +327,7 @@ public class CrapsTest {
         //Given
         Craps craps = new Craps(defautConsole);
         Balance balance = new Balance(1000);
-        String expected = "***ROLL** (( "+ANSI_RED+"2"+ANSI_RESET+" )) **ROLL***\n\nRoll Again\n\n";
+        String expected = "\n***ROLL** (( "+ANSI_RED+"2"+ANSI_RESET+" )) **ROLL***\n\nRoll Again\n\n";
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         craps.setConsole(new Console(System.in, new PrintStream(outputStream)));
         //When
@@ -342,7 +342,7 @@ public class CrapsTest {
         //Given
         Craps craps = new Craps(defautConsole);
         Balance balance = new Balance(1000);
-        String expected = "***ROLL** (( "+ANSI_RED+"7"+ANSI_RESET+" )) **ROLL***\n\n***** 7 OUT! Better Luck Next Time.\n***** Your balance is: 1000\n";
+        String expected = "\n***ROLL** (( "+ANSI_RED+"7"+ANSI_RESET+" )) **ROLL***\n\n***** 7 OUT! Better Luck Next Time.\n***** Your balance is: 1000\n";
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         craps.setConsole(new Console(System.in, new PrintStream(outputStream)));
         //When
@@ -357,7 +357,7 @@ public class CrapsTest {
         //Given
         Craps craps = new Craps(defautConsole);
         Balance balance = new Balance(1000);
-        String expected = "***ROLL** (( "+ANSI_RED+"5"+ANSI_RESET+" )) **ROLL***\n\nRoll Again\n\n";
+        String expected = "\n***ROLL** (( "+ANSI_RED+"5"+ANSI_RESET+" )) **ROLL***\n\nRoll Again\n\n";
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         craps.setConsole(new Console(System.in, new PrintStream(outputStream)));
         //When
@@ -372,7 +372,7 @@ public class CrapsTest {
         //Given
         Craps craps = new Craps(defautConsole);
         Balance balance = new Balance(1000);
-        String expected = "***ROLL** (( "+ANSI_RED+"7"+ANSI_RESET+" )) **ROLL***\n\n***** You WIN!\n Winnings: "+ ANSI_GREEN +"100"+ ANSI_RESET+"\n***** Your balance is: 1200\n";
+        String expected = "\n***ROLL** (( "+ANSI_RED+"7"+ANSI_RESET+" )) **ROLL***\n\n***** You WIN!\n Winnings: "+ ANSI_GREEN +"100"+ ANSI_RESET+"\n***** Your balance is: 1200\n";
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         craps.setConsole(new Console(System.in, new PrintStream(outputStream)));
         //When
@@ -387,7 +387,7 @@ public class CrapsTest {
         //Given
         Craps craps = new Craps(defautConsole);
         Balance balance = new Balance(1000);
-        String expected = "***ROLL** (( "+ANSI_RED+"8"+ANSI_RESET+" )) **ROLL***\n\n***** Don't Pass Line Loses! Better Luck Next Time.\n***** Your balance is: 1000\n";
+        String expected = "\n***ROLL** (( "+ANSI_RED+"8"+ANSI_RESET+" )) **ROLL***\n\n***** Don't Pass Line Loses! Better Luck Next Time.\n***** Your balance is: 1000\n";
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         craps.setConsole(new Console(System.in, new PrintStream(outputStream)));
         //When
@@ -406,24 +406,6 @@ public class CrapsTest {
         //then
         Assert.assertTrue(expected >= 2 && expected <= 12);
     }
-
-//    @Test
-//    public void anotherRoundTest(){
-//        //Given
-//        Craps craps = new Craps(defautConsole);
-//        Balance balance = new Balance(1000);
-//        byte[] inputBytes = "y".getBytes();
-//        ByteArrayInputStream inputString = new ByteArrayInputStream(inputBytes);
-//        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-//        craps.setConsole(new Console(inputString, new PrintStream(outputStream)));
-//        //When
-//        craps.anotherRound(balance);
-//        String expected ="";
-//        String actual = outputStream.toString();
-//        //then
-//        Assert.assertEquals(expected, actual);
-//
-//    }
 
     @Test
     public void setPointerTestDPL() {
@@ -474,7 +456,7 @@ public class CrapsTest {
     @Test
     public void setPointerLoserPrintOut() {
         //Given
-        String expected = "***** You Rolled: "+ANSI_RED+"7"+ANSI_RESET+"\n"+
+        String expected = "\n***ROLL** (( "+ANSI_RED+"7"+ANSI_RESET+" )) **ROLL***\n\n"+
                 "***** You Lose, Try Again!\n" +
                 "Play another round? (Y)/(N)\n";
         Balance balance = new Balance();
@@ -494,7 +476,7 @@ public class CrapsTest {
     @Test
     public void setPointerLoserPrintOut2() {
         //Given
-        String expected = "***** You Rolled: "+ANSI_RED+"12"+ANSI_RESET+"\n"+
+        String expected = "\n***ROLL** (( "+ANSI_RED+"12"+ANSI_RESET+" )) **ROLL***\n\n"+
                 "Push, Roll Again!\n";
         Balance balance = new Balance();
         Craps craps = new Craps(defautConsole);
@@ -680,24 +662,5 @@ public class CrapsTest {
         //Then
         Assert.assertEquals(expected, actual);
     }
-
-//    @Test
-//    public void getMoreFundsMakeNewBetTest(){
-//        //Given
-//        Craps craps = new Craps(defautConsole);
-//        Balance balance = new Balance(0);
-//        byte[] inputBytes = "100".getBytes();
-//        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-//        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
-//        craps.setConsole(new Console(inputStream, System.out));
-//        Integer expected = 100;
-//        //when
-//        Integer actual = craps.getMoreFundsMakeNewBet(balance);
-//
-//        //Then
-//        Assert.assertEquals(expected, actual);
-//    }
-
-
 
 }

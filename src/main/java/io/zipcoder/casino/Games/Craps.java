@@ -8,9 +8,8 @@ import static io.zipcoder.casino.utilities.AnsiScapeCodes.*;
 
 
 public class Craps extends DiceGames implements GameInterface {
-//    private Casino casino = new Casino();
-    DecorationCards diceArt = new DecorationCards();
-    //private Symbols diceArt;
+
+    private DecorationCards diceArt = new DecorationCards();
     private Console console; // = new Console(System.in, System.out);
     private Balance balance;
     private Integer pointer = 0;
@@ -47,7 +46,7 @@ public class Craps extends DiceGames implements GameInterface {
             do {
                 String rollRequest = console.getStringInput("***** Press (R) to Roll\n***** Press (E) to exit");
                 if (rollRequest.equals("R") || rollRequest.equals("r")) {
-                    Integer roll = diceGames.tossTwoDie(diceGames, die);
+                    Integer roll = secondPhaseRollWithHardWayCheck(0, 0);
                     pointer = setPointerPL(balance, passLineBet, roll);
                 } else {
                     break;
@@ -101,7 +100,7 @@ public class Craps extends DiceGames implements GameInterface {
                 String rollRequest = console.getStringInput("***** Press (R) to Roll\n***** Press (E) to exit");
 
                 if (rollRequest.equals("R") || rollRequest.equals("r")) {
-                    Integer roll = diceGames.tossTwoDie(diceGames, die);
+                    Integer roll = secondPhaseRollWithHardWayCheck(0, 0);
                     pointer = setPointerDontPL(balance, dontPassLineBet, roll);
                 } else {
                     break;
@@ -150,10 +149,10 @@ public class Craps extends DiceGames implements GameInterface {
         diceGames = new DiceGames();
         Integer die1 = diceGames.toss(die, null);
         Integer die2 = diceGames.toss(die, null);
-        Integer[] dices = {die1, die2};
+        Integer[] diceArr = {die1, die2};
         Integer crapsRoll = die1 + die2;
-        console.println("****** [ "+ANSI_YELLOW+ die1 + " ] / [ " + die2 +ANSI_RESET+" ] ******");
-//        diceArt.drawDices(dices);
+        diceArt.drawDices(diceArr);
+        //console.println("****** [ "+ANSI_YELLOW+ die1 + " ] / [ " + die2 +ANSI_RESET+" ] ******");
         if (crapsRoll == hardWayNumber) {
             hardWayWinnings(die1, die2, hardwayBet, hardWayNumber);
         }
@@ -189,18 +188,14 @@ public class Craps extends DiceGames implements GameInterface {
             console.println("You do not have that much...");
             String buyMore = console.getStringInput("Would you like to buy more? (Y) / (N)");
             if (buyMore.equals("Y") || buyMore.equals("y")) {
-                return getMoreFundsMakeNewBet(balance);
+                balance.addMoreChips();
+                Integer newBet = crapsBet(balance);
+                return newBet;
             } else {
                 play(balance);
             }
         }
         return 0;
-    }
-
-    protected Integer getMoreFundsMakeNewBet(Balance balance) {
-        balance.addMoreChips();
-        Integer newBet = crapsBet(balance);
-        return newBet;
     }
 
     protected boolean passLine(String passLineChoice) {
@@ -210,7 +205,7 @@ public class Craps extends DiceGames implements GameInterface {
     protected Integer setPointerPL(Balance balance, Integer bet, Integer diceRoll) {
         Integer pointer = 0;
 
-        console.println("***** You Rolled: " +ANSI_RED+diceRoll+ANSI_RESET);
+        console.println("\n***ROLL** (( "+ANSI_RED+ diceRoll+ANSI_RESET+ " )) **ROLL***\n");
         if (diceRoll == 7 || diceRoll == 11) {
             console.println("***** Nice! you won: " + ANSI_GREEN +bet+ ANSI_RESET);
             balance.setBalance(balance.getBalance() + bet);
@@ -231,7 +226,7 @@ public class Craps extends DiceGames implements GameInterface {
 
     protected void crapsRoundPL(Balance balance, Integer bet, Integer diceRoll, Integer pointer) {
 
-        console.println("***ROLL** (( "+ANSI_RED+ diceRoll+ANSI_RESET+" )) **ROLL***\n");
+        console.println("\n***ROLL** (( "+ANSI_RED+ diceRoll+ANSI_RESET+" )) **ROLL***\n");
         if (diceRoll == pointer) {
             console.println("***** You WIN!\n Winnings: " + ANSI_GREEN +bet+ ANSI_RESET);
             crapsPayout(balance, bet);
@@ -252,7 +247,7 @@ public class Craps extends DiceGames implements GameInterface {
     protected Integer setPointerDontPL(Balance balance, Integer bet, Integer diceRoll) {
         Integer pointer = 0;
 
-        console.println("***** You Rolled: " +ANSI_RED+ diceRoll+ANSI_RESET);
+        console.println("\n***ROLL** (( "+ANSI_RED+ diceRoll+ANSI_RESET+" )) **ROLL***\n");
         if (diceRoll == 2 || diceRoll == 3) {
             console.println("***** Nice! you won: " + bet);
             crapsPayout(balance, bet);
@@ -274,7 +269,7 @@ public class Craps extends DiceGames implements GameInterface {
     }
 
     protected void crapsRoundDPL(Balance balance, Integer bet, Integer diceRoll, Integer pointer) {
-        console.println("***ROLL** (( "+ANSI_RED+ diceRoll+ANSI_RESET+" )) **ROLL***\n");
+        console.println("\n***ROLL** (( "+ANSI_RED+ diceRoll+ANSI_RESET+" )) **ROLL***\n");
         if (diceRoll == pointer) {
             console.println("***** Don't Pass Line Loses! Better Luck Next Time.\n***** Your balance is: " + balance.getBalance());
 
@@ -392,10 +387,4 @@ public class Craps extends DiceGames implements GameInterface {
         this.console = console;
     }
 
-//    public static void main(String[] args) {
-//        Balance balance = new Balance(1000);
-//        Console console = new Console(System.in, System.out);
-//        Craps craps = new Craps(console);
-//
-//    }
 }
