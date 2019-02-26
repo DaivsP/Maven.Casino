@@ -7,8 +7,10 @@ import io.zipcoder.casino.utilities.Console;
 import io.zipcoder.casino.Banners;
 
 
+
 public class Craps extends DiceGames {
 //    private Casino casino = new Casino();
+
     private Console console; // = new Console(System.in, System.out);
     private Balance balance;
     private Integer pointer = 0;

@@ -104,7 +104,7 @@ public class GoFishTest {
 
         goFish.printHand(player);
 
-        
+
         String expected = "***** Your Hand ******\n" +
                 "FIVE : ";
  //       Assert.assertEquals(expected, actual);
