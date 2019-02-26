@@ -10,10 +10,13 @@ import java.util.Scanner;
  * You are advised against modifying this class.
  */
 public final class Console {
+    private static final Console INSTANCE = new Console(System.in, System.out);
     private final Scanner input;
     private final PrintStream output;
 
-
+    public static Console getInstance() {
+        return INSTANCE;
+    }
 
     public Console(InputStream in, PrintStream out) {
         this.input = new Scanner(in);

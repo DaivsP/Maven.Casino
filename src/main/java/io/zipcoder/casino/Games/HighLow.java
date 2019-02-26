@@ -1,14 +1,11 @@
 package io.zipcoder.casino.Games;
-import io.zipcoder.casino.Banners;
-import io.zipcoder.casino.CardDeck;
-import io.zipcoder.casino.Card;
-import io.zipcoder.casino.Hand;
+import io.zipcoder.casino.*;
 import io.zipcoder.casino.Person.FunDealer;
 import io.zipcoder.casino.Person.HiLowPlayer;
 import io.zipcoder.casino.utilities.Console;
 
 
-public class HighLow extends CardGames implements FunGame {
+public class HighLow extends CardGames implements  GameInterface{
 
     private HiLowPlayer player ;
     private FunDealer dealer;
@@ -19,6 +16,7 @@ public class HighLow extends CardGames implements FunGame {
     private Integer score;
     private Hand playerHand ;
     private Hand dealerHand ;
+
 
     public HighLow(Console console)
     {
@@ -33,7 +31,7 @@ public class HighLow extends CardGames implements FunGame {
     }
 
 
-  public void play() {
+  public void play(Balance balance) {
         Banners banners = new Banners();
         banners.getHighLowBanner();
         Integer lives = 3;

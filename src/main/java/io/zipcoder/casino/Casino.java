@@ -5,11 +5,16 @@ import io.zipcoder.casino.Games.*;
 
 import io.zipcoder.casino.utilities.Console;
 
+import java.util.Arrays;
+
 
 public class Casino {
     private Balance balance;
-    private Console console ;
-    private Games games;
+    //private Console console ;
+    private static Console console  = new Console(System.in, System.out);
+    GameInterface gameInterface;
+
+
 
     public static void main(String[] args) {
         // write your tests before you start fucking with this
@@ -29,27 +34,15 @@ public class Casino {
 
         console.println("***** Please Enter The Number Of A Game To Play *****");
 
-        Integer gamePicked = console.getIntegerInput("(1) HighLow (2) Craps (3) BlackJack (4) Go Fish" );
-        switch (gamePicked){
-            case 1:
-                games = new HighLow(console);
-                ((HighLow) games).play();
-                break;
-            case 2:
-                games = new Craps(console);
-               ((Craps) games).play(balance);
-                break;
-            case 3:
-               games = new BlackJack();
-               ((BlackJack) games).play(balance);
-                break;
-            case 4:
-                games = new GoFish(console);
-               ((GoFish) games).play();
-                break;
-            default:
-                console.println("Incorrect game picked");
-                break;
+        String continueString = "";
+        while(!"QUIT".equals(continueString.toUpperCase())){
+            //   String userInput = console.getStringInput(Arrays.toString(GameEnum.values()));
+            String userInput = console.getStringInput("HighLow  / Craps / BlackJack / GoFish" );
+            GameEnum enumeration = GameEnum.getValueOf(userInput);
+            //GameInterface gameInterface = enumeration.create(console);
+            gameInterface = enumeration.create(console);
+            gameInterface.play(balance);
+            continueString = console.getStringInput("Quit to continue, Any key to play again");
         }
 
 
@@ -107,9 +100,6 @@ public class Casino {
     }
 
 
-    public Games getGames(){
-        return this.games;
-    }
 
 
 }
