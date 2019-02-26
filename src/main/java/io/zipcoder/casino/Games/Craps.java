@@ -72,7 +72,7 @@ public class Craps extends DiceGames {
 
                 String rollRequest = console.getStringInput("ROLL A " + pointer + " TO WIN!\n***** Press (R) to Roll\n***** Press (E) to exit");
                 if (rollRequest.equals("R") || rollRequest.equals("r")) {
-                    crapsRoll = secondPhaseRollWithHardWay(hardwayBet, hardwayNumber);
+                    crapsRoll = secondPhaseRollWithHardWayCheck(hardwayBet, hardwayNumber);
                     crapsRoundPL(balance, passLineBet, crapsRoll, pointer);
                 } else {
                     break;
@@ -120,7 +120,7 @@ public class Craps extends DiceGames {
                 betCheck(passLineBet);
                 String rollRequest = console.getStringInput("ROLL A 7 before " + pointer + " TO WIN!\n***** Press (R) to Roll\n***** Press (E) to exit");
                 if (rollRequest.equals("R") || rollRequest.equals("r")) {
-                    crapsRoll = secondPhaseRollWithHardWay(hardwayBet, hardwayNumber);
+                    crapsRoll = secondPhaseRollWithHardWayCheck(hardwayBet, hardwayNumber);
                     crapsRoundDPL(balance, passLineBet, crapsRoll, pointer);
 
                 } else {
@@ -133,7 +133,7 @@ public class Craps extends DiceGames {
 
     }
 
-    protected Integer secondPhaseRollWithHardWay(Integer hardwayBet, Integer hardWayNumber) {
+    protected Integer secondPhaseRollWithHardWayCheck(Integer hardwayBet, Integer hardWayNumber) {
         die = new Die();
         diceGames = new DiceGames();
         Integer die1 = diceGames.toss(die, null);
