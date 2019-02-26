@@ -14,6 +14,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class GoFishTest {
@@ -28,11 +29,11 @@ public class GoFishTest {
     private Integer score;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         cardDeck = new CardDeck();
         defautConsole = new Console(System.in, System.out);
         player = new GoFishPlayer("You", 9);
-        player2 = new GoFishPlayer( "Dealer",1);
+        player2 = new GoFishPlayer("Dealer", 1);
         playerHand = new Hand();
         player.setHand(playerHand);
         GoFish goFish = new GoFish(defautConsole);
@@ -41,7 +42,7 @@ public class GoFishTest {
     }
 
     @Test
-    public void constructorTest(){
+    public void constructorTest() {
         // Given
 
         // When
@@ -77,8 +78,9 @@ public class GoFishTest {
         goFish.removeMatchingCards(player, input);
         //then
         System.out.println(player.getHand().getNumberOfCards());
-        Assert.assertEquals(player.getHand().getNumberOfCards(),expected);
+        Assert.assertEquals(player.getHand().getNumberOfCards(), expected);
     }
+
     @Test
     public void aIRemoveMatchingCardsTest() {
         GoFish goFish = new GoFish(defautConsole);
@@ -100,7 +102,7 @@ public class GoFishTest {
         goFish.aIRemoveMatchingCards(player, input);
         //then
         System.out.println(player.getHand().getNumberOfCards());
-        Assert.assertEquals(player.getHand().getNumberOfCards(),expected);
+        Assert.assertEquals(player.getHand().getNumberOfCards(), expected);
     }
 
     @Test
@@ -110,7 +112,7 @@ public class GoFishTest {
         playerHand.addACard(fiveClubs);
 
         //when
-        Card expected = goFish.getPlayerCard(player,0);
+        Card expected = goFish.getPlayerCard(player, 0);
 
         //then
         Assert.assertEquals(expected, fiveClubs);
@@ -124,7 +126,7 @@ public class GoFishTest {
         Hand playerHand = new Hand();
         playerHand.addACard(fiveClubs);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        goFish.setConsole(new Console(System.in , new PrintStream(outputStream)));
+        goFish.setConsole(new Console(System.in, new PrintStream(outputStream)));
 
         goFish.printHand(player);
         String actual = outputStream.toString();
@@ -227,7 +229,7 @@ public class GoFishTest {
         DecorationCards dec = new DecorationCards();
         GoFish goFish = new GoFish(defautConsole);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        goFish.setConsole(new Console(System.in , new PrintStream(outputStream)));
+        goFish.setConsole(new Console(System.in, new PrintStream(outputStream)));
         GoFishPlayer player = goFish.getPlayer();
         goFish.dealHands();
         goFish.printHand(player);
@@ -240,9 +242,9 @@ public class GoFishTest {
         GoFish goFish = new GoFish(defautConsole);
         GoFishPlayer player = goFish.getPlayer();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        goFish.setConsole(new Console(System.in , new PrintStream(outputStream)));
+        goFish.setConsole(new Console(System.in, new PrintStream(outputStream)));
         CardDeck deck = goFish.getCardDeck();
-        for(int i = 0 ; i<52; i++){
+        for (int i = 0; i < 52; i++) {
             deck.dealCard();
         }
         defautConsole.println(deck.toString());
@@ -272,7 +274,7 @@ public class GoFishTest {
         Boolean expected = true;
         Boolean actual = goFish.checkForMatch(player, input);
         //then
-        Assert.assertEquals(actual,expected);
+        Assert.assertEquals(actual, expected);
     }
 
     @Test
@@ -290,7 +292,7 @@ public class GoFishTest {
         Boolean expected = false;
         Boolean actual = goFish.checkForMatch(player, input);
         //then
-        Assert.assertEquals(actual,expected);
+        Assert.assertEquals(actual, expected);
     }
 
     @Test
@@ -303,7 +305,7 @@ public class GoFishTest {
         Card twoClubs = new Card(Card.Rank.TWO, Card.Suit.CLUBS, null);
         GoFishPlayer player = goFish.getPlayer();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        goFish.setConsole(new Console(System.in , new PrintStream(outputStream)));
+        goFish.setConsole(new Console(System.in, new PrintStream(outputStream)));
         Hand playerHand = new Hand();
         playerHand.addACard(fiveClubs);
         playerHand.addACard(fiveSpades);
@@ -323,7 +325,7 @@ public class GoFishTest {
         //then
 //        defautConsole.println(actual);
 //        defautConsole.println(expected);
-        Assert.assertEquals(actual,expected);
+        Assert.assertEquals(actual, expected);
     }
 
     @Test
@@ -349,7 +351,7 @@ public class GoFishTest {
     }
 
     @Test
-    public void getLastGuessTest(){
+    public void getLastGuessTest() {
         GoFish goFish = new GoFish(defautConsole);
         String actual = goFish.getLastGuess();
 
@@ -365,7 +367,7 @@ public class GoFishTest {
         Card fiveHearts = new Card(Card.Rank.FIVE, Card.Suit.HEARTS, null);
         GoFishPlayer player = goFish.getPlayer();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        goFish.setConsole(new Console(System.in , new PrintStream(outputStream)));
+        goFish.setConsole(new Console(System.in, new PrintStream(outputStream)));
         Hand playerHand = new Hand();
         playerHand.addACard(fiveClubs);
         playerHand.addACard(fiveSpades);
@@ -380,7 +382,7 @@ public class GoFishTest {
         //then
 //        defautConsole.println(actual);
 //        defautConsole.println(expected);
-        Assert.assertEquals(actual,expected);
+        Assert.assertEquals(actual, expected);
 
 
     }
@@ -391,7 +393,7 @@ public class GoFishTest {
         Card fiveClubs = new Card(Card.Rank.FIVE, Card.Suit.CLUBS, null);
         GoFishPlayer player = goFish.getPlayer();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        goFish.setConsole(new Console(System.in , new PrintStream(outputStream)));
+        goFish.setConsole(new Console(System.in, new PrintStream(outputStream)));
         Hand playerHand = new Hand();
         playerHand.addACard(fiveClubs);
 
@@ -403,7 +405,7 @@ public class GoFishTest {
         //then
 //        defautConsole.println(actual);
 //        defautConsole.println(expected);
-        Assert.assertEquals(actual,expected);
+        Assert.assertEquals(actual, expected);
 
 
     }
@@ -415,7 +417,7 @@ public class GoFishTest {
 
         GoFishPlayer player = goFish.getPlayer();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        goFish.setConsole(new Console(System.in , new PrintStream(outputStream)));
+        goFish.setConsole(new Console(System.in, new PrintStream(outputStream)));
         Hand playerHand = new Hand();
         goFish.aILastGuess("FIVE");
 
@@ -429,8 +431,9 @@ public class GoFishTest {
         //then
 //        defautConsole.println(actual);
 //        defautConsole.println(expected);
-        Assert.assertEquals(actual,expected);
+        Assert.assertEquals(actual, expected);
     }
+
     @Test
     public void aIGuessingMagicTest4() {
         GoFish goFish = new GoFish(defautConsole);
@@ -438,7 +441,7 @@ public class GoFishTest {
         Card fiveSpades = new Card(Card.Rank.FIVE, Card.Suit.SPADES, null);
         GoFishPlayer player = goFish.getPlayer();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        goFish.setConsole(new Console(System.in , new PrintStream(outputStream)));
+        goFish.setConsole(new Console(System.in, new PrintStream(outputStream)));
         Hand playerHand = new Hand();
         goFish.aILastGuess("FIVE");
 
@@ -452,7 +455,7 @@ public class GoFishTest {
         //then
 //        defautConsole.println(actual);
 //        defautConsole.println(expected);
-        Assert.assertEquals(actual,expected);
+        Assert.assertEquals(actual, expected);
     }
 
     @Test
@@ -464,7 +467,7 @@ public class GoFishTest {
         Card fiveHearts = new Card(Card.Rank.FIVE, Card.Suit.HEARTS, null);
         GoFishPlayer player = goFish.getPlayer();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        goFish.setConsole(new Console(System.in , new PrintStream(outputStream)));
+        goFish.setConsole(new Console(System.in, new PrintStream(outputStream)));
         Hand playerHand = new Hand();
         playerHand.addACard(fiveClubs);
         playerHand.addACard(fiveSpades);
@@ -485,7 +488,38 @@ public class GoFishTest {
         //then
 //        defautConsole.println(actual);
 //        defautConsole.println(expected);
-        Assert.assertEquals(outputStream.toString(),expected);
+        Assert.assertEquals(outputStream.toString(), expected);
+    }
+
+    @Test
+    public void aITakeTurnTest2() {
+        GoFish goFish = new GoFish(defautConsole);
+        Card fiveClubs = new Card(Card.Rank.FIVE, Card.Suit.CLUBS, null);
+        Card fiveSpades = new Card(Card.Rank.FIVE, Card.Suit.SPADES, null);
+        Card fiveDim = new Card(Card.Rank.FIVE, Card.Suit.DIAMONDS, null);
+
+        GoFishPlayer player = goFish.getPlayer();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        goFish.setConsole(new Console(System.in, new PrintStream(outputStream)));
+
+        byte[] inputBytes = "FIVE\r".getBytes();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+        goFish.setConsole(new Console(inputStream, System.out));
+
+        Hand playerHand = new Hand();
+        playerHand.addACard(fiveClubs);
+        playerHand.addACard(fiveSpades);
+        playerHand.addACard(fiveDim);
+        player.setHand(playerHand);
+        //when
+        int expected = player.getHand().getNumberOfCards();
+        goFish.aITakeTurn(player);
+        defautConsole.println(outputStream.toString());
+        int actual = player.getHand().getNumberOfCards();
+        //then
+//        defautConsole.println(actual);
+//        defautConsole.println(expected);
+        Assert.assertEquals(expected + 1, actual);
     }
 
     @Test
@@ -498,14 +532,14 @@ public class GoFishTest {
         GoFishPlayer player = goFish.getPlayer();
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        goFish.setConsole(new Console(System.in , new PrintStream(outputStream)));
+        goFish.setConsole(new Console(System.in, new PrintStream(outputStream)));
         byte[] inputBytes = "FIVE\r".getBytes();
         ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
         goFish.setConsole(new Console(inputStream, System.out));
         Hand playerHand = new Hand();
         playerHand.addACard(fiveClubs);
-       // playerHand.addACard(fiveSpades);
-       // playerHand.addACard(fiveDim);
+        // playerHand.addACard(fiveSpades);
+        // playerHand.addACard(fiveDim);
         //playerHand.addACard(fiveHearts);
 
         player.setHand(playerHand);
@@ -522,8 +556,110 @@ public class GoFishTest {
                 "Guess a Card: (please spell the card)\n";
         //then
 //        defautConsole.println(actual);
-     //   defautConsole.println(expected);
+        //   defautConsole.println(expected);
         Assert.assertNotNull(outputStream.toString());
+    }
+
+    @Test
+    public void takeTurnTest2() {
+        GoFish goFish = new GoFish(defautConsole);
+        Card fiveClubs = new Card(Card.Rank.FIVE, Card.Suit.CLUBS, null);
+        Card fiveSpades = new Card(Card.Rank.FIVE, Card.Suit.SPADES, null);
+        Card fiveDim = new Card(Card.Rank.FIVE, Card.Suit.DIAMONDS, null);
+        Card fiveHearts = new Card(Card.Rank.FIVE, Card.Suit.HEARTS, null);
+        Card twoDim = new Card(Card.Rank.TWO, Card.Suit.DIAMONDS, null);
+        GoFishPlayer player = goFish.getPlayer();
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        goFish.setConsole(new Console(System.in, new PrintStream(outputStream)));
+        byte[] inputBytes = "TWO".getBytes();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+        goFish.setConsole(new Console(inputStream, System.out));
+        Hand playerHand = new Hand();
+        playerHand.addACard(fiveClubs);
+        playerHand.addACard(fiveSpades);
+        playerHand.addACard(fiveDim);
+        playerHand.addACard(fiveHearts);
+        playerHand.addACard(twoDim);
+        player.setHand(playerHand);
+        int handsizeBefore = playerHand.getNumberOfCards();
+        int actual = handsizeBefore-3;
+
+        //when
+        defautConsole.println(outputStream.toString());
+        goFish.takeTurn(player);
+        int handsizeAfter = player.getHand().getNumberOfCards();
+
+        Assert.assertEquals(handsizeAfter,actual);
+    }
+
+    @Test
+    public void takeTurnTest3() {
+        GoFish goFish = new GoFish(defautConsole);
+        Card fiveClubs = new Card(Card.Rank.FIVE, Card.Suit.CLUBS, null);
+        Card fiveSpades = new Card(Card.Rank.FIVE, Card.Suit.SPADES, null);
+        Card fiveDim = new Card(Card.Rank.FIVE, Card.Suit.DIAMONDS, null);
+        Card fiveHearts = new Card(Card.Rank.FIVE, Card.Suit.HEARTS, null);
+        //Card twoDim = new Card(Card.Rank.TWO, Card.Suit.DIAMONDS, null);
+        GoFishPlayer player = goFish.getPlayer();
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        goFish.setConsole(new Console(System.in, new PrintStream(outputStream)));
+        byte[] inputBytes = "E".getBytes();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+        goFish.setConsole(new Console(inputStream, System.out));
+        Hand playerHand = new Hand();
+        playerHand.addACard(fiveClubs);
+        playerHand.addACard(fiveSpades);
+        playerHand.addACard(fiveDim);
+        playerHand.addACard(fiveHearts);
+        //playerHand.addACard(twoDim);
+        player.setHand(playerHand);
+        int handsizeBefore = playerHand.getNumberOfCards();
+        int actual = handsizeBefore-3;
+
+        //when
+        defautConsole.println(outputStream.toString());
+        goFish.takeTurn(player);
+        int handsizeAfter = player.getHand().getNumberOfCards();
+
+        Assert.assertEquals(handsizeAfter,actual);
+    }
+    @Test
+    public void takeTurnTest4() {
+        //what if the deck is empty
+        GoFish goFish = new GoFish(defautConsole);
+        Card fiveClubs = new Card(Card.Rank.FIVE, Card.Suit.CLUBS, null);
+        Card fiveSpades = new Card(Card.Rank.FIVE, Card.Suit.SPADES, null);
+        Card fiveDim = new Card(Card.Rank.FIVE, Card.Suit.DIAMONDS, null);
+        Card fiveHearts = new Card(Card.Rank.FIVE, Card.Suit.HEARTS, null);
+        //Card twoDim = new Card(Card.Rank.TWO, Card.Suit.DIAMONDS, null);
+        GoFishPlayer player = goFish.getPlayer();
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        goFish.setConsole(new Console(System.in, new PrintStream(outputStream)));
+        byte[] inputBytes = "E".getBytes();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+        goFish.setConsole(new Console(inputStream, System.out));
+        Hand playerHand = new Hand();
+        playerHand.addACard(fiveClubs);
+        playerHand.addACard(fiveSpades);
+        playerHand.addACard(fiveDim);
+        playerHand.addACard(fiveHearts);
+        player.setHand(playerHand);
+        int handsizeBefore = playerHand.getNumberOfCards();
+        int actual = handsizeBefore-4;
+        CardDeck deck = goFish.getCardDeck();
+        for (int i = 0; i < 52; i++) {
+            deck.dealCard();
+        }
+        //when
+
+        defautConsole.println(outputStream.toString());
+        goFish.takeTurn(player);
+        int handsizeAfter = player.getHand().getNumberOfCards();
+
+        Assert.assertEquals(handsizeAfter,actual);
     }
 
     @Test
@@ -533,7 +669,7 @@ public class GoFishTest {
         GoFishPlayer player = goFish.getPlayer();
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        goFish.setConsole(new Console(System.in , new PrintStream(outputStream)));
+        goFish.setConsole(new Console(System.in, new PrintStream(outputStream)));
         byte[] inputBytes = "E\r".getBytes();
         ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
         goFish.setConsole(new Console(inputStream, System.out));
@@ -545,12 +681,9 @@ public class GoFishTest {
         //when
         goFish.play(balance);
 
-        //defautConsole.println(outputStream.toString());
         int actual = player.getHand().getNumberOfCards();
 
         //then
-//        defautConsole.println(actual);
-        //   defautConsole.println(expected);
         Assert.assertEquals(expected, actual);
 
 
