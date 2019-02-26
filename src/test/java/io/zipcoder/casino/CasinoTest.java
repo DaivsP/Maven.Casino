@@ -23,15 +23,16 @@ public class CasinoTest {
 
         sb.append("Would you like to buy chips ? (Y/N) \n");
         sb.append("***** Please Enter The Number Of A Game To Play *****\n");
-        sb.append("(1) HighLow (2) Craps (3) BlackJack (4) Go Fish\n");
-        sb.append("Incorrect game picked\n");
+        sb.append("HighLow  / Craps / BlackJack / GoFish\n");
+        sb.append("You selected an invalid game\n");
+        sb.append("Quit to continue, Any key to play again\n");
         sb.append("Your current chip count: 0\n");
         sb.append("Would you like to play again? \n");
         sb.append("(Q) to Exit the Casino / (A)ny key to Enter the Lobby / (B)uy more chips : \n");
         String expected = sb.toString();
 
 
-        byte[] inputBytes = "n\r5\rq".getBytes();
+        byte[] inputBytes = "n\r5\rquit\rq".getBytes();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
         casino.setConsole(new Console(inputStream,new PrintStream(outputStream) ));
@@ -83,7 +84,6 @@ public class CasinoTest {
         Integer actual = balance.getBalance();
 
         // Then
-        //System.out.println(balance.getBalance());
         Assert.assertEquals(expected, actual);
 
     }
@@ -114,38 +114,21 @@ public class CasinoTest {
 
     }
 
-    @Test
-    public void pickGameIncorrectNumTest(){
-        // Given
-        Casino casino = new Casino();
-        String expected = "***** Please Enter The Number Of A Game To Play *****\n(1) HighLow (2) Craps (3) BlackJack (4) Go Fish\nIncorrect game picked\n";
-        byte[] inputBytes = "7".getBytes();
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        ByteArrayInputStream leaveString = new ByteArrayInputStream(inputBytes);
-        casino.setConsole(new Console(leaveString,new PrintStream(outputStream) ));
 
-        // When
-        casino.pickGame(new Balance(100));
-       String actual = outputStream.toString();
-
-        // Then
-        Assert.assertEquals(expected, actual);
-
-    }
 
     @Test
     public void pickGameLaunchedHLTest(){
         // Given
         Casino casino = new Casino();
 
-        byte[] inputBytes = "1\rE".getBytes();
+        byte[] inputBytes = "HIGHLOW\rE\rQUIT".getBytes();
         ByteArrayInputStream leaveString = new ByteArrayInputStream(inputBytes);
         casino.setConsole(new Console(leaveString, System.out));
         boolean result = false;
 
         // When
         casino.pickGame(new Balance(100));
-        if(casino.getGames() instanceof HighLow)
+        if(casino.gameInterface instanceof HighLow)
         {
             result = true;
         }
@@ -160,14 +143,14 @@ public class CasinoTest {
         // Given
         Casino casino = new Casino();
 
-        byte[] inputBytes = "4\rE".getBytes();
+        byte[] inputBytes = "GOFISH\rE\rQUIT\r".getBytes();
         ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
         casino.setConsole(new Console(inputStream, System.out));
         boolean result = false;
 
         // When
         casino.pickGame(new Balance(100));
-        if(casino.getGames() instanceof GoFish)
+        if(casino.gameInterface instanceof GoFish)
         {
             result = true;
         }
@@ -175,64 +158,61 @@ public class CasinoTest {
         // Then
         Assert.assertTrue(result);
     }
+    /*
+        @Test
+        public void pickGameLaunchedCrapTest(){
+            // Given
+            Casino casino = new Casino();
+            byte[] inputBytes = "CRAPS\rE\rQUIT".getBytes();
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+            casino.setConsole(new Console(inputStream, System.out));
+            boolean result = false;
 
-    @Test
-    public void pickGameLaunchedCrapTest(){
-        // Given
-        Casino casino = new Casino();
-        byte[] inputBytes = "2\rE".getBytes();
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
-        casino.setConsole(new Console(inputStream, System.out));
-        boolean result = false;
+            // When
+            casino.pickGame(new Balance(100));
+            if(casino.gameInterface instanceof Craps)
+            {
+                result = true;
 
-        // When
-        casino.pickGame(new Balance(100));
-        if(casino.getGames() instanceof Craps)
-        {
-            result = true;
+            // Then
+            Assert.assertTrue(result);
+        }
+    /*
+        @Test
+        public void pickGameLaunchedBJTest(){
+            // Given
+            Casino casino = new Casino();
+            byte[] inputBytes = "3\rE".getBytes();
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
+            casino.setConsole(new Console(inputStream, System.out));
+            boolean result = false;
+
+            // When
+            casino.pickGame(new Balance(100));
+            if(casino.getGames() instanceof BlackJack)
+            {
+                result = true;
+            }
+
+            // Then
+            Assert.assertTrue(result);
         }
 
-        // Then
-        Assert.assertTrue(result);
-    }
-/*
-    @Test
-    public void pickGameLaunchedBJTest(){
-        // Given
-        Casino casino = new Casino();
-        byte[] inputBytes = "3\rE".getBytes();
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
-        casino.setConsole(new Console(inputStream, System.out));
-        boolean result = false;
-
-        // When
-        casino.pickGame(new Balance(100));
-        if(casino.getGames() instanceof BlackJack)
-        {
-            result = true;
-        }
-
-        // Then
-        Assert.assertTrue(result);
-    }
 
 
 
-
-*/
+    */
     @Test
     public void pickGameInvalidInputTest(){
         // Given
         Casino casino = new Casino();
         StringBuilder sb = new StringBuilder();
         sb.append("***** Please Enter The Number Of A Game To Play *****\n");
-        sb.append("(1) HighLow (2) Craps (3) BlackJack (4) Go Fish\n");
-        sb.append("[ b ] is an invalid user input!\n");
-        sb.append("Try inputting an integer value!\n");
-        sb.append("(1) HighLow (2) Craps (3) BlackJack (4) Go Fish\n");
-        sb.append("Incorrect game picked\n");
+        sb.append("HighLow  / Craps / BlackJack / GoFish\n");
+        sb.append("You selected an invalid game\n");
+        sb.append("Quit to continue, Any key to play again\n");
         String expected = sb.toString();
-        byte[] inputBytes = "b\r5".getBytes();
+        byte[] inputBytes = "b\rQUIT".getBytes();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
 

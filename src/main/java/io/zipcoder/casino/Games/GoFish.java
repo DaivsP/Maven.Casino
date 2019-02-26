@@ -8,7 +8,7 @@ import io.zipcoder.casino.utilities.Console;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class GoFish extends Games implements FunGame {
+public class GoFish extends Games implements FunGame, GameInterface {
     private io.zipcoder.casino.Person.Player goFishPlayer;
     private Console console;
     private GoFishPlayer player;
@@ -43,7 +43,7 @@ public class GoFish extends Games implements FunGame {
 
     }
 
-    public void play() {
+    public void play(Balance balance) {
         Banners banners = new Banners();
         banners.getGoFishBanner();
         console.println("Please type 'E' to exit at any time");

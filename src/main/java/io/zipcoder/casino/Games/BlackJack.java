@@ -20,13 +20,13 @@ public class BlackJack extends Games implements GamblingGame {
 
     private Hand dealerHand;
 
-    public BlackJack(){
+    public BlackJack(Console console){
         playerHand = new Hand();
         dealerHand = new Hand();
         player = new BlackJackPlayer(null, null);
         dealer = new GamblingDealer(new Balance(new Integer(0)));
         cardDeck = new CardDeck();
-        console = new Console(System.in, System.out);
+        this.console = console;
         cardDeck.shuffle();
     }
 
