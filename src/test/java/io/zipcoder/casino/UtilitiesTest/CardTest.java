@@ -1,9 +1,8 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.UtilitiesTest;
 
+import io.zipcoder.casino.utilities.Card;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class CardTest {
     @Test

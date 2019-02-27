@@ -1,6 +1,6 @@
 package io.zipcoder.casino.Games;
 
-import io.zipcoder.casino.Die;
+import io.zipcoder.casino.utilities.Die;
 
 import java.util.Random;
 

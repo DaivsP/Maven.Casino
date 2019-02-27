@@ -1,9 +1,6 @@
 package io.zipcoder.casino.Person;
 
-import io.zipcoder.casino.Balance;
-import io.zipcoder.casino.Die;
-
-import java.util.ArrayList;
+import io.zipcoder.casino.utilities.Balance;
 
 public class CrapsPlayer extends DicePlayer implements GamblingPlayer {
     private Balance balance;

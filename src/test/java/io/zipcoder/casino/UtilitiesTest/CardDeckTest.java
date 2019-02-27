@@ -1,11 +1,11 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.UtilitiesTest;
 
+import io.zipcoder.casino.utilities.Card;
+import io.zipcoder.casino.utilities.CardDeck;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class CardDeckTest {
 

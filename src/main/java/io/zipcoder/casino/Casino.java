@@ -3,7 +3,10 @@ package io.zipcoder.casino;
 
 import io.zipcoder.casino.Games.*;
 
+import io.zipcoder.casino.utilities.Balance;
+import io.zipcoder.casino.utilities.Banners;
 import io.zipcoder.casino.utilities.Console;
+import io.zipcoder.casino.utilities.GameEnum;
 
 public class Casino {
     private Balance balance;

@@ -5,6 +5,7 @@ import io.zipcoder.casino.Games.BlackJack;
 import io.zipcoder.casino.Games.Craps;
 import io.zipcoder.casino.Games.GoFish;
 import io.zipcoder.casino.Games.HighLow;
+import io.zipcoder.casino.utilities.Balance;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -185,7 +186,7 @@ public class CasinoTest {
     }
 
        // @Test
-        public void pickGameLaunchedCrapTest(){
+        public void gpickGameLaunchedCrapTest(){
             // Given
             Casino casino = new Casino();
             byte[] inputBytes = "CRAPS\rE\rQUIT".getBytes();
@@ -206,7 +207,7 @@ public class CasinoTest {
         public void pickGameLaunchedBJTest(){
             // Given
             Casino casino = new Casino();
-            byte[] inputBytes = "blackjack\r9\rs\nn\nquit".getBytes();
+            byte[] inputBytes = "blackjack\rno\r9\rs\nn\nquit".getBytes();
             ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
             casino.setConsole(new Console(inputStream, System.out));
             boolean result = false;

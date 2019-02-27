@@ -1,11 +1,8 @@
 package io.zipcoder.casino.Person;
 
-import io.zipcoder.casino.Balance;
-import io.zipcoder.casino.Hand;
+import io.zipcoder.casino.utilities.Hand;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class FunDealerTest {
 
