@@ -33,14 +33,17 @@ public class BlackJack extends Games implements GamblingGame {
     }
 
     public void play(Balance balance) {
+        setBanner();
+        setBalanceAndRunIfPositiveBalance(balance);
+        runBlackJackGame(balance);
+    }
+
+    public void setBanner() {
         Banners banners = new Banners();
         banners.getBlackjackBanner();
-        //Setting Players balance to current balance
-        player.setBalance(balance);
-        if (player.getBalance().getBalance() <= 0) {
-            console.println("You dont have enough chips to play.");
-            console.println("Please buy more chips to play.");
-        }
+    }
+
+    public void runBlackJackGame(Balance balance) {
         while (playerHasAPositiveBalance()) {
             clearHands(dealerHand, playerHand);
             String userChoice = "";
@@ -49,9 +52,7 @@ public class BlackJack extends Games implements GamblingGame {
             if ("YES".equals(userInput.toUpperCase())) {
                 balance.addMoreChips();
             }
-            Integer userBet = console.getIntegerInput("How much do you want to Bet: ");
-            player.bet(balance, userBet);
-            pot = userBet;
+            Integer userBet = takeUserBet(balance);
 
             dealCardsToPlayerAndDealerAndAddThemToRespectiveHands();
 
@@ -59,47 +60,81 @@ public class BlackJack extends Games implements GamblingGame {
 
             printUserFirstHandAndDealerFirstCard();
             Boolean doubleDown = false;
-            do {
-                if (doubleDown){
-                    userChoice = forceUserInputToH();
-                }
-                else {
-                    userChoice = console.getStringInput("Do you want to (H)it, (S)tay, or (D)ouble Down: ");
-                }
-                if ("H".equals(userChoice.toUpperCase())) {
-                    playerActionIfHit();
-                    dealACardToThePlayerAndPrintTheirNewHand();
-                }
-                else if ("D".equals(userChoice.toUpperCase())){
-                    doubleDown = actionThatHappensIfPlayerDoubleDowns(balance, userBet, doubleDown);
-                }
-            } while (playerHitsAndDidNotBustAndDoesNotHave21(userChoice));
+            userChoice = playerActionHitOrDoubleDown(balance, userBet, doubleDown);
 
-            if (playerHand.getSumOfHand() > 21) {
-                playerLostHandWithValueLargerThan21();
-                dealer.collect(balance, pot);
-            } else if (playerHand.getSumOfHand() == 21) {
-                playerGotBlackJack();
-            } else if ("S".equals(userChoice.toUpperCase())) {
-                printDealersFullHand();
-
-                while (dealerHandIsLessThanPlayerHandAndDoesNotHave21()) {
-                    Card dealerNextCard = cardDeck.dealCard();
-                    dealerHand.addACard(dealerNextCard);
-                    dealerDrawsACardAddsItToHisHandAndPrintDealerHand();
-                }
-                dealerPlayActions(balance);
-            }
-            String userContinue = console.getStringInput("Would you like to continue? (Y/N)");
-            if ("N".equals(userContinue.toUpperCase())) {
-                balance.setBalance(player.getBalance().getBalance());
-                break;
-            } else {
-                cardDeck = new CardDeck();
-                cardDeck.shuffle();
-            }
-            balance.setBalance(player.getBalance().getBalance());
+            playerHandActionWhenStay(balance, userChoice);
+            if (askIfUserWantsToContinuePlaying(balance)) break;
         }
+    }
+
+    public void setBalanceAndRunIfPositiveBalance(Balance balance) {
+        player.setBalance(balance);
+        if (player.getBalance().getBalance() <= 0) {
+            printPlayerDoesntHaveEnoughMoney();
+        }
+    }
+
+    public void playerHandActionWhenStay(Balance balance, String userChoice) {
+        if (playerHand.getSumOfHand() > 21) {
+            playerLostHandWithValueLargerThan21();
+            dealer.collect(balance, pot);
+        } else if (playerHand.getSumOfHand() == 21) {
+            playerGotBlackJack();
+        } else if ("S".equals(userChoice.toUpperCase())) {
+            printDealersFullHand();
+
+            while (dealerHandIsLessThanPlayerHandAndDoesNotHave21()) {
+                Card dealerNextCard = cardDeck.dealCard();
+                dealerHand.addACard(dealerNextCard);
+                dealerDrawsACardAddsItToHisHandAndPrintDealerHand();
+            }
+            dealerPlayActions(balance);
+        }
+    }
+
+    public boolean askIfUserWantsToContinuePlaying(Balance balance) {
+        String userContinue = console.getStringInput("Would you like to continue? (Y/N)");
+        if ("N".equals(userContinue.toUpperCase())) {
+            balance.setBalance(player.getBalance().getBalance());
+            return true;
+        } else {
+            cardDeck = new CardDeck();
+            cardDeck.shuffle();
+        }
+        balance.setBalance(player.getBalance().getBalance());
+        return false;
+    }
+
+    public String playerActionHitOrDoubleDown(Balance balance, Integer userBet, Boolean doubleDown) {
+        String userChoice;
+        do {
+            if (doubleDown){
+                userChoice = forceUserInputToH();
+            }
+            else {
+                userChoice = console.getStringInput("Do you want to (H)it, (S)tay, or (D)ouble Down: ");
+            }
+            if ("H".equals(userChoice.toUpperCase())) {
+                playerActionIfHit();
+                dealACardToThePlayerAndPrintTheirNewHand();
+            }
+            else if ("D".equals(userChoice.toUpperCase())){
+                doubleDown = actionThatHappensIfPlayerDoubleDowns(balance, userBet, doubleDown);
+            }
+        } while (playerHitsAndDidNotBustAndDoesNotHave21(userChoice));
+        return userChoice;
+    }
+
+    public Integer takeUserBet(Balance balance) {
+        Integer userBet = console.getIntegerInput("How much do you want to Bet: ");
+        player.bet(balance, userBet);
+        pot = userBet;
+        return userBet;
+    }
+
+    public void printPlayerDoesntHaveEnoughMoney() {
+        console.println("You dont have enough chips to play.");
+        console.println("Please buy more chips to play.");
     }
 
     public String forceUserInputToH() {

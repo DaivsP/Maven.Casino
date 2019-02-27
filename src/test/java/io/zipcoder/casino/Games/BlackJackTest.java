@@ -486,4 +486,23 @@ public class BlackJackTest {
         Integer expected = 1;
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void testPrintPlayerDoesntHaveEnoughMoney(){
+        //Given
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("You dont have enough chips to play." + "\n");
+        sb.append("Please buy more chips to play." + "\n");
+        String expected = sb.toString();
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        blackJack.setConsole(new Console(System.in, new PrintStream(outputStream)));
+        //When
+        blackJack.printPlayerDoesntHaveEnoughMoney();
+        String actual = outputStream.toString();
+
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
 }
