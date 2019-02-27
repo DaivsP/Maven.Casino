@@ -55,9 +55,9 @@ public class BlackJack extends Games implements GamblingGame {
             dealCardsToPlayerAndDealerAndAddThemToRespectiveHands();
 
             printUserFirstHandAndDealerFirstCard();
-
+            
             do {
-                userChoice = console.getStringInput("Do you want to (H)it or (S)tay: ");
+                userChoice = console.getStringInput("Do you want to (H)it, (S)tay, or (D)ouble Down: ");
                 if ("H".equals(userChoice.toUpperCase())) {
                     Card nextPlayerCard = cardDeck.dealCard();
                     playerHand.addACard(nextPlayerCard);
