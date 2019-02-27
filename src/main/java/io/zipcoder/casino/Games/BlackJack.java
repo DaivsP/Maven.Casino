@@ -46,6 +46,10 @@ public class BlackJack extends Games implements GamblingGame {
             clearHands(dealerHand, playerHand);
             String userChoice = "";
             console.println("Your balance is: " + player.getBalance().getBalance().toString());
+            String userInput = console.getStringInput("Would you like to buy more chips? (Yes/No)");
+            if ("YES".equals(userInput.toUpperCase())) {
+                balance.addMoreChips();
+            }
             Integer userBet = console.getIntegerInput("How much do you want to Bet: ");
             player.bet(balance, userBet);
             pot = userBet;
@@ -87,8 +91,8 @@ public class BlackJack extends Games implements GamblingGame {
                 }
                 dealerPlayActions(balance);
             }
-            String userInput = console.getStringInput("Would you like to continue? (Y/N)");
-            if ("N".equals(userInput.toUpperCase())) {
+            String userContinue = console.getStringInput("Would you like to continue? (Y/N)");
+            if ("N".equals(userContinue.toUpperCase())) {
                 balance.setBalance(player.getBalance().getBalance());
                 break;
             } else {
