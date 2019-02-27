@@ -1,8 +1,7 @@
 package io.zipcoder.casino.Games;
 
-import io.zipcoder.casino.*;
 import io.zipcoder.casino.Person.GoFishPlayer;
-import io.zipcoder.casino.utilities.Console;
+import io.zipcoder.casino.utilities.*;
 
 
 public class GoFish extends Games implements FunGame, GameInterface {

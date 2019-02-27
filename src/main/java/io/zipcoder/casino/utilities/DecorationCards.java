@@ -1,7 +1,4 @@
-package io.zipcoder.casino;
-
-import io.zipcoder.casino.utilities.Console;
-import io.zipcoder.casino.utilities.Symbols;
+package io.zipcoder.casino.utilities;
 
 
 public class DecorationCards {

@@ -1,5 +1,5 @@
 
-package io.zipcoder.casino;
+package io.zipcoder.casino.utilities;
 
 import java.util.ArrayList;
 import java.util.Collections;

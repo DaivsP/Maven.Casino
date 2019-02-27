@@ -1,7 +1,7 @@
 package io.zipcoder.casino.Person;
 
-import io.zipcoder.casino.Balance;
-import io.zipcoder.casino.Hand;
+import io.zipcoder.casino.utilities.Balance;
+import io.zipcoder.casino.utilities.Hand;
 
 public class GamblingDealer extends Dealer implements GamblingPlayer {
     private Balance balance;

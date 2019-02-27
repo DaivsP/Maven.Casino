@@ -1,6 +1,6 @@
 package io.zipcoder.casino.Person;
 
-import io.zipcoder.casino.Balance;
+import io.zipcoder.casino.utilities.Balance;
 
 public interface GamblingPlayer {
     void bet(Balance balance, Integer amount);

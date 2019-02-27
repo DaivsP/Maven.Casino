@@ -1,5 +1,6 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.UtilitiesTest;
 
+import io.zipcoder.casino.utilities.Banners;
 import io.zipcoder.casino.utilities.Console;
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,6 +1,6 @@
 package io.zipcoder.casino.Games;
 
-import io.zipcoder.casino.Balance;
+import io.zipcoder.casino.utilities.Balance;
 import io.zipcoder.casino.utilities.Console;
 
 public class InvalidGame implements GameInterface {

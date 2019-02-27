@@ -1,8 +1,7 @@
 package io.zipcoder.casino.Games;
 
 import io.zipcoder.casino.*;
-import io.zipcoder.casino.utilities.Console;
-import io.zipcoder.casino.utilities.Symbols;
+import io.zipcoder.casino.utilities.*;
 
 import static io.zipcoder.casino.utilities.AnsiScapeCodes.*;
 
