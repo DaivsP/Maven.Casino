@@ -24,10 +24,6 @@ public class Symbols {
 
     String hL = Character.toString((char) 0x2500 ); // Horizontal Line
 
-    public String gethL(){
-        return this.hL;
-    }
-
     public String gethL(Integer number){
         String result = "";
         for (int i = 0; i < number; i++) {

@@ -2,7 +2,6 @@ package io.zipcoder.casino;
 import io.zipcoder.casino.utilities.AdvertisementForBanners;
 import io.zipcoder.casino.utilities.Console;
 
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public final class Banners {
