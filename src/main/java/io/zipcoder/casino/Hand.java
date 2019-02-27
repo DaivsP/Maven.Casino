@@ -51,9 +51,17 @@ public class Hand  {
 
     public Integer getSumOfHand() {
         Integer sumOfHand = 0;
+        int acesCounter = 0;
 
         for (Card card: myHand) {
+            if (card.getRank() == Card.Rank.ACE){
+                acesCounter++;
+            }
             sumOfHand += card.getCardValue();
+            while (sumOfHand > 21 && acesCounter > 0){
+                sumOfHand -= 10;
+                acesCounter--;
+            }
         }
         return sumOfHand;
     }

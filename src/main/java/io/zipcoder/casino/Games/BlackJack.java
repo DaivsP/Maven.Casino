@@ -20,7 +20,7 @@ public class BlackJack extends Games implements GamblingGame {
 
     private Hand dealerHand;
 
-    public BlackJack(Console console){
+    public BlackJack(Console console) {
 
         decorationCards = new DecorationCards();
 
@@ -38,6 +38,7 @@ public class BlackJack extends Games implements GamblingGame {
         banners.getBlackjackBanner();
         //Setting Players balance to current balance
         player.setBalance(balance);
+        balance.addMoreChips();
         if (player.getBalance().getBalance() <= 0) {
             console.println("You dont have enough chips to play.");
             console.println("Please buy more chips to play.");
@@ -53,9 +54,6 @@ public class BlackJack extends Games implements GamblingGame {
             dealCardsToPlayerAndDealerAndAddThemToRespectiveHands();
 
             dealCardsToPlayerAndDealerAndAddThemToRespectiveHands();
-            Integer aceCounter = 0;
-            if (aceCounter == 0){
-            }
 
             printUserFirstHandAndDealerFirstCard();
 
