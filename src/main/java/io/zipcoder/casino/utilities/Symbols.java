@@ -129,7 +129,8 @@ public class Symbols {
                         , switchFrame("vL") + "   " + getBullet(0) +  "    " + switchFrame("vL")
                         , switchFrame("vL") + " " + getBullet(1) + " " + getBullet(1) + " " + getBullet(1) + " " + switchFrame("vL")
                         , finalLine};
-                default: return null;
+                default:
+                    return null;
         }
     }
 

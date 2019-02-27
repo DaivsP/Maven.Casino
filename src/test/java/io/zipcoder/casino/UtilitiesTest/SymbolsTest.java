@@ -36,7 +36,7 @@ public class SymbolsTest {
     public void switchRankTest(){
         // Given
         Symbols symbols = new Symbols();
-        String expected1 = "1";
+        String expected1 = "A";
         String expected2 = "2";
         String expected3 = "3";
         String expected4 = "4";
@@ -124,7 +124,6 @@ public class SymbolsTest {
         String actual4 = symbols.switchDie(4)[0];
         String actual5 = symbols.switchDie(5)[0];
         String actual6 = symbols.switchDie(6)[0];
-        String actual7 = symbols.switchDie(9)[0];
         // Then
         Assert.assertEquals(expected1,actual1);
         Assert.assertEquals(expected2,actual2);
@@ -132,8 +131,14 @@ public class SymbolsTest {
         Assert.assertEquals(expected4,actual4);
         Assert.assertEquals(expected5,actual5);
         Assert.assertEquals(expected6,actual6);
-        Assert.assertNull(actual7);
+    }
 
+    @Test(expected=NullPointerException.class)
+    public void switchDieTest2() {
+        // Given
+        Symbols symbols = new Symbols();
+        // When
+        String actual = symbols.switchDie(9)[0];
     }
 
 
