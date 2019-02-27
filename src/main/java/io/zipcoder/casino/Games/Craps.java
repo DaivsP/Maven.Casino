@@ -417,8 +417,13 @@ public class Craps extends DiceGames implements GameInterface {
 //balance.setBalance(balance.getBalance()+hedgeBet);
 
 
+    public static void main(String[] args) {
+        System.out.println("😍🥳😎💴");
+    }
+
     //Used for unit Testing
     public void setConsole(Console console) {
         this.console = console;
     }
+
 }
