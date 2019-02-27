@@ -1,16 +1,14 @@
 package io.zipcoder.casino.Games;
 
-import io.zipcoder.casino.Card;
-import io.zipcoder.casino.CardDeck;
-import io.zipcoder.casino.Hand;
+import io.zipcoder.casino.utilities.Card;
+import io.zipcoder.casino.utilities.CardDeck;
+import io.zipcoder.casino.utilities.Hand;
 import io.zipcoder.casino.Person.FunDealer;
 import io.zipcoder.casino.Person.HiLowPlayer;
 import io.zipcoder.casino.utilities.Console;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.ByteArrayInputStream;
 
 public class HiLowGameTest {
     Console defautConsole;

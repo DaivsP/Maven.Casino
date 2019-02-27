@@ -1,7 +1,6 @@
 package io.zipcoder.casino.Person;
 
-import io.zipcoder.casino.Die;
-import io.zipcoder.casino.Person.Player;
+import io.zipcoder.casino.utilities.Die;
 
 import java.util.ArrayList;
 

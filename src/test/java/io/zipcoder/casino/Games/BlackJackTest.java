@@ -1,23 +1,14 @@
 package io.zipcoder.casino.Games;
 
-import com.sun.xml.internal.bind.v2.util.ByteArrayOutputStreamEx;
-import com.sun.xml.internal.ws.api.ha.StickyFeature;
-import io.zipcoder.casino.*;
 import io.zipcoder.casino.Person.BlackJackPlayer;
 import io.zipcoder.casino.Person.GamblingDealer;
-import io.zipcoder.casino.utilities.Console;
-import org.junit.After;
+import io.zipcoder.casino.utilities.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.print.attribute.HashAttributeSet;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.text.BreakIterator;
-
-import static org.junit.Assert.*;
 
 public class BlackJackTest {
 
@@ -27,6 +18,7 @@ public class BlackJackTest {
     Hand dealerHand = new Hand();
     BlackJackPlayer player = new BlackJackPlayer(null, null);
     GamblingDealer dealer = new GamblingDealer(blackJack.getDealer().getBalance());
+    DecorationCards decorationCards = new DecorationCards();
 
     @Before
     public void setup(){
@@ -94,16 +86,15 @@ public class BlackJackTest {
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append("Your current cards: ");
-        sb.append(playerHand.toString() + "\n");
-        sb.append("Your current hand value: ");
-        sb.append(playerHand.getSumOfHand().toString() + "\n");
-        sb.append("The Dealers first card: ");
-        sb.append(dealerHand.getACard(0).toString() + "\n");
+        sb.append("Your current cards: " + "\n" + "\n");
+        sb.append("Your current hand value: " + playerHand.getSumOfHand() + "\n");
+        sb.append("The Dealers first card: " + dealerHand.getACard(0).toString() + "\n");
         String expected = sb.toString();
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         blackJack.setConsole(new Console(System.in,new PrintStream(outputStream)));
+
+        decorationCards.setConsole(new Console(System.in,System.out));
 
         //When
         blackJack.printUserFirstHandAndDealerFirstCard();
@@ -125,14 +116,15 @@ public class BlackJackTest {
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append("Your current cards");
-        sb.append(playerHand.toString() + "\n");
+        sb.append("Your current cards" + "\n" + "\n");
         sb.append("Your current hand value: ");
         sb.append(playerHand.getSumOfHand().toString() + "\n");
         String expected = sb.toString();
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         blackJack.setConsole(new Console(System.in, new PrintStream(outputStream)));
+
+        decorationCards.setConsole(new Console(System.in, System.out));
 
         //When
         blackJack.dealACardToThePlayerAndPrintTheirNewHand();
@@ -195,14 +187,15 @@ public class BlackJackTest {
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append("The dealer shows all cards: ");
-        sb.append(dealerHand.toString() + "\n");
+        sb.append("The dealer shows all cards: " + "\n" + "\n");
         sb.append("The dealers hand value is: ");
         sb.append(dealerHand.getSumOfHand().toString() + "\n");
         String expected = sb.toString();
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         blackJack.setConsole(new Console(System.in, new PrintStream(outputStream)));
+
+        decorationCards.setConsole(new Console(System.in, System.out));
 
         //When
         blackJack.printDealersFullHand();
@@ -220,14 +213,15 @@ public class BlackJackTest {
         StringBuilder sb = new StringBuilder();
 
         sb.append("The dealer hits" + "\n");
-        sb.append("The dealers hand is now: ");
-        sb.append(dealerHand.toString() + "\n");
+        sb.append("The dealers hand is now: " + "\n" + "\n");
         sb.append("The dealers hand value is now: ");
         sb.append(dealerHand.getSumOfHand().toString() + "\n");
         String expected = sb.toString();
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         blackJack.setConsole(new Console(System.in, new PrintStream(outputStream)));
+
+        decorationCards.setConsole(new Console(System.in, System.out));
 
         //When
         blackJack.dealerDrawsACardAddsItToHisHandAndPrintDealerHand();
@@ -368,7 +362,7 @@ public class BlackJackTest {
         this.playerHand = blackJack.getPlayerHand();
         player.setBalance(new Balance(100));
 
-        Card dealerCard = new Card(Card.Rank.ACE, Card.Suit.HEARTS, 11);
+        Card dealerCard = new Card(Card.Rank.KING, Card.Suit.HEARTS, 10);
         Card dealerCard2 = new Card(Card.Rank.KING, Card.Suit.HEARTS, 10);
         Card dealerCard3 = new Card(Card.Rank.FIVE, Card.Suit.HEARTS, 5);
         dealerHand.addACard(dealerCard);
@@ -463,6 +457,33 @@ public class BlackJackTest {
         String actual = outputStream.toString();
 
         //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testPlayerHasAPositiveBalance(){
+        //Given
+        this.player = blackJack.getPlayer();
+        player.setBalance(new Balance(1));
+
+        //When
+
+        //Then
+        Boolean actual = blackJack.playerHasAPositiveBalance();
+        Assert.assertTrue(actual);
+    }
+
+    @Test
+    public void testPlayerActionIfHit(){
+        //Given
+        this.playerHand = blackJack.getPlayerHand();
+
+        //When
+        blackJack.playerActionIfHit();
+        Integer actual = playerHand.getNumberOfCards();
+
+        //Then
+        Integer expected = 1;
         Assert.assertEquals(expected, actual);
     }
 }

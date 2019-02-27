@@ -1,7 +1,5 @@
 package io.zipcoder.casino.utilities;
 
-import java.util.Set;
-
 import static io.zipcoder.casino.utilities.AnsiScapeCodes.*;
 
 public class AdvertisementForBanners {
@@ -84,7 +82,6 @@ public class AdvertisementForBanners {
             + setColorOutOfFunds + "**************************** PLEASE BUY MORE CHIPS OR GTFO *************************" + SETDEFAULT
             + " \n";
 
-
     public String getCasinoStr(){
         return this.casinoStr;
     }
@@ -106,4 +103,5 @@ public class AdvertisementForBanners {
     public String getOutOfFundsStr(){
         return this.outOfFundsStr;
     }
+
 }

@@ -1,6 +1,6 @@
 package io.zipcoder.casino.Person;
 
-import io.zipcoder.casino.Hand;
+import io.zipcoder.casino.utilities.Hand;
 
 public class HiLowPlayer extends CardPlayer {
     private Hand hand;

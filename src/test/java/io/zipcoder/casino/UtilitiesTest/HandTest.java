@@ -1,13 +1,12 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.UtilitiesTest;
 
-import org.jcp.xml.dsig.internal.dom.Utils;
+import io.zipcoder.casino.utilities.Card;
+import io.zipcoder.casino.utilities.Hand;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
-import java.util.Scanner;
 
 import static junit.framework.TestCase.assertTrue;
 

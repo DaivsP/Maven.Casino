@@ -1,20 +1,19 @@
 package io.zipcoder.casino.Games;
 
-import io.zipcoder.casino.Balance;
-import io.zipcoder.casino.Casino;
-import io.zipcoder.casino.Die;
-import io.zipcoder.casino.utilities.Console;
-import io.zipcoder.casino.Banners;
+import io.zipcoder.casino.*;
+import io.zipcoder.casino.utilities.*;
 
+import static io.zipcoder.casino.utilities.AnsiScapeCodes.*;
 
 
 public class Craps extends DiceGames implements GameInterface {
-//    private Casino casino = new Casino();
-
+    private Casino casino = new Casino();
+    private DecorationCards diceArt = new DecorationCards();
     private Console console; // = new Console(System.in, System.out);
     private Balance balance;
     private Integer pointer = 0;
     private Integer passLineBet = 0;
+    private Integer dontPassLineBet = 0;
     private Die die = new Die();
     private DiceGames diceGames = new DiceGames();
     private Integer hardwayBet = 0;
@@ -41,12 +40,13 @@ public class Craps extends DiceGames implements GameInterface {
              * COME OUT ROLL SEQUENCE
              *
              * */
-            passLineBet = crapsBet(balance);
-            console.println("You bet: " + passLineBet);
+            console.println(balanceCheck(balance));
+            passLineBet = crapsBet(balance, 0);
+            console.println("You bet: " + ANSI_YELLOW + passLineBet + ANSI_RESET);
             do {
                 String rollRequest = console.getStringInput("***** Press (R) to Roll\n***** Press (E) to exit");
                 if (rollRequest.equals("R") || rollRequest.equals("r")) {
-                    Integer roll = diceGames.tossTwoDie(diceGames, die);
+                    Integer roll = secondPhaseRollWithHardWayCheck(0,0, 0);
                     pointer = setPointerPL(balance, passLineBet, roll);
                 } else {
                     break;
@@ -58,28 +58,37 @@ public class Craps extends DiceGames implements GameInterface {
              * SECOND PHASE -- POINT HAS BEEN ESTABLISHED
              *
              * */
+            Integer runner = 0;
+            while(pointer!=0 && runner != 5){
 
-            //Hedge Bet Prompt
-            passLineBet = hedgeBet(balance, passLineBet);
+                dontPassLineBet = hedgeBet(balance, dontPassLineBet);
+                if (hardWayPlayChoice() == true) {
+                    hardwayNumber = hardWayNumberChoice();
+                    hardwayBet = crapsBet(balance, dontPassLineBet);
 
-
-            if (hardWayPlayChoice() == true) {
-                hardwayNumber = hardWayNumberChoice();
-                hardwayBet = crapsBet(balance);
+                }
+                runner = 5;
             }
+
 
             betCheck(passLineBet);
             while (crapsRoll != pointer && crapsRoll != 7 && pointer != 0) {
 
-                String rollRequest = console.getStringInput("ROLL A " + pointer + " TO WIN!\n***** Press (R) to Roll\n***** Press (E) to exit");
+                String rollRequest = console.getStringInput("ROLL A " + ANSI_RED + pointer + ANSI_RESET + " TO WIN!\n" +
+                        "***** Press (R) to Roll\n***** Press (E) to exit");
                 if (rollRequest.equals("R") || rollRequest.equals("r")) {
-                    crapsRoll = secondPhaseRollWithHardWayCheck(hardwayBet, hardwayNumber);
+                    crapsRoll = secondPhaseRollWithHardWayCheck(hardwayBet, hardwayNumber, pointer);
                     crapsRoundPL(balance, passLineBet, crapsRoll, pointer);
-                } else {
+
+                } else if(rollRequest.equals("e")||rollRequest.equals("E")){
                     break;
                 }
             }
-
+            pointer = 0;
+            crapsRoll = 0;
+            passLineBet = 0;
+            hardwayBet = 0;
+            console.println(balanceCheck(balance));
             anotherRound(balance);
 
         }
@@ -90,14 +99,15 @@ public class Craps extends DiceGames implements GameInterface {
              * COME OUT ROLL SEQUENCE
              *
              * */
-            passLineBet = crapsBet(balance);
+            console.println(balanceCheck(balance));
+            dontPassLineBet = crapsBet(balance, 0);
 
             do {
                 String rollRequest = console.getStringInput("***** Press (R) to Roll\n***** Press (E) to exit");
 
                 if (rollRequest.equals("R") || rollRequest.equals("r")) {
-                    Integer roll = diceGames.tossTwoDie(diceGames, die);
-                    pointer = setPointerDontPL(balance, passLineBet, roll);
+                    Integer roll = secondPhaseRollWithHardWayCheck(0, 0,0);
+                    pointer = setPointerDontPL(balance, dontPassLineBet, roll);
                 } else {
                     break;
                 }
@@ -110,53 +120,66 @@ public class Craps extends DiceGames implements GameInterface {
              *
              * */
 
-            //Hedge Bet Prompt
-            passLineBet = hedgeBet(balance, passLineBet);
+            Integer runner = 0;
+            while(pointer!=0 && runner != 5){
 
-            if (hardWayPlayChoice() == true) {
-                hardwayNumber = hardWayNumberChoice();
-                hardwayBet = crapsBet(balance);
+                dontPassLineBet = hedgeBet(balance, dontPassLineBet);
+                if (hardWayPlayChoice() == true) {
+                    hardwayNumber = hardWayNumberChoice();
+                    hardwayBet = crapsBet(balance, dontPassLineBet);
+
+                }
+                runner = 5;
             }
 
-            while (crapsRoll != pointer && crapsRoll != 7 && pointer != 0) {
-                betCheck(passLineBet);
-                String rollRequest = console.getStringInput("ROLL A 7 before " + pointer + " TO WIN!\n***** Press (R) to Roll\n***** Press (E) to exit");
-                if (rollRequest.equals("R") || rollRequest.equals("r")) {
-                    crapsRoll = secondPhaseRollWithHardWayCheck(hardwayBet, hardwayNumber);
-                    crapsRoundDPL(balance, passLineBet, crapsRoll, pointer);
 
+            betCheck(dontPassLineBet);
+            while (crapsRoll != pointer && crapsRoll != 7 && pointer != 0) {
+
+                String rollRequest = console.getStringInput("ROLL A " + ANSI_RED + 7 + ANSI_RESET + " before " + ANSI_RED + pointer + ANSI_RESET + " TO WIN!\n" +
+                        "***** Press (R) to Roll\n***** Press (E) to exit");
+                if (rollRequest.equals("R") || rollRequest.equals("r")) {
+                    crapsRoll = secondPhaseRollWithHardWayCheck(hardwayBet, hardwayNumber,0);
+                    crapsRoundDPL(balance, dontPassLineBet, crapsRoll, pointer);
+                    //console.println(balanceCheck(balance));
                 } else {
                     break;
                 }
             }
+
+            console.println(balanceCheck(balance));
+            pointer = 0;
+            crapsRoll = 0;
+            dontPassLineBet = 0;
+            hardwayBet = 0;
             anotherRound(balance);
         }
 
 
     }
 
-    protected Integer secondPhaseRollWithHardWayCheck(Integer hardwayBet, Integer hardWayNumber) {
+    protected Integer secondPhaseRollWithHardWayCheck(Integer hardwayBet, Integer hardWayNumber, Integer pointer) {
         die = new Die();
         diceGames = new DiceGames();
         Integer die1 = diceGames.toss(die, null);
         Integer die2 = diceGames.toss(die, null);
+        Integer[] diceArr = {die1, die2};
         Integer crapsRoll = die1 + die2;
-        console.println("****** [ " + die1 + " ] / [ " + die2 + " ] ******");
-        if (crapsRoll == hardWayNumber) {
-            hardWayWinnings(die1, die2, hardwayBet, hardWayNumber);
+        diceArt.drawDices(diceArr);
+        if (crapsRoll == hardWayNumber || crapsRoll == pointer) {
+            hardWayWinnings(balance, die1, die2, hardwayBet, hardWayNumber);
         }
         return crapsRoll;
     }
 
     protected void betCheck(Integer passLineBet) {
-        console.println("***** Bet: " + passLineBet + " *****\n");
+        console.println("\n\n***** Bet: " + passLineBet + " *****");
     }
 
     protected void anotherRound(Balance balance) {
-        Integer passLineBet;
+
         String anotherRound = console.getStringInput("Play another round? (Y)/(N)");
         if (anotherRound.equals("Y") || anotherRound.equals("y")) {
-            passLineBet = 0;
             play(balance);
         }
     }
@@ -168,22 +191,16 @@ public class Craps extends DiceGames implements GameInterface {
         return passLineChoice;
     }
 
-    protected Integer crapsBet(Balance balance) {
-        console.println("***** Balance: " + balance.getBalance() + " *****");
-        Integer bet = console.getIntegerInput("***** How much do you want to bet?");
-        if (bet <= balance.getBalance()) {
-            balance.setBalance(balance.getBalance() - bet);
+    protected Integer crapsBet(Balance balance, Integer firstBet) {
+
+        Integer bet = console.getIntegerInput("***** How much do you want to bet? *****");
+        if (bet <= balance.getBalance() - firstBet) {
             return bet;
-        } else {
+        } else if (bet >= balance.getBalance()) {
             console.println("You do not have that much...");
-            String buyMore = console.getStringInput("Would you like to buy more? (Y) / (N)");
-            if (buyMore.equals("Y") || buyMore.equals("y")) {
-                balance.addMoreChips();
-                Integer newBet = crapsBet(balance);
-                return newBet;
-            } else {
-                play(balance);
-            }
+            console.println("***** Balance: " + ANSI_BLUE + (balance.getBalance() - firstBet) + ANSI_RESET + " *****");
+            Integer trueBet = crapsBet(balance, firstBet);
+            return trueBet;
         }
         return 0;
     }
@@ -195,39 +212,52 @@ public class Craps extends DiceGames implements GameInterface {
     protected Integer setPointerPL(Balance balance, Integer bet, Integer diceRoll) {
         Integer pointer = 0;
 
-        console.println("***** You Rolled: " + diceRoll);
+        console.println("\n***ROLL** (( " + ANSI_RED + diceRoll + ANSI_RESET + " )) **ROLL***\n");
         if (diceRoll == 7 || diceRoll == 11) {
-            console.println("***** Nice! you won: " + bet);
-            balance.setBalance(balance.getBalance() + bet);
-            console.println("***** Your balance is: " + balance.getBalance());
+            winComeOutRoll(balance, bet);
 
         } else if (diceRoll == 2 || diceRoll == 3 || diceRoll == 12) {
-            console.println("***** You Lose, Try Again!");
-            console.println("***** Your balance is: " + balance.getBalance());
-            anotherRound(balance);
+            youLosePlayAgain(balance, bet);
 
         } else {
-            console.println("***** Pointer set to: " + diceRoll + "\n");
+            console.println("***** Pointer set to: " + ANSI_RED + diceRoll + ANSI_RESET + " *****\n");
             pointer = diceRoll;
 
         }
         return pointer;
     }
 
+    protected void winComeOutRoll(Balance balance, Integer bet) {
+        console.println("***** Nice! you won: " + ANSI_GREEN + bet + ANSI_RESET + " *****");
+        balance.setBalance(balance.getBalance() + bet);
+        //console.println(balanceCheck(balance));
+    }
+
+    protected void youLosePlayAgain(Balance balance, Integer bet) {
+        console.println("***** You Lose, Try Again! *****");
+        balance.setBalance(balance.getBalance() - bet);
+        //console.println(balanceCheck(balance));
+        anotherRound(balance);
+    }
+
     protected void crapsRoundPL(Balance balance, Integer bet, Integer diceRoll, Integer pointer) {
 
-        console.println("**ROLL** (( " + diceRoll + " )) **ROLL**\n");
+        console.println("\n***ROLL** (( " + ANSI_RED + diceRoll + ANSI_RESET + " )) **ROLL***\n");
         if (diceRoll == pointer) {
-            console.println("***** You WIN!\n Winnings: " + bet);
-            crapsPayout(balance, bet);
-            console.println("***** Your balance is: " + balance.getBalance());
+            youWinSecondPhase(balance, bet);
 
         } else if (diceRoll == 7) {
-            console.println("***** 7 OUT! Better Luck Next Time.\n***** Your balance is: " + balance.getBalance());
+            sevenOutLoss(balance, bet);
 
         } else {
             console.println("Roll Again\n");
         }
+    }
+
+    private void sevenOutLoss(Balance balance, Integer bet) {
+        console.println("***** 7 OUT! Better Luck Next Time. *****");
+        balance.setBalance(balance.getBalance() - bet);
+        //console.println(balanceCheck(balance));
     }
 
     protected boolean dontPassLine(String passLineChoice) {
@@ -237,20 +267,17 @@ public class Craps extends DiceGames implements GameInterface {
     protected Integer setPointerDontPL(Balance balance, Integer bet, Integer diceRoll) {
         Integer pointer = 0;
 
-        console.println("***** You Rolled: " + diceRoll);
+        console.println("\n***ROLL** (( " + ANSI_RED + diceRoll + ANSI_RESET + " )) **ROLL***\n");
         if (diceRoll == 2 || diceRoll == 3) {
-            console.println("***** Nice! you won: " + bet);
-            crapsPayout(balance, bet);
-            console.println("***** Your balance is: " + balance.getBalance());
+            winComeOutRoll(balance, bet);
 
         } else if (diceRoll == 7 || diceRoll == 11) {
-            console.println("***** You Lose, Try Again!");
-            anotherRound(balance);
+            youLosePlayAgain(balance, bet);
 
         } else if (diceRoll == 12) {
             console.println("Push, Roll Again!");
         } else {
-            console.println("***** Pointer set to: " + diceRoll + "\n");
+            console.println("***** Pointer set to: " + ANSI_RED + diceRoll + ANSI_RESET + "\n");
             pointer = diceRoll;
 
         }
@@ -259,19 +286,29 @@ public class Craps extends DiceGames implements GameInterface {
     }
 
     protected void crapsRoundDPL(Balance balance, Integer bet, Integer diceRoll, Integer pointer) {
-        console.println("**ROLL** (( " + diceRoll + " )) **ROLL**\n");
+        console.println("\n***ROLL** (( " + ANSI_RED + diceRoll + ANSI_RESET + " )) **ROLL***\n");
         if (diceRoll == pointer) {
-            console.println("***** Don't Pass Line Loses! Better Luck Next Time.\n***** Your balance is: " + balance.getBalance());
+            youLosePlayAgain(balance, bet);
 
         } else if (diceRoll == 7) {
 
-            console.println("***** You WIN!\n Winnings: " + bet);
-            crapsPayout(balance, bet);
-            console.println("***** Your balance is: " + balance.getBalance());
+            youWinSecondPhase(balance, bet);
+
 
         } else {
             console.println("Roll Again\n");
         }
+
+    }
+
+    protected void youWinSecondPhase(Balance balance, Integer bet) {
+        console.println("***** You WIN! *****\n Winnings: " + ANSI_GREEN + bet + ANSI_RESET);
+        crapsPayout(balance, bet);
+        //console.println(balanceCheck(balance));
+    }
+
+    protected String balanceCheck(Balance balance) {
+        return "***** Balance: " + ANSI_BLUE + balance.getBalance() + ANSI_RESET + " *****";
     }
 
     protected Integer hedgeBet(Balance balance, Integer bet) {
@@ -307,53 +344,60 @@ public class Craps extends DiceGames implements GameInterface {
         return numberChoice;
     }
 
-    protected Integer hardWayWinnings(Integer dice1, Integer dice2, Integer bet, Integer hardWayNumber) {
+    protected void hardWayWinnings(Balance balance, Integer dice1, Integer dice2, Integer bet, Integer hardWayNumber) {
         Integer total = dice1 + dice2;
         Integer winnings = 0;
         switch (total) {
             case 4:
                 if (total == hardWayNumber && dice1 == dice2) {
                     winnings = bet * 7;
-                    console.println("Hard Way HIT! You Win: " + winnings);
+                    console.println("\nHard Way HIT! You Win: " + ANSI_GREEN + winnings + ANSI_RESET);
+                    balance.setBalance(balance.getBalance() + winnings);
                     break;
                 } else {
-                    console.println("Soft 4 hit, You lost: " + bet);
+                    console.println("\nSoft 4 hit, You lost: " +ANSI_RED+ bet+ANSI_RESET);
+                    balance.setBalance(balance.getBalance() - bet);
                 }
                 break;
 
             case 6:
                 if (total == hardWayNumber && dice1 == dice2) {
                     winnings = bet * 9;
-                    console.println("Hard Way HIT! You Win: " + winnings);
+                    console.println("\nHard Way HIT! You Win: " + ANSI_GREEN + winnings + ANSI_RESET);
+                    balance.setBalance(balance.getBalance() + winnings);
                     break;
                 } else {
-                    console.println("Soft 6 hit, You lost: " + bet);
+                    console.println("\nSoft 6 hit, You lost: " +ANSI_RED+ bet+ANSI_RESET);
+                    balance.setBalance(balance.getBalance() - bet);
                 }
                 break;
 
             case 8:
                 if (total == hardWayNumber && dice1 == dice2) {
                     winnings = bet * 9;
-                    console.println("Hard Way HIT! You Win: " + winnings);
+                    console.println("\nHard Way HIT! You Win: " + ANSI_GREEN + winnings + ANSI_RESET);
+                    balance.setBalance(balance.getBalance() + winnings);
                     break;
                 } else {
-                    console.println("Soft 8 hit, You lost: " + bet);
+                    console.println("\nSoft 8 hit, You lost: " +ANSI_RED+ bet+ANSI_RESET);
+                    balance.setBalance(balance.getBalance() - bet);
                 }
                 break;
 
             case 10:
                 if (total == hardWayNumber && dice1 == dice2) {
                     winnings = bet * 7;
-                    console.println("Hard Way HIT! You Win: " + winnings);
+                    console.println("\nHard Way HIT! You Win: " + ANSI_GREEN + winnings + ANSI_RESET);
+                    balance.setBalance(balance.getBalance() + winnings);
                     break;
                 } else {
-                    console.println("Soft 10 hit, You lost: " + bet);
+                    console.println("\nSoft 10 hit, You lost: " +ANSI_RED+ bet+ANSI_RESET);
+                    balance.setBalance(balance.getBalance() - bet);
                 }
                 break;
-            default:
+            default:balance.setBalance(balance.getBalance() - bet);
                 break;
         }
-        return winnings;
     }
 
     protected void hardWayPayout(Balance balance, Integer winnings) {
@@ -365,22 +409,15 @@ public class Craps extends DiceGames implements GameInterface {
     }
 
     protected void crapsPayout(Balance balance, Integer amount) {
-        balance.setBalance(balance.getBalance() + (amount * 2));
+        balance.setBalance(balance.getBalance() + (amount*2));
     }
 
 
-
+//balance.setBalance(balance.getBalance()+hedgeBet);
 
 
     //Used for unit Testing
     public void setConsole(Console console) {
         this.console = console;
     }
-
-//    public static void main(String[] args) {
-//        Balance balance = new Balance(1000);
-//        Console console = new Console(System.in, System.out);
-//        Craps craps = new Craps(console);
-//        craps.anotherRound(balance);
-//    }
 }
