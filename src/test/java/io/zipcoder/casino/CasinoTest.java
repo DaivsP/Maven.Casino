@@ -185,7 +185,7 @@ public class CasinoTest {
     }
 
        // @Test
-        public void pickGameLaunchedCrapTest(){
+        public void gpickGameLaunchedCrapTest(){
             // Given
             Casino casino = new Casino();
             byte[] inputBytes = "CRAPS\rE\rQUIT".getBytes();
