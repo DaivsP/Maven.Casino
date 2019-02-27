@@ -1,7 +1,6 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.utilities;
 
 import io.zipcoder.casino.Games.*;
-import io.zipcoder.casino.utilities.Console;
 
 import java.util.function.Function;
 

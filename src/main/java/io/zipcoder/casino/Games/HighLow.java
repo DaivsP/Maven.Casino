@@ -1,8 +1,7 @@
 package io.zipcoder.casino.Games;
-import io.zipcoder.casino.*;
 import io.zipcoder.casino.Person.FunDealer;
 import io.zipcoder.casino.Person.HiLowPlayer;
-import io.zipcoder.casino.utilities.Console;
+import io.zipcoder.casino.utilities.*;
 
 
 public class HighLow  implements  GameInterface{

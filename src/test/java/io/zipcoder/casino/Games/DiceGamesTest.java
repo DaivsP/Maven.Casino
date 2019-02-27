@@ -1,10 +1,8 @@
 package io.zipcoder.casino.Games;
 
-import io.zipcoder.casino.Die;
+import io.zipcoder.casino.utilities.Die;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class DiceGamesTest {
 

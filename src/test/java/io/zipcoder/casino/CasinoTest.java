@@ -5,6 +5,7 @@ import io.zipcoder.casino.Games.BlackJack;
 import io.zipcoder.casino.Games.Craps;
 import io.zipcoder.casino.Games.GoFish;
 import io.zipcoder.casino.Games.HighLow;
+import io.zipcoder.casino.utilities.Balance;
 import org.junit.Assert;
 import org.junit.Test;
 

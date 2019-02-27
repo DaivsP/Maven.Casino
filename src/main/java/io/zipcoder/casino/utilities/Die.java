@@ -1,4 +1,4 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.utilities;
 
 public class Die {
 

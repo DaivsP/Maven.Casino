@@ -1,23 +1,14 @@
 package io.zipcoder.casino.Games;
 
-import com.sun.xml.internal.bind.v2.util.ByteArrayOutputStreamEx;
-import com.sun.xml.internal.ws.api.ha.StickyFeature;
-import io.zipcoder.casino.*;
 import io.zipcoder.casino.Person.BlackJackPlayer;
 import io.zipcoder.casino.Person.GamblingDealer;
-import io.zipcoder.casino.utilities.Console;
-import org.junit.After;
+import io.zipcoder.casino.utilities.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.print.attribute.HashAttributeSet;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.text.BreakIterator;
-
-import static org.junit.Assert.*;
 
 public class BlackJackTest {
 
