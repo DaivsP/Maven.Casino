@@ -371,7 +371,7 @@ public class BlackJackTest {
         this.playerHand = blackJack.getPlayerHand();
         player.setBalance(new Balance(100));
 
-        Card dealerCard = new Card(Card.Rank.ACE, Card.Suit.HEARTS, 11);
+        Card dealerCard = new Card(Card.Rank.KING, Card.Suit.HEARTS, 10);
         Card dealerCard2 = new Card(Card.Rank.KING, Card.Suit.HEARTS, 10);
         Card dealerCard3 = new Card(Card.Rank.FIVE, Card.Suit.HEARTS, 5);
         dealerHand.addACard(dealerCard);
