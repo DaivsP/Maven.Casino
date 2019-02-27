@@ -55,16 +55,38 @@ public class BlackJack extends Games implements GamblingGame {
             dealCardsToPlayerAndDealerAndAddThemToRespectiveHands();
 
             printUserFirstHandAndDealerFirstCard();
-
+            Boolean doubleDown = false;
             do {
-                userChoice = console.getStringInput("Do you want to (H)it, (S)tay, or (D)ouble Down: ");
+                if (doubleDown){
+                    userChoice = console.getStringInput("Do you want to (H)it or (S)tay: ");
+                    if ("D".equals(userChoice.toUpperCase())){
+                        userChoice = "H";
+                    }
+                }
+                else {
+                    userChoice = console.getStringInput("Do you want to (H)it, (S)tay, or (D)ouble Down: ");
+                }
                 if ("H".equals(userChoice.toUpperCase())) {
                     Card nextPlayerCard = cardDeck.dealCard();
                     playerHand.addACard(nextPlayerCard);
                     dealACardToThePlayerAndPrintTheirNewHand();
                 }
+                else if ("D".equals(userChoice.toUpperCase())){
+                    if (player.getBalance().getBalance() >= userBet) {
+                        player.bet(balance, userBet);
+                        pot += userBet;
+                        Card nextPlayerCard = cardDeck.dealCard();
+                        playerHand.addACard(nextPlayerCard);
+                        dealACardToThePlayerAndPrintTheirNewHand();
+                        doubleDown = true;
+                    }
+                    else {
+                        console.println("You do not have enough chips to Double Down");
+                    }
+                }
+                System.out.println("loop");
             } while (playerHitsAndDidNotBustAndDoesNotHave21(userChoice));
-
+            System.out.println("out of loop");
 
             if (playerHand.getSumOfHand() > 21) {
                 playerLostHandWithValueLargerThan21();
@@ -199,7 +221,12 @@ public class BlackJack extends Games implements GamblingGame {
     }
 
     public boolean playerHitsAndDidNotBustAndDoesNotHave21(String userChoice) {
-        return "H".equals(userChoice.toUpperCase()) && playerHand.getSumOfHand() < 22 && !playerHand.getSumOfHand().equals(21);
+        return (("H".equals(userChoice.toUpperCase()))
+                && playerHand.getSumOfHand() < 22
+                && !playerHand.getSumOfHand().equals(21) ||
+                (("D".equals(userChoice.toUpperCase()))
+                && playerHand.getSumOfHand() < 22
+                && !playerHand.getSumOfHand().equals(21)));
     }
 
     public void setConsole(Console console) {
