@@ -1,6 +1,5 @@
 package io.zipcoder.casino;
 
-import io.zipcoder.casino.Games.DiceGames;
 import io.zipcoder.casino.utilities.Console;
 import io.zipcoder.casino.utilities.Symbols;
 
@@ -62,16 +61,6 @@ public class DecorationCards {
         this.containerT = this.container1 + "\n" + this.container2 + "\n"
                 + this.container3 + "\n" + this.container4 + "\n" + this.container5;
     }
-
-//    public static void main(String[] args) {
-//        DecorationCards decoration = new DecorationCards();
-//        DiceGames setDices = new DiceGames();
-//        Die die = new Die();
-//        Symbols sym = new Symbols();
-//        Integer[] number = new Integer[]{3,3,3,4,5,6};
-//        decoration.drawDices(number);
-//    }
-
 
     public void setConsole(Console console){
         this.console = console;

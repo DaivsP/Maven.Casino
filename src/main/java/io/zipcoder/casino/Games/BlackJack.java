@@ -20,7 +20,7 @@ public class BlackJack extends Games implements GamblingGame {
 
     private Hand dealerHand;
 
-    public BlackJack(Console console){
+    public BlackJack(Console console) {
 
         decorationCards = new DecorationCards();
 
@@ -53,18 +53,22 @@ public class BlackJack extends Games implements GamblingGame {
             dealCardsToPlayerAndDealerAndAddThemToRespectiveHands();
 
             dealCardsToPlayerAndDealerAndAddThemToRespectiveHands();
-            Integer aceCounter = 0;
-            if (aceCounter == 0){
-            }
 
             printUserFirstHandAndDealerFirstCard();
-
+            Boolean doubleDown = false;
             do {
-                userChoice = console.getStringInput("Do you want to (H)it or (S)tay: ");
+                if (doubleDown){
+                    userChoice = forceUserInputToH();
+                }
+                else {
+                    userChoice = console.getStringInput("Do you want to (H)it, (S)tay, or (D)ouble Down: ");
+                }
                 if ("H".equals(userChoice.toUpperCase())) {
-                    Card nextPlayerCard = cardDeck.dealCard();
-                    playerHand.addACard(nextPlayerCard);
+                    playerActionIfHit();
                     dealACardToThePlayerAndPrintTheirNewHand();
+                }
+                else if ("D".equals(userChoice.toUpperCase())){
+                    doubleDown = actionThatHappensIfPlayerDoubleDowns(balance, userBet, doubleDown);
                 }
             } while (playerHitsAndDidNotBustAndDoesNotHave21(userChoice));
 
@@ -93,6 +97,33 @@ public class BlackJack extends Games implements GamblingGame {
             }
             balance.setBalance(player.getBalance().getBalance());
         }
+    }
+
+    public String forceUserInputToH() {
+        String userChoice;
+        userChoice = console.getStringInput("Do you want to (H)it or (S)tay: ");
+        if ("D".equals(userChoice.toUpperCase())){
+            userChoice = "H";
+        }
+        return userChoice;
+    }
+
+    public void playerActionIfHit() {
+        Card nextPlayerCard = cardDeck.dealCard();
+        playerHand.addACard(nextPlayerCard);
+    }
+
+    public Boolean actionThatHappensIfPlayerDoubleDowns(Balance balance, Integer userBet, Boolean doubleDown) {
+        if (player.getBalance().getBalance() >= userBet) {
+            player.bet(balance, userBet);
+            pot += userBet;
+            playerActionIfHit();
+            doubleDown = true;
+        }
+        else {
+            console.println("You do not have enough chips to Double Down");
+        }
+        return doubleDown;
     }
 
     public void clearHands(Hand dealerHand, Hand playerHand) {
@@ -201,7 +232,12 @@ public class BlackJack extends Games implements GamblingGame {
     }
 
     public boolean playerHitsAndDidNotBustAndDoesNotHave21(String userChoice) {
-        return "H".equals(userChoice.toUpperCase()) && playerHand.getSumOfHand() < 22 && !playerHand.getSumOfHand().equals(21);
+        return (("H".equals(userChoice.toUpperCase()))
+                && playerHand.getSumOfHand() < 22
+                && !playerHand.getSumOfHand().equals(21) ||
+                (("D".equals(userChoice.toUpperCase()))
+                && playerHand.getSumOfHand() < 22
+                && !playerHand.getSumOfHand().equals(21)));
     }
 
     public void setConsole(Console console) {

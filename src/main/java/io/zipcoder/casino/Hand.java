@@ -4,14 +4,13 @@ package io.zipcoder.casino;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import java.util.Comparator;
 import java.util.List;
 
 public class Hand  {
 
 
     private List<Card> myHand = new ArrayList<Card>();
-    protected void Hand(){}
+//    protected void Hand(){}
 
     public void addACard(Card card){
         myHand.add(card);
@@ -51,9 +50,17 @@ public class Hand  {
 
     public Integer getSumOfHand() {
         Integer sumOfHand = 0;
+        int acesCounter = 0;
 
         for (Card card: myHand) {
+            if (card.getRank() == Card.Rank.ACE){
+                acesCounter++;
+            }
             sumOfHand += card.getCardValue();
+            while (sumOfHand > 21 && acesCounter > 0){
+                sumOfHand -= 10;
+                acesCounter--;
+            }
         }
         return sumOfHand;
     }

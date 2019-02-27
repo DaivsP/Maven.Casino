@@ -24,10 +24,6 @@ public class Symbols {
 
     String hL = Character.toString((char) 0x2500 ); // Horizontal Line
 
-    public String gethL(){
-        return this.hL;
-    }
-
     public String gethL(Integer number){
         String result = "";
         for (int i = 0; i < number; i++) {
@@ -133,7 +129,8 @@ public class Symbols {
                         , switchFrame("vL") + "   " + getBullet(0) +  "    " + switchFrame("vL")
                         , switchFrame("vL") + " " + getBullet(1) + " " + getBullet(1) + " " + getBullet(1) + " " + switchFrame("vL")
                         , finalLine};
-                default: return null;
+                default:
+                    return null;
         }
     }
 
