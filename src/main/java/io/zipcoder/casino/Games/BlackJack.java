@@ -55,7 +55,7 @@ public class BlackJack extends Games implements GamblingGame {
             dealCardsToPlayerAndDealerAndAddThemToRespectiveHands();
 
             printUserFirstHandAndDealerFirstCard();
-            
+
             do {
                 userChoice = console.getStringInput("Do you want to (H)it, (S)tay, or (D)ouble Down: ");
                 if ("H".equals(userChoice.toUpperCase())) {
@@ -64,6 +64,7 @@ public class BlackJack extends Games implements GamblingGame {
                     dealACardToThePlayerAndPrintTheirNewHand();
                 }
             } while (playerHitsAndDidNotBustAndDoesNotHave21(userChoice));
+
 
             if (playerHand.getSumOfHand() > 21) {
                 playerLostHandWithValueLargerThan21();
