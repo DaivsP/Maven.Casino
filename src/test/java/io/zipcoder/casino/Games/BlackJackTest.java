@@ -481,4 +481,18 @@ public class BlackJackTest {
         Boolean actual = blackJack.playerHasAPositiveBalance();
         Assert.assertTrue(actual);
     }
+
+    @Test
+    public void testPlayerActionIfHit(){
+        //Given
+        this.playerHand = blackJack.getPlayerHand();
+
+        //When
+        blackJack.playerActionIfHit();
+        Integer actual = playerHand.getNumberOfCards();
+
+        //Then
+        Integer expected = 1;
+        Assert.assertEquals(expected, actual);
+    }
 }

@@ -58,35 +58,19 @@ public class BlackJack extends Games implements GamblingGame {
             Boolean doubleDown = false;
             do {
                 if (doubleDown){
-                    userChoice = console.getStringInput("Do you want to (H)it or (S)tay: ");
-                    if ("D".equals(userChoice.toUpperCase())){
-                        userChoice = "H";
-                    }
+                    userChoice = forceUserInputToH();
                 }
                 else {
                     userChoice = console.getStringInput("Do you want to (H)it, (S)tay, or (D)ouble Down: ");
                 }
                 if ("H".equals(userChoice.toUpperCase())) {
-                    Card nextPlayerCard = cardDeck.dealCard();
-                    playerHand.addACard(nextPlayerCard);
+                    playerActionIfHit();
                     dealACardToThePlayerAndPrintTheirNewHand();
                 }
                 else if ("D".equals(userChoice.toUpperCase())){
-                    if (player.getBalance().getBalance() >= userBet) {
-                        player.bet(balance, userBet);
-                        pot += userBet;
-                        Card nextPlayerCard = cardDeck.dealCard();
-                        playerHand.addACard(nextPlayerCard);
-                        dealACardToThePlayerAndPrintTheirNewHand();
-                        doubleDown = true;
-                    }
-                    else {
-                        console.println("You do not have enough chips to Double Down");
-                    }
+                    doubleDown = actionThatHappensIfPlayerDoubleDowns(balance, userBet, doubleDown);
                 }
-                System.out.println("loop");
             } while (playerHitsAndDidNotBustAndDoesNotHave21(userChoice));
-            System.out.println("out of loop");
 
             if (playerHand.getSumOfHand() > 21) {
                 playerLostHandWithValueLargerThan21();
@@ -113,6 +97,33 @@ public class BlackJack extends Games implements GamblingGame {
             }
             balance.setBalance(player.getBalance().getBalance());
         }
+    }
+
+    public String forceUserInputToH() {
+        String userChoice;
+        userChoice = console.getStringInput("Do you want to (H)it or (S)tay: ");
+        if ("D".equals(userChoice.toUpperCase())){
+            userChoice = "H";
+        }
+        return userChoice;
+    }
+
+    public void playerActionIfHit() {
+        Card nextPlayerCard = cardDeck.dealCard();
+        playerHand.addACard(nextPlayerCard);
+    }
+
+    public Boolean actionThatHappensIfPlayerDoubleDowns(Balance balance, Integer userBet, Boolean doubleDown) {
+        if (player.getBalance().getBalance() >= userBet) {
+            player.bet(balance, userBet);
+            pot += userBet;
+            playerActionIfHit();
+            doubleDown = true;
+        }
+        else {
+            console.println("You do not have enough chips to Double Down");
+        }
+        return doubleDown;
     }
 
     public void clearHands(Hand dealerHand, Hand playerHand) {
