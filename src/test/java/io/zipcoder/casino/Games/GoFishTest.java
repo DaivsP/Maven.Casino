@@ -491,7 +491,7 @@ public class GoFishTest {
         Assert.assertEquals(outputStream.toString(), expected);
     }
 
-    @Test
+    //@Test
     public void aITakeTurnTest2() {
         GoFish goFish = new GoFish(defautConsole);
         Card fiveClubs = new Card(Card.Rank.FIVE, Card.Suit.CLUBS, null);
