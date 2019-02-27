@@ -8,7 +8,7 @@ import static io.zipcoder.casino.utilities.AnsiScapeCodes.*;
 
 
 public class Craps extends DiceGames implements GameInterface {
-
+    private Casino casino = new Casino();
     private DecorationCards diceArt = new DecorationCards();
     private Console console; // = new Console(System.in, System.out);
     private Balance balance;
@@ -50,9 +50,7 @@ public class Craps extends DiceGames implements GameInterface {
                     Integer roll = secondPhaseRollWithHardWayCheck(0,0, 0);
                     pointer = setPointerPL(balance, passLineBet, roll);
                 } else {
-                    balance.setBalance(balance.getBalance()-passLineBet);
-                    play(balance);
-                    // break;
+                    break;
                 }
             } while (pointer == 0);
 
@@ -61,14 +59,17 @@ public class Craps extends DiceGames implements GameInterface {
              * SECOND PHASE -- POINT HAS BEEN ESTABLISHED
              *
              * */
+            Integer runner = 0;
+            while(pointer!=0 && runner != 5){
 
-            //Hedge Bet Prompt
-            passLineBet = hedgeBet(balance, passLineBet);
-            if (hardWayPlayChoice() == true) {
-                hardwayNumber = hardWayNumberChoice();
-                hardwayBet = crapsBet(balance, dontPassLineBet);
+                dontPassLineBet = hedgeBet(balance, dontPassLineBet);
+                if (hardWayPlayChoice() == true) {
+                    hardwayNumber = hardWayNumberChoice();
+                    hardwayBet = crapsBet(balance, dontPassLineBet);
+
+                }
+                runner = 5;
             }
-
 
 
             betCheck(passLineBet);
@@ -80,10 +81,8 @@ public class Craps extends DiceGames implements GameInterface {
                     crapsRoll = secondPhaseRollWithHardWayCheck(hardwayBet, hardwayNumber, pointer);
                     crapsRoundPL(balance, passLineBet, crapsRoll, pointer);
 
-                } else {
-                    balance.setBalance(balance.getBalance()-passLineBet);
-                    play(balance);
-                    //break;
+                } else if(rollRequest.equals("e")||rollRequest.equals("E")){
+                    break;
                 }
             }
             pointer = 0;
@@ -122,13 +121,18 @@ public class Craps extends DiceGames implements GameInterface {
              *
              * */
 
-            //Hedge Bet Prompt
-            dontPassLineBet = hedgeBet(balance, dontPassLineBet);
+            Integer runner = 0;
+            while(pointer!=0 && runner != 5){
 
-            if (hardWayPlayChoice() == true) {
-                hardwayNumber = hardWayNumberChoice();
-                hardwayBet = crapsBet(balance, dontPassLineBet);
+                dontPassLineBet = hedgeBet(balance, dontPassLineBet);
+                if (hardWayPlayChoice() == true) {
+                    hardwayNumber = hardWayNumberChoice();
+                    hardwayBet = crapsBet(balance, dontPassLineBet);
+
+                }
+                runner = 5;
             }
+
 
             betCheck(dontPassLineBet);
             while (crapsRoll != pointer && crapsRoll != 7 && pointer != 0) {

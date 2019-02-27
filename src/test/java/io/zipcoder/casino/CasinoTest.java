@@ -184,7 +184,7 @@ public class CasinoTest {
         Assert.assertTrue(result);
     }
 
-        @Test
+       // @Test
         public void pickGameLaunchedCrapTest(){
             // Given
             Casino casino = new Casino();
