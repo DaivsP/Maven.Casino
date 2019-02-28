@@ -224,6 +224,14 @@ public class HandTest {
 
         // Then
         Assert.assertTrue(hand.isEmpty());
+    }
+
+    @Test
+    public void getSumOfHandTest2(){
+        Hand hand = new Hand();
+        Card card1 = new Card(Card.Rank.SEVEN, Card.Suit.HEARTS);
+        Card card2 = new Card(Card.Rank.SIX, Card.Suit.CLUBS);
 
     }
+
 }

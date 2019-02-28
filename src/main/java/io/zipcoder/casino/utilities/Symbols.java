@@ -1,4 +1,8 @@
 package io.zipcoder.casino.utilities;
+import io.zipcoder.casino.utilities.*;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 public class Symbols {
 
@@ -90,48 +94,24 @@ public class Symbols {
     }
 
     public String[] switchDie(Integer number){
+        StringForSymbols ss = new StringForSymbols();
         String initialLine = switchFrame("lU") + gethL(7) + switchFrame("rU");
         String finalLine = switchFrame("lD") + gethL(7) + switchFrame("rD");
         switch (number){
             case 1 :
-                return new String[]{initialLine
-                         , switchFrame("vL") + "  " +  getBullet(0) + "     " + switchFrame("vL")
-                         , switchFrame("vL") + "   " + getBullet(1) +  "   " + switchFrame("vL")
-                         , switchFrame("vL") + "      " + getBullet(0) +  " " + switchFrame("vL")
-                         , finalLine};
+                return ss.getOne();
             case 2 :
-                return new String[]{initialLine
-                        , switchFrame("vL") + " " +  getBullet(1) + "     " + switchFrame("vL")
-                        , switchFrame("vL") + "  " + getBullet(0) +  "     " + switchFrame("vL")
-                        , switchFrame("vL") + "     " + getBullet(1) +  " " + switchFrame("vL")
-                        , finalLine};
+                return ss.getTwo();
             case 3 :
-                return new String[]{initialLine
-                        , switchFrame("vL") + " " +  getBullet(1) + "     " + switchFrame("vL")
-                        , switchFrame("vL") + "   " + getBullet(1) + "   " + switchFrame("vL")
-                        , switchFrame("vL") + "     " + getBullet(1) +  " " + switchFrame("vL")
-                        , finalLine};
+                return ss.getThree();
             case 4 :
-                return new String[]{initialLine
-                        , switchFrame("vL") + " " + getBullet(1) + "   " + getBullet(1) + " " + switchFrame("vL")
-                        , switchFrame("vL") + "  " + getBullet(0) +  "     " + switchFrame("vL")
-                        , switchFrame("vL") + " " + getBullet(1) + "   " + getBullet(1) + " " + switchFrame("vL")
-                        , finalLine};
+                return ss.getFour();
             case 5 :
-                return new String[]{initialLine
-                        , switchFrame("vL") + " " + getBullet(1) + "   " + getBullet(1) + " " + switchFrame("vL")
-                        , switchFrame("vL") + "   " + getBullet(1) +  "   " + switchFrame("vL")
-                        , switchFrame("vL") + " " + getBullet(1) + "   " + getBullet(1) + " " + switchFrame("vL")
-                        , finalLine};
+                return ss.getFive();
             case 6 :
-                return new String[]{initialLine
-                        , switchFrame("vL") + " " + getBullet(1) + " " + getBullet(1) + " " + getBullet(1) + " " + switchFrame("vL")
-                        , switchFrame("vL") + "   " + getBullet(0) +  "    " + switchFrame("vL")
-                        , switchFrame("vL") + " " + getBullet(1) + " " + getBullet(1) + " " + getBullet(1) + " " + switchFrame("vL")
-                        , finalLine};
+                return ss.getSix();
                 default:
                     return null;
         }
     }
-
 }
