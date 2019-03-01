@@ -429,13 +429,8 @@ public class Craps extends DiceGames implements GameInterface {
         balance.setBalance(balance.getBalance() - amount);
     }
 
-<<<<<<< HEAD:src/main/java/io/zipcoder/casino/Games/Craps.java
-    protected void crapsPayout(Balance balance, Integer amount) {
-        balance.setBalance(balance.getBalance() + (amount * 2));
-=======
     public void crapsPayout(Balance balance, Integer amount) {
         balance.setBalance(balance.getBalance() + (amount*2));
->>>>>>> Davis2:src/main/java/io/zipcoder/casino/games/diegames/craps/Craps.java
     }
 
 
