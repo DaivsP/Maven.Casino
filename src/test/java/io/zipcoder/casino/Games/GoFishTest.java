@@ -74,29 +74,29 @@ public class GoFishTest {
         Assert.assertEquals(player.getHand().getNumberOfCards(), expected);
     }
 
-    @Test
-    public void aIRemoveMatchingCardsTest() {
-        GoFish goFish = new GoFish(defautConsole);
-        Card fiveClubs = new Card(Card.Rank.FIVE, Card.Suit.CLUBS, null);
-        Card fiveSpades = new Card(Card.Rank.FIVE, Card.Suit.SPADES, null);
-        Card twoClubs = new Card(Card.Rank.TWO, Card.Suit.CLUBS, null);
-        //given
-//        ArrayList<Card> cards = new ArrayList<Card>();
-//        cards.add(fiveClubs);
-//        cards.add(fiveSpades);
-//        cards.add(twoClubs);
-        playerHand.addACard(fiveClubs);
-        playerHand.addACard(fiveSpades);
-        playerHand.addACard(twoClubs);
-        player.setHand(playerHand);
-        String input = "FIVE";
-        //when
-        Integer expected = 1;
-        goFish.aIRemoveMatchingCards(player, input);
-        //then
-        System.out.println(player.getHand().getNumberOfCards());
-        Assert.assertEquals(player.getHand().getNumberOfCards(), expected);
-    }
+//    @Test
+//    public void aIRemoveMatchingCardsTest() {
+//        GoFish goFish = new GoFish(defautConsole);
+//        Card fiveClubs = new Card(Card.Rank.FIVE, Card.Suit.CLUBS, null);
+//        Card fiveSpades = new Card(Card.Rank.FIVE, Card.Suit.SPADES, null);
+//        Card twoClubs = new Card(Card.Rank.TWO, Card.Suit.CLUBS, null);
+//        //given
+////        ArrayList<Card> cards = new ArrayList<Card>();
+////        cards.add(fiveClubs);
+////        cards.add(fiveSpades);
+////        cards.add(twoClubs);
+//        playerHand.addACard(fiveClubs);
+//        playerHand.addACard(fiveSpades);
+//        playerHand.addACard(twoClubs);
+//        player.setHand(playerHand);
+//        String input = "FIVE";
+//        //when
+//        Integer expected = 1;
+//        goFish.aIRemoveMatchingCards(player, input);
+//        //then
+//        System.out.println(player.getHand().getNumberOfCards());
+//        Assert.assertEquals(player.getHand().getNumberOfCards(), expected);
+//    }
 
     @Test
     public void getPlayerCardTest() {
@@ -338,7 +338,7 @@ public class GoFishTest {
         goFish.aILastGuess("FIVE");
 
 
-        String actual = goFish.getLastGuess();
+        String actual = goFish.getAiLastGuess();
 
         Assert.assertEquals("FIVE", actual);
     }
@@ -346,7 +346,7 @@ public class GoFishTest {
     @Test
     public void getLastGuessTest() {
         GoFish goFish = new GoFish(defautConsole);
-        String actual = goFish.getLastGuess();
+        String actual = goFish.getAiLastGuess();
 
         Assert.assertEquals(null, actual);
     }
