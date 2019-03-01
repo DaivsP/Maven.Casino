@@ -1,3 +1,5 @@
+Welcome! I worked on this project with a group of 5 fellow students at Zipcode. My responsibilities were the person classes/ tests as well as producing the Go Fish game.
+
 # ZCW-Casino
 * Objective:
   * To create a casino simulation.
