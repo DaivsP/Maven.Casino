@@ -1,10 +1,7 @@
 
 package io.zipcoder.casino.utilities;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
-import java.util.List;
+import java.util.*;
 
 public class Hand  {
 
@@ -76,6 +73,12 @@ public class Hand  {
 
     public boolean isEmpty() {
         return myHand.isEmpty();
+    }
+    public List<Card> removeDuplicates(){
+        Set<Card> set = new HashSet<>(myHand);
+        myHand.clear();
+        myHand.addAll(set);
+        return myHand;
     }
 }
 
