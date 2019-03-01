@@ -1,6 +1,6 @@
 package io.zipcoder.casino.UtilitiesTest;
 
-import io.zipcoder.casino.utilities.Die;
+import io.zipcoder.casino.games.diegames.dieutilities.Die;
 import org.junit.Assert;
 import org.junit.Test;
 

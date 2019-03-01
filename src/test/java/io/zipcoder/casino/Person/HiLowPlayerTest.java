@@ -1,6 +1,7 @@
 package io.zipcoder.casino.Person;
 
-import io.zipcoder.casino.utilities.Hand;
+import io.zipcoder.casino.games.cardgames.highlow.HiLowPlayer;
+import io.zipcoder.casino.games.cardgames.cardutilities.Hand;
 import org.junit.Assert;
 import org.junit.Test;
 
