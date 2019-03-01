@@ -1,6 +1,7 @@
 package io.zipcoder.casino.Person;
 
-import io.zipcoder.casino.utilities.Balance;
+import io.zipcoder.casino.games.diegames.craps.CrapsPlayer;
+import io.zipcoder.casino.games.gameutilities.Balance;
 import org.junit.Assert;
 import org.junit.Test;
 

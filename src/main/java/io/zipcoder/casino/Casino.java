@@ -1,12 +1,11 @@
 package io.zipcoder.casino;
 
 
-import io.zipcoder.casino.Games.*;
-
-import io.zipcoder.casino.utilities.Balance;
-import io.zipcoder.casino.utilities.Banners;
-import io.zipcoder.casino.utilities.Console;
-import io.zipcoder.casino.utilities.GameEnum;
+import io.zipcoder.casino.games.gameutilities.Balance;
+import io.zipcoder.casino.games.gameutilities.bannerutilities.Banners;
+import io.zipcoder.casino.games.gameutilities.Console;
+import io.zipcoder.casino.games.gameutilities.GameEnum;
+import io.zipcoder.casino.games.interfaceutilities.GameInterface;
 
 public class Casino {
     private Balance balance;
