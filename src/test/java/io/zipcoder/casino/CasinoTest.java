@@ -1,15 +1,15 @@
 package io.zipcoder.casino;
 
 
-import io.zipcoder.casino.Games.BlackJack;
-import io.zipcoder.casino.Games.Craps;
-import io.zipcoder.casino.Games.GoFish;
-import io.zipcoder.casino.Games.HighLow;
-import io.zipcoder.casino.utilities.Balance;
+import io.zipcoder.casino.games.cardgames.blackjack.BlackJack;
+import io.zipcoder.casino.games.diegames.craps.Craps;
+import io.zipcoder.casino.games.cardgames.gofish.GoFish;
+import io.zipcoder.casino.games.cardgames.highlow.HighLow;
+import io.zipcoder.casino.games.gameutilities.Balance;
 import org.junit.Assert;
 import org.junit.Test;
 
-import io.zipcoder.casino.utilities.Console;
+import io.zipcoder.casino.games.gameutilities.Console;
 
 import java.io.*;
 

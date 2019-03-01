@@ -1,6 +1,6 @@
 package io.zipcoder.casino.UtilitiesTest;
 
-import io.zipcoder.casino.utilities.Symbols;
+import io.zipcoder.casino.games.gameutilities.bannerutilities.Symbols;
 import org.junit.Assert;
 import org.junit.Test;
 

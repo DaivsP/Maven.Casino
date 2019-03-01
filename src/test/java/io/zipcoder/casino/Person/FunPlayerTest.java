@@ -1,9 +1,8 @@
 package io.zipcoder.casino.Person;
 
+import io.zipcoder.casino.Person.fun.FunPlayer;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class FunPlayerTest {
 
